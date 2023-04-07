@@ -1,10 +1,14 @@
+package MainScreen.Components;
+
+import MainScreen.Components.CardsComponent.Cards;
+import MainScreen.Components.CustomJframe.Jframe;
+import MainScreen.Components.MenuComponent.MenuPrincipais;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
-public class Main {
+public class TesteMain {
 
     static Jframe frame;
 

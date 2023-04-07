@@ -1,3 +1,5 @@
+package MainScreen.Components.MenuComponent;
+
 import javax.swing.*;
 import java.awt.*;
 

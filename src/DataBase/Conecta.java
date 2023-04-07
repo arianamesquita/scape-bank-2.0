@@ -12,7 +12,7 @@ public class Conecta {
 		
 		
 		final String DRIVER = "com.mysql.cj.jdbc.Driver";
-		final String URL = "jdbc:mysql://127.0.0.1:3306/?user=administrator";
+		final String URL = "jdbc:mysql://127.0.0.1:3308/?user=administrator";
 		
 
 		try {

@@ -1,8 +1,11 @@
+package MainScreen.Components.CardsComponent;
+
+import MainScreen.Components.CustomJframe.Jframe;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
@@ -27,6 +30,21 @@ public class Cards extends JPanel {
         addButtons();
         addPaintCards();
         setVisible(true);
+    }
+
+
+    public void setBounds(int x, int y ) {
+        int width = 0; int height=150;
+        if (getText().length<3){
+
+            for (int i = 0; i < getText().length; i++) {
+                height =height+400;
+
+            }
+
+
+        }
+        super.setBounds(x, y, width, height);
     }
 
     @Override
