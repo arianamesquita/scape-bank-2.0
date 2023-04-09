@@ -1,13 +1,8 @@
 package MainScreen.Components.CardsComponent;
 
-import MainScreen.Components.CustomJframe.Jframe;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class Cards extends JPanel {
     private JButton[]buttons;
@@ -15,36 +10,37 @@ public class Cards extends JPanel {
    private int x,  y,  width, height;
    private int[][]ints;
 
-    public Cards(JButton[] buttons, String[] text, int x, int y, int width, int height ) {
+    public Cards(JButton[] buttons, String[] text, int x, int y) {
         this.buttons = buttons;
         this.text = text;
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
         this.ints =new int[][] {{0, 0}, {0, 200}, {0, 400}, {500, 0}, {500, 200}, {500, 400}};
 
-        setBounds(getX(), getY(), getWidth(), getHeight());
+        setBounds();
         setLayout(null);
         setOpaque(false);
         addButtons();
         addPaintCards();
-        setVisible(true);
+            setVisible(true);
     }
 
 
-    public void setBounds(int x, int y ) {
-        int width = 0; int height=150;
-        if (getText().length<3){
+    public void setBounds() {
+        int width = 400; int height=0;
 
             for (int i = 0; i < getText().length; i++) {
-                height =height+400;
+                if (i==0){
+                    height=150;
+                } else if (i<=2) {
+                    height= height+200;
+
+                }else width = 900;
 
             }
-
-
-        }
-        super.setBounds(x, y, width, height);
+        super.setBounds(getX(), getY(), width, height);
+        setWidth(width);
+        setHeight(height);
     }
 
     @Override
@@ -135,7 +131,6 @@ public class Cards extends JPanel {
 
             int count = 0;
             int count1 = 0;
-            int count2 = 0;
 
             for (int i = 0; i < quantidade; i++)
             {
@@ -147,7 +142,6 @@ public class Cards extends JPanel {
                     count1 = count1 + 500;
                     count = 0;
                 }
-                count2++;
             }
             g.dispose();
         }
@@ -196,43 +190,6 @@ public class Cards extends JPanel {
         }
 
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new Jframe();
-        frame.setTitle("Scape Bank");
-        frame.setLayout(null);
-        frame.setSize(frame.getMaximumSize());
-        frame.setLocationRelativeTo(null);
-        frame.setExtendedState(MAXIMIZED_BOTH);
-        frame.setResizable(false);
-
-        JButton[]jbuttons;
-        String[] text = {"Extrato","emprestimo","saldo","cartoes","pix","limite"};
-
-        jbuttons= new JButton[text.length];
-        for (int i = 0; i < text.length; i++) {
-            jbuttons[i]= new JButton("oi");
-            jbuttons[i].setVisible(true);
-        }
-        jbuttons[0].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "olá");
-            }
-        });
-
-        Cards cards = new Cards(jbuttons, text, 400, 200, 900, 550);
-        frame.add(cards);
-        /*cards.addPaintCards();*/
-        cards.addButtons();
-        cards.addPaintCards();
-
-
-        frame.setVisible(true);
-    }
-
-
-
 }
 
 
