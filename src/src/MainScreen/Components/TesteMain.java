@@ -2,7 +2,7 @@ package MainScreen.Components;
 
 import MainScreen.Components.CardsComponent.Cards;
 import MainScreen.Components.CustomJframe.Jframe;
-import MainScreen.Components.MenuComponent.MenuPrincipais;
+import MainScreen.Components.MenuComponent.MenuOpcoes;
 
 import javax.swing.*;
 
@@ -32,7 +32,7 @@ public class TesteMain {
             buttons[i]= new JButton();
             buttons[i].setVisible(true);
         }
-        MenuPrincipais menuPrincipais= new MenuPrincipais(20,160,300,570,buttons);
+        MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
 
         JButton[] buttonsCards;
         String[] text = {"Extrato","emprestimo","saldo","cartoes","pix","limite"};
