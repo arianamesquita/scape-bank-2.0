@@ -8,6 +8,11 @@ import javax.swing.*;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
+/**
+ * class para teste de alguns objetos
+ * @author pedro
+ * @version 1.0
+ */
 public class TesteMain {
 
     static Jframe frame;
