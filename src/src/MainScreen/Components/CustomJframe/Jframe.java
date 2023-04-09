@@ -9,11 +9,6 @@ import java.util.Objects;
 
 public class Jframe extends JFrame {
 
-    private JPanel contentPane;
-    /**
-     * Launch the application.
-     */
-
     public Jframe(){
 
         try {
@@ -23,9 +18,7 @@ public class Jframe extends JFrame {
                     g.drawImage(backgroundImage, 0, 0, null);
                 }
             });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
 

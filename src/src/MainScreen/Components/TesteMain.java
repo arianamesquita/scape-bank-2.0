@@ -42,6 +42,8 @@ public class TesteMain {
             buttonsCards[i].setVisible(true);
         }
 
+
+
         Cards cards = new Cards(buttonsCards, text, 400, 170);
 
 
