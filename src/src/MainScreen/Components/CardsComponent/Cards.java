@@ -270,7 +270,8 @@ public class Cards extends JPanel
          */
         public ButtonsCards(JButton[] buttons,String[]text, int[][] posicao) {
             this.buttons = buttons;
-            setTextButtons(getButtons(), text);
+            String[] texto = {" ","  ","   ","    ","     ","      "};
+            setTextButtons(getButtons(), texto);
             setBoundsButtons(getButtons(), posicao);
         }
 
@@ -429,7 +430,7 @@ public class Cards extends JPanel
         }
 
         void setBounds1(JLabel label ,int x ,int y){
-            label.setBounds(x,y , label.getText().length()*10, 50);
+            label.setBounds(x,y , label.getText().length()*11, 50);
             label.setFont(new Font("Consolas", Font.BOLD, 18));
             label.setForeground(Color.darkGray);
 
