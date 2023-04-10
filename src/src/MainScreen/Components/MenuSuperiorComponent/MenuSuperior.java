@@ -134,7 +134,7 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
       Color rgbgrey = new Color(199,188,161);    
       buttonLogo.setIcon(logo);
-      buttonLogo.setBounds(670, 23, 45, 45);
+      buttonLogo.setBounds(865, 23, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
       buttonLogo.setBackground(rgbgrey);

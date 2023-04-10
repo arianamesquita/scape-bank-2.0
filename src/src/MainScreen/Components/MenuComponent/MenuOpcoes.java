@@ -148,6 +148,7 @@ public class MenuOpcoes extends JPanel
         }
     }
 
+
     /**
      * Subclass ButtonsMenu para objeto do tipo MenuOpcoes, onde serão gerados os botões do objeto.
      * @author pedro
@@ -251,7 +252,7 @@ public class MenuOpcoes extends JPanel
                 Color buttonsMenu = new Color(101,100,124);    
                 button.setBackground(buttonsMenu);
                 button.setForeground(Color.white);
-                Font consolasButton = new Font("Consolas", 50, 20);
+                Font consolasButton = new Font("Century Gothic", 50, 18);
                 button.setFont(consolasButton);
             }
         }
@@ -263,6 +264,7 @@ public class MenuOpcoes extends JPanel
         public JButton[] getButtons() {
             return buttons;
         }
+
     }
 
 

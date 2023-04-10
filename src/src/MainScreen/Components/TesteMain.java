@@ -40,7 +40,6 @@ public class TesteMain {
         MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
         String[] text = {"Extrato -->","Empréstimo -->","Saldo -->","Cartões -->","Pix -->","Pagamentos -->"};
         JButton[] buttonsCards;
-
         buttonsCards = new JButton[text.length];
         for (int i = 0; i < text.length; i++) {
             buttonsCards[i]= new JButton("oi");
@@ -49,23 +48,20 @@ public class TesteMain {
 
 
         Cards cards = new Cards(buttonsCards, text, 400, 170);
-
-
         buttons[0].addActionListener(e -> {
             frame.add(cards);
             frame.repaint();
         });
         buttons[1].addActionListener(e -> {
             frame.remove(cards);
-
             frame.repaint();});
         buttons[2].addActionListener(e -> JOptionPane.showMessageDialog(null, "Pagamento"));
         buttons[3].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
-
         JTextField searchField = new JTextField("");
         searchField.setVisible(true);
+
 
         JButton[] buttons2 = new JButton[5];
         buttons2[0] = new JButton("");
@@ -73,10 +69,7 @@ public class TesteMain {
         buttons2[2] = new JButton("");
         buttons2[3] = new JButton("");
         buttons2[4] = new JButton("");
-        
-
         MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
-
         searchField.addFocusListener(new FocusListener(){
                 public void focusGained(FocusEvent e){
                 if (searchField.getText().equals("Pesquisar..")){
@@ -84,13 +77,13 @@ public class TesteMain {
                     searchField.setBackground(Color.white);
                 }
             }
-
             public void focusLost(FocusEvent e){
                 if (searchField.getText().isEmpty()){
                     searchField.setText("Pesquisar..");
                 }
             }
         });
+
 
         frame.add(menuPrincipais);
         frame.add(menuSuperior);
