@@ -64,12 +64,12 @@ public class TesteMain {
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
 
-        JTextField searchField = new JTextField("oi");
+        JTextField searchField = new JTextField("");
         searchField.setVisible(true);
 
         JButton[] buttons2 = new JButton[2];
-        buttons2[0] = new JButton("oi!");
-        buttons2[1] = new JButton("oii!");
+        buttons2[0] = new JButton("");
+        buttons2[1] = new JButton("");
         
 
         MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);

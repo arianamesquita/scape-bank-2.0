@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Objects;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,14 +26,15 @@ public class MenuSuperior extends JPanel {
        this.height = height;
        this.searchField = z;
        this.button = button;
-       addPaintMenu();
+
        setBounds(getX(),getY(),getWidth(),getHeight());
        setLayout(null);
        ButtonSearch(getSearchField());
-       add(getSearchField());
        ButtonLogo(getButton()[0]);
        SearchIcon(getButton()[1]);
        addButton();
+       add(getSearchField());
+       addPaintMenu();
        setVisible(true);
     }
    void addButton() {
@@ -111,9 +113,9 @@ public class MenuSuperior extends JPanel {
     }
 
     public void ButtonLogo(JButton buttonLogo){
-        Icon logo = new ImageIcon(getClass().getResource("S_logo_provisoria.png"));
+        Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("S_logo_provisoria.png")));
         Color rgbgrey = new Color(199,188,161);    
-        buttonLogo = new JButton(logo);
+        buttonLogo.setIcon(logo);
         buttonLogo.setBounds(20, 1, 100, 100);
         buttonLogo.setBorderPainted(false);
         buttonLogo.setOpaque(true);
