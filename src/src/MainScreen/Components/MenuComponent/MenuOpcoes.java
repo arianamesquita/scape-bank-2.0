@@ -139,10 +139,10 @@ public class MenuOpcoes extends JPanel
          */
         @Override
         public void paint(Graphics g) {
-
-            g.setColor(Color.darkGray);
+            Color rgbgrey = new Color(199,188,161);    
+            g.setColor(rgbgrey);
             g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-            g.setColor(Color.gray);
+            g.setColor(Color.white);
             g.fillRoundRect(10, 10, getWidth()-20, (int) (getHeight()*0.2727272727), 20, 20);
             g.dispose();
         }
@@ -156,7 +156,7 @@ public class MenuOpcoes extends JPanel
     private static class ButtonsMenu {
         private  final int x,y,width,height;
         private final JButton[]buttons;
-        private String[] text = {"menu Principal ->","pix->", "pagamento->","emprestimos->", "cartões->"};
+        private String[] text = {"Menu Principal ->","Pix->", "Pagamentos->","Empréstimos->", "Cartões->"};
 
         /**
          * Construtor da Subclass ButtonsMenu, usado para gerar o objeto.
@@ -248,6 +248,11 @@ public class MenuOpcoes extends JPanel
             for (JButton button :buttons) {
                 button.setBounds(10, getY()+20+ count, getWidth()-20, (int) (0.0909090909*getHeight()));
                 count = (int) (0.10*getHeight()+ count);
+                Color buttonsMenu = new Color(101,100,124);    
+                button.setBackground(buttonsMenu);
+                button.setForeground(Color.white);
+                Font consolasButton = new Font("Consolas", 50, 20);
+                button.setFont(consolasButton);
             }
         }
 

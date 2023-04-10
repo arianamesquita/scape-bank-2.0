@@ -235,12 +235,14 @@ public class Cards extends JPanel
         public void paint(Graphics g) {
             super.paint(g);
 
+
             int count = 0;
             int count1 = 0;
 
             for (int i = 0; i < quantidade; i++)
             {
-                g.setColor(Color.gray);
+                Color rgbgrey = new Color(237,228,224);    
+                g.setColor(rgbgrey);
                 g.fillRoundRect(count1,  count, 400, 150, 40, 40);
                 count = count + 200;
 
@@ -317,7 +319,13 @@ public class Cards extends JPanel
             int count = 0;
             for (JButton button:buttons) {
 
-                button.setBounds(ints[count][0]+280,ints[count][1]+120,100,30);
+                /*button.setBounds(ints[count][0]+200,ints[count][1]+120,200,30);*/
+                button.setBounds(ints[count][0]+50,ints[count][1],300,150);
+                button.setOpaque(false); // pra voltar o botão
+                button.setContentAreaFilled(false); // pra voltar a cor do botão
+                button.setBorderPainted(false); // pra voltar a borda do botão
+                Font arialButton = new Font("Arial", 50, 18);
+                button.setFont(arialButton);
                 count++;
             }
         }
@@ -334,15 +342,16 @@ public class Cards extends JPanel
     private static class LabelsCards{
         private JLabel[][] labels;
         private String[][] texto = {
-                {"seu saldo é de: 000", "rendimento 110% CDI"},
-                {"oba!!! voce tem emprestimo disponivel","no valor de: 000 em até 12x"},
-                {"saldo","saldo"},
-                {"cartoes","cartões"},
-                {"pix","pix"},
-                {"limite","limite"}};
+                {"Seu saldo é de: R$ 000", "Rendimento 110% CDI"},
+                {"Oba!!! Você tem empréstimo disponível","No valor de: 000 em até 12x"},
+                {"Saldo","Saldo"},
+                {"Cartões","Cartões de crédito e débito"},
+                {"Pagamentos","Pagamentos"},
+                {"Pix","Pix"}};
         private String[] text;
         private int[][]ints;
         private int x,y,widht,heidgth;
+
 
         public LabelsCards(String[]text, int[][] ints, int x, int y) {
             this.text = text;
@@ -350,7 +359,6 @@ public class Cards extends JPanel
             this.x = x;
             this.y = y;
             this.labels = new JLabel[6][2];
-
 
             InstanciaLabel(getLabels());
             addPersonalizacao(getText(),getInts());
@@ -361,57 +369,57 @@ public class Cards extends JPanel
 
             for (String string : texts) {
                 switch (string) {
-                    case "Extrato" -> {
+                    case "Extrato -->" -> {
                         labels[count][count1].setText(texto[0][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[0][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
-                    case "emprestimo" -> {
+                    case "Empréstimo -->" -> {
                         labels[count][count1].setText(texto[1][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[1][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]+50);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
-                    case "saldo" -> {
+                    case "Saldo -->" -> {
                         labels[count][count1].setText(texto[2][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[2][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
-                    case "cartoes" -> {
+                    case "Cartões -->" -> {
                         labels[count][count1].setText(texto[3][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[3][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
-                    case "pix" -> {
+                    case "Pagamentos -->" -> {
                         labels[count][count1].setText(texto[4][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[4][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
-                    case "limite" -> {
+                    case "Pix -->" -> {
                         labels[count][count1].setText(texto[5][0]);
-                        setBounds(labels[count][count1], ints[count][count1], ints[count][count1 + 1]);
+                        setBounds1(labels[count][count1], ints[count][count1]+10, ints[count][count1 + 1]);
                         count1++;
                         labels[count][count1].setText(texto[5][1]);
-                        setBounds(labels[count][count1], ints[count][count1 - 1 ]+200, ints[count][count1]);
+                        setBounds2(labels[count][count1], ints[count][count1 - 1 ]+100, ints[count][count1]+50);
                         count++;
                         count1=0;
                     }
@@ -420,8 +428,15 @@ public class Cards extends JPanel
             }
         }
 
-        void setBounds(JLabel label ,int x ,int y){
+        void setBounds1(JLabel label ,int x ,int y){
             label.setBounds(x,y , label.getText().length()*10, 50);
+            label.setFont(new Font("Consolas", Font.BOLD, 18));
+            label.setForeground(Color.darkGray);
+
+        }
+        void setBounds2(JLabel label ,int x ,int y){
+            label.setBounds(x,y , label.getText().length()*15, 50);
+            label.setFont(new Font("Arial", Font.ITALIC, 18));
 
         }
         void  InstanciaLabel(JLabel[][] labels){

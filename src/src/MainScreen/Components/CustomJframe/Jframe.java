@@ -12,7 +12,7 @@ public class Jframe extends JFrame {
     public Jframe(){
 
         try {
-            final Image backgroundImage = javax.imageio.ImageIO.read(new File(Objects.requireNonNull(getClass().getResource("Cosmic Fusion.jpg")).toURI()));
+            final Image backgroundImage = javax.imageio.ImageIO.read(new File(Objects.requireNonNull(getClass().getResource("gradient2.png")).toURI()));
             setContentPane(new JPanel(new BorderLayout()) {
                 @Override public void paintComponent(Graphics g) {
                     g.drawImage(backgroundImage, 0, 0, null);
@@ -23,6 +23,5 @@ public class Jframe extends JFrame {
         }
 
     }
-
-
+    
     }
