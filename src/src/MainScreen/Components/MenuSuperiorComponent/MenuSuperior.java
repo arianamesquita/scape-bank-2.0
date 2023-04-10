@@ -32,6 +32,9 @@ public class MenuSuperior extends JPanel {
        ButtonSearch(getSearchField());
        ButtonLogo(getButton()[0]);
        SearchIcon(getButton()[1]);
+       ExitSystem(getButton()[2]);
+       NotificationIcon(getButton()[3]);
+       MenuIcon(getButton()[4]);
        addButton();
        add(getSearchField());
        addPaintMenu();
@@ -42,9 +45,8 @@ public class MenuSuperior extends JPanel {
          add(button);
       }
    }
-
-    
-    public JButton[] getButton() {
+   
+   public JButton[] getButton() {
       return button;
    }
    public void setButton(JButton[] button) {
@@ -91,12 +93,10 @@ public class MenuSuperior extends JPanel {
            setVisible(true);
        }
 
-
        @Override
        public int getWidth() {
            return width;
        }
-
 
        @Override
        public int getHeight() {
@@ -123,7 +123,7 @@ public class MenuSuperior extends JPanel {
         buttonLogo.setVisible(true);       
     }
     public void ButtonSearch(JTextField text){
-      text.setBounds(160, 25, 500, 45);
+      text.setBounds(160, 25, 700, 45);
       text.setBackground(Color.white);
       text.setForeground(Color.BLACK);
       text.setFont(new Font("Arial", Font.BOLD, 20));
@@ -134,11 +134,41 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
       Color rgbgrey = new Color(199,188,161);    
       buttonLogo.setIcon(logo);
-      buttonLogo.setBounds(670, 25, 45, 45);
+      buttonLogo.setBounds(670, 23, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
       buttonLogo.setBackground(rgbgrey);
       buttonLogo.setVisible(true);
+    }
+    public void ExitSystem (JButton buttonExit){
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("sair_sistema.png")));
+      Color rgbgrey = new Color(199,188,161);    
+      buttonExit.setIcon(logo);
+      buttonExit.setBounds(1300, 23, 50, 50);
+      buttonExit.setBorderPainted(false);
+      buttonExit.setOpaque(true);
+      buttonExit.setBackground(rgbgrey);
+      buttonExit.setVisible(true);
+    }
+    public void NotificationIcon(JButton notiButton){
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("notificacao_cheia.png")));
+      Color rgbgrey = new Color(199,188,161);    
+      notiButton.setIcon(logo);
+      notiButton.setBounds(1250, 23, 50, 50);
+      notiButton.setBorderPainted(false);
+      notiButton.setOpaque(true);
+      notiButton.setBackground(rgbgrey);
+      notiButton.setVisible(true);
+    }
+    public void MenuIcon(JButton menuButton){
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("menu_icone.png")));
+      Color rgbgrey = new Color(199,188,161);    
+      menuButton.setIcon(logo);
+      menuButton.setBounds(1190, 23, 50, 50);
+      menuButton.setBorderPainted(false);
+      menuButton.setOpaque(true);
+      menuButton.setBackground(rgbgrey);
+      menuButton.setVisible(true);
     }
     
 }

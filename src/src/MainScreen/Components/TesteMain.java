@@ -67,9 +67,12 @@ public class TesteMain {
         JTextField searchField = new JTextField("");
         searchField.setVisible(true);
 
-        JButton[] buttons2 = new JButton[2];
+        JButton[] buttons2 = new JButton[5];
         buttons2[0] = new JButton("");
         buttons2[1] = new JButton("");
+        buttons2[2] = new JButton("");
+        buttons2[3] = new JButton("");
+        buttons2[4] = new JButton("");
         
 
         MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
