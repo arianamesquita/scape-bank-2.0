@@ -131,7 +131,7 @@ public class MenuSuperior extends JPanel {
       text.setVisible(true);
     }
     public void SearchIcon (JButton buttonLogo){
-      Icon logo = new ImageIcon(getClass().getResource("botaopesquisar.png"));
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
       Color rgbgrey = new Color(199,188,161);    
       buttonLogo.setIcon(logo);
       buttonLogo.setBounds(670, 25, 45, 45);
