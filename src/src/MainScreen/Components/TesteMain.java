@@ -9,6 +9,10 @@ import javax.swing.*;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
+import java.awt.Color;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
+
 /**
  * class para teste de alguns objetos
  * @author pedro
@@ -43,10 +47,6 @@ public class TesteMain {
             buttonsCards[i].setVisible(true);
         }
 
-        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100);
-        menuSuperior.ButtonLogo();
-
-
 
         Cards cards = new Cards(buttonsCards, text, 400, 170);
 
@@ -64,7 +64,30 @@ public class TesteMain {
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
 
+        JTextField searchField = new JTextField("oi");
+        searchField.setVisible(true);
 
+        JButton[] buttons2 = new JButton[2];
+        buttons2[0] = new JButton("oi!");
+        buttons2[1] = new JButton("oii!");
+        
+
+        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
+
+        searchField.addFocusListener(new FocusListener(){
+                public void focusGained(FocusEvent e){
+                if (searchField.getText().equals("Pesquisar..")){
+                    searchField.setText("");
+                    searchField.setBackground(Color.white);
+                }
+            }
+
+            public void focusLost(FocusEvent e){
+                if (searchField.getText().isEmpty()){
+                    searchField.setText("Pesquisar..");
+                }
+            }
+        });
 
         frame.add(menuPrincipais);
         frame.add(menuSuperior);

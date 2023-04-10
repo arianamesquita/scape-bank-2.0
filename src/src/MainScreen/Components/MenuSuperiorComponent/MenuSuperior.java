@@ -3,29 +3,60 @@ package MainScreen.Components.MenuSuperiorComponent;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MenuSuperior extends JPanel {
 
     private final int x, y, width, height;
+    private JTextField searchField;
+    private JButton[] button;
 
-    public MenuSuperior(int x, int y, int width, int height) {
+    public MenuSuperior(int x, int y, int width, int height, JTextField z, JButton[] button) {
        this.x = x;
        this.y = y;
        this.width = width;
        this.height = height;
+       this.searchField = z;
+       this.button = button;
        addPaintMenu();
        setBounds(getX(),getY(),getWidth(),getHeight());
        setLayout(null);
+       ButtonSearch(getSearchField());
+       add(getSearchField());
+       ButtonLogo(getButton()[0]);
+       SearchIcon(getButton()[1]);
+       addButton();
        setVisible(true);
     }
+   void addButton() {
+      for (JButton button : getButton()) {
+         add(button);
+      }
+   }
 
-    public int getX() {
+    
+    public JButton[] getButton() {
+      return button;
+   }
+   public void setButton(JButton[] button) {
+      this.button = button;
+   }
+
+   public JTextField getSearchField() {
+      return searchField;
+   }
+   public void setSearchField(JTextField searchField) {
+      this.searchField = searchField;
+   }
+
+   public int getX() {
        return x;
     }
 
@@ -70,7 +101,6 @@ public class MenuSuperior extends JPanel {
            return height;
        }
 
-
        @Override
        public void paint(Graphics g) {
            Color rgbgrey = new Color(199,188,161);    
@@ -79,13 +109,34 @@ public class MenuSuperior extends JPanel {
            g.dispose();
        }
     }
-    
-    private JButton buttonLogo;
 
-    public void ButtonLogo(){
-        Icon logo = new ImageIcon(getClass().getResource("SP_logo_provisoria.jpg"));
-        buttonLogo = new JButton(" ", logo);
-        add(buttonLogo);        
+    public void ButtonLogo(JButton buttonLogo){
+        Icon logo = new ImageIcon(getClass().getResource("S_logo_provisoria.png"));
+        Color rgbgrey = new Color(199,188,161);    
+        buttonLogo = new JButton(logo);
+        buttonLogo.setBounds(20, 1, 100, 100);
+        buttonLogo.setBorderPainted(false);
+        buttonLogo.setOpaque(true);
+        buttonLogo.setBackground(rgbgrey);
+        buttonLogo.setVisible(true);       
+    }
+    public void ButtonSearch(JTextField text){
+      text.setBounds(160, 25, 500, 45);
+      text.setBackground(Color.white);
+      text.setForeground(Color.BLACK);
+      text.setFont(new Font("Arial", Font.BOLD, 20));
+      text.setText("Pesquisar..");
+      text.setVisible(true);
+    }
+    public void SearchIcon (JButton buttonLogo){
+      Icon logo = new ImageIcon(getClass().getResource("botaopesquisar.png"));
+      Color rgbgrey = new Color(199,188,161);    
+      buttonLogo.setIcon(logo);
+      buttonLogo.setBounds(670, 25, 45, 45);
+      buttonLogo.setBorderPainted(false);
+      buttonLogo.setOpaque(true);
+      buttonLogo.setBackground(rgbgrey);
+      buttonLogo.setVisible(true);
     }
     
 }
