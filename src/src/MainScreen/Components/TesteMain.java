@@ -22,6 +22,10 @@ public class TesteMain {
 
     static Jframe frame;
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
 
         frame = new Jframe();

@@ -8,6 +8,10 @@ import javax.swing.JOptionPane;
 
 public class Conecta {
 
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		

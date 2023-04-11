@@ -46,6 +46,10 @@ public class MenuSuperior extends JPanel {
       }
    }
    
+   
+   /** 
+    * @return JButton[]
+    */
    public JButton[] getButton() {
       return button;
    }
