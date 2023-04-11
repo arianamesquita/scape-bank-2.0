@@ -11,7 +11,7 @@ public class Conecta {
 	public static void main(String[] args) {
 		
 		
-		final String DRIVER = "com.mysql.jdbc.Driver";
+		final String DRIVER = "com.mysql.cj.jdbc.Driver";
 		final String URL = "jdbc:mysql://127.0.0.1:3308/?user=administrator"; //ajustado para novo teste
 		
 
