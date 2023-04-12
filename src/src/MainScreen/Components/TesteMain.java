@@ -49,6 +49,7 @@ public class TesteMain {
             buttonsCards[i]= new JButton("oi");
             buttonsCards[i].setVisible(true);
         }
+        
 
 
         Cards cards = new Cards(buttonsCards, text, 400, 170);
