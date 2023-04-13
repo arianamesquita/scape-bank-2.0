@@ -2,6 +2,7 @@ package MainScreen.Components.MenuComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 
 /**
@@ -28,11 +29,19 @@ public class MenuOpcoes extends JPanel
         this.width = width;
         this.height = height;
         this.buttons = buttons;
-        addButtons();
+        addButtons();     addLabel();
         addPaintMenu();
+   
         setBounds(getX(),getY(),getWidth(),getHeight());
         setLayout(null);
         setVisible(true);
+    }
+    void addLabel(){
+        JlabelUser jlabelUser = new JlabelUser();
+        for (JLabel label : jlabelUser.getLabels()) {
+            add(label);
+            
+        }
     }
 
     /**
@@ -157,7 +166,7 @@ public class MenuOpcoes extends JPanel
     private static class ButtonsMenu {
         private  final int x,y,width,height;
         private final JButton[]buttons;
-        private String[] text = {"Menu Principal ->","Pix->", "Pagamentos->","Empréstimos->", "Cartões->"};
+        private String[] text = {"image","Menu Principal ->","Pix->", "Pagamentos->","Empréstimos->", "Cartões->"};
 
         /**
          * Construtor da Subclass ButtonsMenu, usado para gerar o objeto.
@@ -239,6 +248,17 @@ public class MenuOpcoes extends JPanel
                 count++;
             }
         }
+        void setBoundsImage(JButton button){
+            Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("avatar.png")));
+            button.setIcon(logo);
+            button.setBounds(10,20,50,50);
+            button.setBackground(Color.white);
+            button.setBorderPainted(false);
+            button.setText("");
+            button.setVisible(true);
+
+
+        }
 
         /**
          * Método da Subclass ButtonsMenu que insere a dimensão dos botões.
@@ -247,6 +267,10 @@ public class MenuOpcoes extends JPanel
         void setButtonsBound(JButton[]buttons){
             int count = 0;
             for (JButton button :buttons) {
+                if(button.getText().equals(getText()[0])){
+                    setBoundsImage(button);
+                    continue;
+                }
                 button.setBounds(10, getY()+20+ count, getWidth()-20, (int) (0.0909090909*getHeight()));
                 count = (int) (0.10*getHeight()+ count);
                 Color buttonsMenu = new Color(101,100,124);    
@@ -264,7 +288,50 @@ public class MenuOpcoes extends JPanel
         public JButton[] getButtons() {
             return buttons;
         }
+    
 
+    }
+    private class JlabelUser{
+        private JLabel[] labels;
+
+        public JlabelUser() {
+            this.labels = new JLabel[2];
+            String[] text = {"pedro ferreira","<html> conta: 999999.99-8 <br> agencia: 0404 <br> banco:006</html>"};
+            setText(text,getLabels());
+            setBounds(getLabels());
+
+        }
+
+        public JLabel[] getLabels() {
+            return labels;
+        }
+
+        public void setLabels(JLabel[] labels) {
+            this.labels = labels;
+        }
+
+        void setText(String[] text, JLabel[]labels){
+            int count = 0;
+            for (String string : text) {
+                labels[count] = new JLabel(string);
+                count++;
+            }
+
+        }
+        void setBounds(JLabel[] labels){
+
+            Font arialButton = new Font("Arial", 50, 18);
+            int count = 0;
+            for (JLabel jLabel : labels) {
+                jLabel.setBounds(70,30+count,jLabel.getText().length()*11,(int) (jLabel.getText().length()*1.2));
+                jLabel.setFont(arialButton);
+                jLabel.setBackground(Color.BLACK);
+                jLabel.setVisible(true);
+                count= count+20;
+            }
+
+        }
+        
     }
 
 

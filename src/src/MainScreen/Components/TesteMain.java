@@ -36,8 +36,8 @@ public class TesteMain {
         frame.setExtendedState(MAXIMIZED_BOTH);
         frame.setResizable(false);
 
-        JButton[] buttons = new JButton[5];
-        for (int i = 0; i < 5; i++) {
+        JButton[] buttons = new JButton[6];
+        for (int i = 0; i < 6; i++) {
             buttons[i]= new JButton();
             buttons[i].setVisible(true);
         }
@@ -53,16 +53,16 @@ public class TesteMain {
 
 
         Cards cards = new Cards(buttonsCards, text, 400, 170);
-        buttons[0].addActionListener(e -> {
+        buttons[1].addActionListener(e -> {
             frame.add(cards);
             frame.repaint();
         });
-        buttons[1].addActionListener(e -> {
+        buttons[2].addActionListener(e -> {
             frame.remove(cards);
             frame.repaint();});
-        buttons[2].addActionListener(e -> JOptionPane.showMessageDialog(null, "Pagamento"));
-        buttons[3].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
-        buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
+        buttons[3].addActionListener(e -> JOptionPane.showMessageDialog(null, "Pagamento"));
+        buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
+        buttons[5].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
         JTextField searchField = new JTextField("");
         searchField.setVisible(true);
