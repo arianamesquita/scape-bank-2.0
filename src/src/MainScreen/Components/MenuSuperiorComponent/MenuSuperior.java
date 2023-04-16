@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import MainScreen.Components.Custom.ColorPaleta;
+import MainScreen.Components.Custom.ImageCustom.ImageIcons;
 
 public class MenuSuperior extends JPanel {
 
@@ -118,8 +119,7 @@ public class MenuSuperior extends JPanel {
     }
 
     public void ButtonLogo(JButton buttonLogo){
-        Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("S_logo_provisoria.png")));  
-        buttonLogo.setIcon(logo);
+        buttonLogo.setIcon(ImageIcons.ImagemLogo());
         buttonLogo.setBounds(20, 1, 100, 100);
         buttonLogo.setBorderPainted(false);
         buttonLogo.setOpaque(true);
@@ -135,8 +135,7 @@ public class MenuSuperior extends JPanel {
       text.setVisible(true);
     }
     public void SearchIcon (JButton buttonLogo){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
-      buttonLogo.setIcon(logo);
+      buttonLogo.setIcon(ImageIcons.ImagemPesquisar());
       buttonLogo.setBounds(865, 23, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
@@ -144,8 +143,7 @@ public class MenuSuperior extends JPanel {
       buttonLogo.setVisible(true);
     }
     public void ExitSystem (JButton buttonExit){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("sair_sistema.png"))); 
-      buttonExit.setIcon(logo);
+      buttonExit.setIcon(ImageIcons.ImagemSair());
       buttonExit.setBounds(1300, 23, 50, 50);
       buttonExit.setBorderPainted(false);
       buttonExit.setOpaque(true);
@@ -153,8 +151,7 @@ public class MenuSuperior extends JPanel {
       buttonExit.setVisible(true);
     }
     public void NotificationIcon(JButton notiButton){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("notificacao_cheia.png")));    
-      notiButton.setIcon(logo);
+      notiButton.setIcon(ImageIcons.ImagemNotificaoTrue());
       notiButton.setBounds(1250, 23, 50, 50);
       notiButton.setBorderPainted(false);
       notiButton.setOpaque(true);
@@ -162,8 +159,7 @@ public class MenuSuperior extends JPanel {
       notiButton.setVisible(true);
     }
     public void MenuIcon(JButton menuButton){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("menu_icone.png")));
-      menuButton.setIcon(logo);
+      menuButton.setIcon(ImageIcons.ImagemMenu_Icone());
       menuButton.setBounds(1190, 23, 50, 50);
       menuButton.setBorderPainted(false);
       menuButton.setOpaque(true);
