@@ -7,8 +7,6 @@ import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 
 import javax.swing.*;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
-
 import java.awt.Color;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
@@ -31,9 +29,8 @@ public class TesteMain {
         frame = new Jframe();
         frame.setTitle("Scape Bank");
         frame.setLayout(null);
-        frame.setSize(frame.getMaximumSize());
+        frame.setSize(1300,650);
         frame.setLocationRelativeTo(null);
-        frame.setExtendedState(MAXIMIZED_BOTH);
         frame.setResizable(false);
 
         JButton[] buttons = new JButton[6];
@@ -51,8 +48,7 @@ public class TesteMain {
         }
         
 
-
-        Cards cards = new Cards(buttonsCards, text, 400, 170);
+        Cards cards = new Cards(buttonsCards, text, 400, 160);
         buttons[1].addActionListener(e -> {
             frame.add(cards);
             frame.repaint();
@@ -74,7 +70,8 @@ public class TesteMain {
         buttons2[2] = new JButton("");
         buttons2[3] = new JButton("");
         buttons2[4] = new JButton("");
-        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
+
+        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 80, searchField, buttons2);
         searchField.addFocusListener(new FocusListener(){
                 public void focusGained(FocusEvent e){
                 if (searchField.getText().equals("Pesquisar..")){

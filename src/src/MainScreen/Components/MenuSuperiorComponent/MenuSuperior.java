@@ -120,17 +120,17 @@ public class MenuSuperior extends JPanel {
         Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("S_logo_provisoria.png")));
         Color rgbgrey = new Color(199,188,161);    
         buttonLogo.setIcon(logo);
-        buttonLogo.setBounds(20, 1, 100, 100);
+        buttonLogo.setBounds(10, 1, 60, 80);
         buttonLogo.setBorderPainted(false);
         buttonLogo.setOpaque(true);
         buttonLogo.setBackground(rgbgrey);
         buttonLogo.setVisible(true);       
     }
     public void ButtonSearch(JTextField text){
-      text.setBounds(160, 25, 700, 45);
+      text.setBounds(120, 18, 600, 45);
       text.setBackground(Color.white);
       text.setForeground(Color.BLACK);
-      text.setFont(new Font("Arial", Font.BOLD, 20));
+      text.setFont(new Font("Arial", Font.BOLD, 16));
       text.setText("Pesquisar..");
       text.setVisible(true);
     }
@@ -138,7 +138,7 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
       Color rgbgrey = new Color(199,188,161);    
       buttonLogo.setIcon(logo);
-      buttonLogo.setBounds(865, 23, 45, 45);
+      buttonLogo.setBounds(735, 23, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
       buttonLogo.setBackground(rgbgrey);
@@ -148,7 +148,7 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("sair_sistema.png")));
       Color rgbgrey = new Color(199,188,161);    
       buttonExit.setIcon(logo);
-      buttonExit.setBounds(1300, 23, 50, 50);
+      buttonExit.setBounds(1220, 15, 50, 50);
       buttonExit.setBorderPainted(false);
       buttonExit.setOpaque(true);
       buttonExit.setBackground(rgbgrey);
@@ -158,7 +158,7 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("notificacao_cheia.png")));
       Color rgbgrey = new Color(199,188,161);    
       notiButton.setIcon(logo);
-      notiButton.setBounds(1250, 23, 50, 50);
+      notiButton.setBounds(1170, 15, 50, 50);
       notiButton.setBorderPainted(false);
       notiButton.setOpaque(true);
       notiButton.setBackground(rgbgrey);
@@ -168,7 +168,7 @@ public class MenuSuperior extends JPanel {
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("menu_icone.png")));
       Color rgbgrey = new Color(199,188,161);    
       menuButton.setIcon(logo);
-      menuButton.setBounds(1190, 23, 50, 50);
+      menuButton.setBounds(1110, 15, 50, 50);
       menuButton.setBorderPainted(false);
       menuButton.setOpaque(true);
       menuButton.setBackground(rgbgrey);
