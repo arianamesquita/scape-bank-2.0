@@ -115,7 +115,7 @@ public class MenuSuperior extends JPanel {
 
     public void ButtonLogo(JButton buttonLogo){
         buttonLogo.setIcon(ImageIcons.ImagemLogo());
-        buttonLogo.setBounds(10, 1, 60, 80);
+        buttonLogo.setBounds(10, 0, 60, 80);
         buttonLogo.setBorderPainted(false);
         buttonLogo.setOpaque(true);
         buttonLogo.setBackground(ColorPaleta.rgbgray2Color());
@@ -131,7 +131,7 @@ public class MenuSuperior extends JPanel {
     }
     public void SearchIcon (JButton buttonLogo){
       buttonLogo.setIcon(ImageIcons.ImagemPesquisar());
-      buttonLogo.setBounds(735, 23, 45, 45);
+      buttonLogo.setBounds(730, 18, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
       buttonLogo.setBackground(ColorPaleta.rgbgray2Color());
@@ -147,7 +147,7 @@ public class MenuSuperior extends JPanel {
     }
     public void NotificationIcon(JButton notiButton){
       notiButton.setIcon(ImageIcons.ImagemNotificaoTrue());
-      notiButton.setBounds(1170, 15, 50, 50);
+      notiButton.setBounds(1165, 15, 50, 50);
       notiButton.setBorderPainted(false);
       notiButton.setOpaque(true);
       notiButton.setBackground(ColorPaleta.rgbgray2Color());
@@ -155,7 +155,7 @@ public class MenuSuperior extends JPanel {
     }
     public void MenuIcon(JButton menuButton){
       menuButton.setIcon(ImageIcons.ImagemMenu_Icone());
-      menuButton.setBounds(1110, 15, 50, 50);
+      menuButton.setBounds(1105, 15, 50, 50);
       menuButton.setBorderPainted(false);
       menuButton.setOpaque(true);
       menuButton.setBackground(ColorPaleta.rgbgray2Color());
