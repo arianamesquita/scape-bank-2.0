@@ -2,6 +2,9 @@ package MainScreen.Components.CardsComponent;
 
 
 import javax.swing.*;
+
+import MainScreen.Components.Custom.ColorPaleta;
+
 import java.awt.*;
 
 /**
@@ -241,8 +244,8 @@ public class Cards extends JPanel
 
             for (int i = 0; i < quantidade; i++)
             {
-                Color rgbgrey = new Color(237,228,224);    
-                g.setColor(rgbgrey);
+            
+                g.setColor(ColorPaleta.rgbGrey());
                 g.fillRoundRect(count1,  count, 400, 150, 40, 40);
                 count = count + 200;
 
@@ -432,12 +435,13 @@ public class Cards extends JPanel
         void setBounds1(JLabel label ,int x ,int y){
             label.setBounds(x,y , label.getText().length()*11, 50);
             label.setFont(new Font("Consolas", Font.BOLD, 18));
-            label.setForeground(Color.darkGray);
+            label.setForeground(ColorPaleta.darkgrayColor());
 
         }
         void setBounds2(JLabel label ,int x ,int y){
             label.setBounds(x,y , label.getText().length()*15, 50);
             label.setFont(new Font("Arial", Font.ITALIC, 18));
+            label.setForeground(ColorPaleta.darkgrayColor());
 
         }
         void  InstanciaLabel(JLabel[][] labels){
