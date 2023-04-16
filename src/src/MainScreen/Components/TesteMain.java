@@ -1,6 +1,8 @@
 package MainScreen.Components;
 
 import MainScreen.Components.CardsComponent.Cards;
+import MainScreen.Components.CustomJButton.Jbutton;
+import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
@@ -33,9 +35,9 @@ public class TesteMain {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        JButton[] buttons = new JButton[6];
+        Jbutton[] buttons = new Jbutton[6];
         for (int i = 0; i < 6; i++) {
-            buttons[i]= new JButton();
+            buttons[i]= new Jbutton();
             buttons[i].setVisible(true);
         }
         MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
@@ -60,7 +62,7 @@ public class TesteMain {
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
         buttons[5].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
-        JTextField searchField = new JTextField("");
+        JtextField searchField = new JtextField();
         searchField.setVisible(true);
 
 
@@ -85,6 +87,8 @@ public class TesteMain {
                 }
             }
         });
+
+
 
 
         frame.add(menuPrincipais);

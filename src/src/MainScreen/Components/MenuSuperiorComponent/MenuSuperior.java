@@ -1,28 +1,23 @@
 package MainScreen.Components.MenuSuperiorComponent;
 
-import java.awt.Button;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.Objects;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import MainScreen.Components.Custom.ColorPaleta;
 import MainScreen.Components.Custom.ImageCustom.ImageIcons;
+import MainScreen.Components.CustomJTextField.JtextField;
 
 public class MenuSuperior extends JPanel {
 
     private final int x, y, width, height;
-    private JTextField searchField;
+    private JtextField searchField;
     private JButton[] button;
 
-    public MenuSuperior(int x, int y, int width, int height, JTextField z, JButton[] button) {
+    public MenuSuperior(int x, int y, int width, int height, JtextField z, JButton[] button) {
        this.x = x;
        this.y = y;
        this.width = width;
@@ -60,10 +55,10 @@ public class MenuSuperior extends JPanel {
       this.button = button;
    }
 
-   public JTextField getSearchField() {
+   public JtextField getSearchField() {
       return searchField;
    }
-   public void setSearchField(JTextField searchField) {
+   public void setSearchField(JtextField searchField) {
       this.searchField = searchField;
    }
 
@@ -126,7 +121,7 @@ public class MenuSuperior extends JPanel {
         buttonLogo.setBackground(ColorPaleta.rgbgray2Color());
         buttonLogo.setVisible(true);       
     }
-    public void ButtonSearch(JTextField text){
+    public void ButtonSearch(JtextField text){
       text.setBounds(120, 18, 600, 45);
       text.setBackground(ColorPaleta.White());
       text.setForeground(ColorPaleta.darkgrayColor());
