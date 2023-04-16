@@ -3,6 +3,7 @@ package MainScreen.Components.MenuComponent;
 import javax.swing.*;
 
 import MainScreen.Components.Custom.ColorPaleta;
+import MainScreen.Components.CustomJButton.Jbutton;
 
 import java.awt.*;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class MenuOpcoes extends JPanel
 {
    private final int x, y, width, height;
-     private  final JButton[] buttons ;
+     private  final Jbutton[] buttons ;
 
     /**
      * Construtor da class MenuOpcoes.
@@ -26,7 +27,7 @@ public class MenuOpcoes extends JPanel
      * @param height — comprimento.
      * @param buttons — botões a serem adicionados
      */
-    public MenuOpcoes(int x, int y, int width, int height, JButton[] buttons) {
+    public MenuOpcoes(int x, int y, int width, int height, Jbutton[] buttons) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -83,7 +84,7 @@ public class MenuOpcoes extends JPanel
      * Método da class MenuOpcoes que retorna os botões.
      * @return — retornar o valor do atributo buttons.
      */
-    public JButton[] getButtons() {
+    public Jbutton[] getButtons() {
         return buttons;
     }
 
@@ -100,7 +101,7 @@ public class MenuOpcoes extends JPanel
      */
     public void addButtons(){
         ButtonsMenu buttonsMenu = new ButtonsMenu(getX(),getY(),getWidth(),getHeight(),getButtons());
-        for (JButton button: buttonsMenu.getButtons()){
+        for (Jbutton button: buttonsMenu.getButtons()){
             add(button);
         }
     }
@@ -167,7 +168,7 @@ public class MenuOpcoes extends JPanel
      */
     private static class ButtonsMenu {
         private  final int x,y,width,height;
-        private final JButton[]buttons;
+        private final Jbutton[]buttons;
         private String[] text = {"image","Menu Principal ->","Pix->", "Pagamentos->","Empréstimos->", "Cartões->"};
 
         /**
@@ -178,7 +179,7 @@ public class MenuOpcoes extends JPanel
          * @param height — comprimento.
          * @param buttons — botões.
          */
-        public ButtonsMenu(int x, int y, int width, int height, JButton[] buttons) {
+        public ButtonsMenu(int x, int y, int width, int height, Jbutton[] buttons) {
             this.x = x;
             this.y = y;
             this.width = width;
@@ -242,7 +243,7 @@ public class MenuOpcoes extends JPanel
          * @param buttons — botões há serem manipulados.
          * @param text — textos a serem inseridos nos botões.
          */
-        void setTextButtons(JButton[]buttons, String[] text)
+        void setTextButtons(Jbutton[]buttons, String[] text)
         {
             int count = 0;
             for (String s: text) {
@@ -250,11 +251,11 @@ public class MenuOpcoes extends JPanel
                 count++;
             }
         }
-        void setBoundsImage(JButton button){
+        void setBoundsImage(Jbutton button){
             Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("avatar.png")));
             button.setIcon(logo);
             button.setBounds(10,20,50,50);
-            button.setBackground(ColorPaleta.White());
+            button.setColors(ColorPaleta.White(),ColorPaleta.White(),ColorPaleta.White());
             button.setBorderPainted(false);
             button.setText("");
             button.setVisible(true);
@@ -266,16 +267,16 @@ public class MenuOpcoes extends JPanel
          * Método da Subclass ButtonsMenu que insere a dimensão dos botões.
          * @param buttons — botões a serem manipulados.
          */
-        void setButtonsBound(JButton[]buttons){
+        void setButtonsBound(Jbutton[]buttons){
             int count = 0;
-            for (JButton button :buttons) {
+            for (Jbutton button :buttons) {
                 if(button.getText().equals(getText()[0])){
                     setBoundsImage(button);
                     continue;
                 }
                 button.setBounds(10, getY()+20+ count, getWidth()-20, (int) (0.0909090909*getHeight()));
                 count = (int) (0.10*getHeight()+ count);
-                button.setBackground(ColorPaleta.buttonsColor());
+                button.setColors(ColorPaleta.buttonsColor(),Color.lightGray,Color.BLACK);
                 button.setForeground(ColorPaleta.White());
                 Font consolasButton = new Font("Century Gothic", 50, 18);
                 button.setFont(consolasButton);
@@ -286,7 +287,7 @@ public class MenuOpcoes extends JPanel
          * Método da Subclass ButtonsMenu que retorna os botões da class.
          * @return — retornar o valor do atributo buttons.
          */
-        public JButton[] getButtons() {
+        public Jbutton[] getButtons() {
             return buttons;
         }
     

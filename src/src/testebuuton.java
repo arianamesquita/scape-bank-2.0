@@ -1,24 +1,29 @@
-import MainScreen.Components.JbuttonCustom.Jbutton;
-import MainScreen.Components.JbuttonCustom.JbuttonOutLine;
+import MainScreen.Components.CustomJTextField.JtextField;
 
 import javax.swing.*;
 import java.awt.*;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
+
 public class testebuuton {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setSize(500,500);
-/*        JbuttonOutLine b = new JbuttonOutLine(0,0,100,50);*/
+        frame.setTitle("Scape Bank");
+        frame.setLayout(null);
+        frame.setSize(frame.getMaximumSize());
+        frame.setLocationRelativeTo(null);
+        frame.setExtendedState(MAXIMIZED_BOTH);
+        frame.setResizable(false);
 
-/*        b.setBackground(Color.darkGray);
-        b.setText("um botão");
-        b.setForeground(Color.CYAN);
-        b.setVisible(true);*/
-        Jbutton jbutton = new Jbutton();
-        jbutton.setBounds(0, 0, 100, 40);
-        jbutton.setVisible(true);
+        JtextField jtxt = new JtextField();
+        jtxt.setBounds(200,200,300,60);
+        jtxt.setText("sóvai");
+        jtxt.setBackground(Color.darkGray);
+        jtxt.setForeground(Color.white);
+        jtxt.setVisible(true);
 
-        frame.add(jbutton);
+        frame.add(jtxt);
+
         frame.setVisible(true);
     }
 }
