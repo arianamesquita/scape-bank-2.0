@@ -1,6 +1,9 @@
 package MainScreen.Components.MenuComponent;
 
 import javax.swing.*;
+
+import MainScreen.Components.Custom.ColorPaleta;
+
 import java.awt.*;
 import java.util.Objects;
 
@@ -147,11 +150,10 @@ public class MenuOpcoes extends JPanel
          * @param g  the <code>Graphics</code> context in which to paint
          */
         @Override
-        public void paint(Graphics g) {
-            Color rgbgrey = new Color(199,188,161);    
-            g.setColor(rgbgrey);
+        public void paint(Graphics g) {   
+            g.setColor(ColorPaleta.rgbgray2Color());
             g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-            g.setColor(Color.white);
+            g.setColor(ColorPaleta.White());
             g.fillRoundRect(10, 10, getWidth()-20, (int) (getHeight()*0.2727272727), 20, 20);
             g.dispose();
         }
@@ -252,7 +254,7 @@ public class MenuOpcoes extends JPanel
             Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("avatar.png")));
             button.setIcon(logo);
             button.setBounds(10,20,50,50);
-            button.setBackground(Color.white);
+            button.setBackground(ColorPaleta.White());
             button.setBorderPainted(false);
             button.setText("");
             button.setVisible(true);
@@ -273,9 +275,8 @@ public class MenuOpcoes extends JPanel
                 }
                 button.setBounds(10, getY()+20+ count, getWidth()-20, (int) (0.0909090909*getHeight()));
                 count = (int) (0.10*getHeight()+ count);
-                Color buttonsMenu = new Color(101,100,124);    
-                button.setBackground(buttonsMenu);
-                button.setForeground(Color.white);
+                button.setBackground(ColorPaleta.buttonsColor());
+                button.setForeground(ColorPaleta.White());
                 Font consolasButton = new Font("Century Gothic", 50, 18);
                 button.setFont(consolasButton);
             }
@@ -325,7 +326,7 @@ public class MenuOpcoes extends JPanel
             for (JLabel jLabel : labels) {
                 jLabel.setBounds(70,30+count,jLabel.getText().length()*11,(int) (jLabel.getText().length()*1.2));
                 jLabel.setFont(arialButton);
-                jLabel.setBackground(Color.BLACK);
+                jLabel.setBackground(ColorPaleta.darkgrayColor());
                 jLabel.setVisible(true);
                 count= count+20;
             }

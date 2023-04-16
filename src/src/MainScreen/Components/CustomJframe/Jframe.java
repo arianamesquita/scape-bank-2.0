@@ -1,6 +1,9 @@
 package MainScreen.Components.CustomJframe;
 
 import javax.swing.*;
+
+import MainScreen.Components.Custom.ImageCustom.ImageIcons;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +18,7 @@ public class Jframe extends JFrame {
             final Image backgroundImage = javax.imageio.ImageIO.read(new File(Objects.requireNonNull(getClass().getResource("gradient2.png")).toURI()));
             setContentPane(new JPanel(new BorderLayout()) {
                 @Override public void paintComponent(Graphics g) {
-                    g.drawImage(backgroundImage, 0, 0, null);
+                    g.drawImage(ImageIcons.ImageJframe(), 0, 0, null);
                 }
             });
         } catch (IOException | URISyntaxException e) {

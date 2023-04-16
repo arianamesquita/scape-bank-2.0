@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import MainScreen.Components.Custom.ColorPaleta;
+
 public class MenuSuperior extends JPanel {
 
     private final int x, y, width, height;
@@ -109,69 +111,63 @@ public class MenuSuperior extends JPanel {
 
        @Override
        public void paint(Graphics g) {
-           Color rgbgrey = new Color(199,188,161);    
-           g.setColor(rgbgrey);
+           g.setColor(ColorPaleta.rgbgray2Color());
            g.fillRect(0, 0, getWidth(), getHeight());
            g.dispose();
        }
     }
 
     public void ButtonLogo(JButton buttonLogo){
-        Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("S_logo_provisoria.png")));
-        Color rgbgrey = new Color(199,188,161);    
+        Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("S_logo_provisoria.png")));  
         buttonLogo.setIcon(logo);
         buttonLogo.setBounds(20, 1, 100, 100);
         buttonLogo.setBorderPainted(false);
         buttonLogo.setOpaque(true);
-        buttonLogo.setBackground(rgbgrey);
+        buttonLogo.setBackground(ColorPaleta.rgbgray2Color());
         buttonLogo.setVisible(true);       
     }
     public void ButtonSearch(JTextField text){
       text.setBounds(160, 25, 700, 45);
-      text.setBackground(Color.white);
-      text.setForeground(Color.BLACK);
+      text.setBackground(ColorPaleta.White());
+      text.setForeground(ColorPaleta.darkgrayColor());
       text.setFont(new Font("Arial", Font.BOLD, 20));
       text.setText("Pesquisar..");
       text.setVisible(true);
     }
     public void SearchIcon (JButton buttonLogo){
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("botaopesquisar.png")));
-      Color rgbgrey = new Color(199,188,161);    
       buttonLogo.setIcon(logo);
       buttonLogo.setBounds(865, 23, 45, 45);
       buttonLogo.setBorderPainted(false);
       buttonLogo.setOpaque(true);
-      buttonLogo.setBackground(rgbgrey);
+      buttonLogo.setBackground(ColorPaleta.rgbgray2Color());
       buttonLogo.setVisible(true);
     }
     public void ExitSystem (JButton buttonExit){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("sair_sistema.png")));
-      Color rgbgrey = new Color(199,188,161);    
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("sair_sistema.png"))); 
       buttonExit.setIcon(logo);
       buttonExit.setBounds(1300, 23, 50, 50);
       buttonExit.setBorderPainted(false);
       buttonExit.setOpaque(true);
-      buttonExit.setBackground(rgbgrey);
+      buttonExit.setBackground(ColorPaleta.rgbgray2Color());
       buttonExit.setVisible(true);
     }
     public void NotificationIcon(JButton notiButton){
-      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("notificacao_cheia.png")));
-      Color rgbgrey = new Color(199,188,161);    
+      Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("notificacao_cheia.png")));    
       notiButton.setIcon(logo);
       notiButton.setBounds(1250, 23, 50, 50);
       notiButton.setBorderPainted(false);
       notiButton.setOpaque(true);
-      notiButton.setBackground(rgbgrey);
+      notiButton.setBackground(ColorPaleta.rgbgray2Color());
       notiButton.setVisible(true);
     }
     public void MenuIcon(JButton menuButton){
       Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("menu_icone.png")));
-      Color rgbgrey = new Color(199,188,161);    
       menuButton.setIcon(logo);
       menuButton.setBounds(1190, 23, 50, 50);
       menuButton.setBorderPainted(false);
       menuButton.setOpaque(true);
-      menuButton.setBackground(rgbgrey);
+      menuButton.setBackground(ColorPaleta.rgbgray2Color());
       menuButton.setVisible(true);
     }
     
