@@ -2,6 +2,8 @@ package AccessScreen.FrameComponents;
 
 import java.awt.Color;
 import java.awt.Font;
+
+import javax.swing.Icon;
 /**
  * Classe que cria os construtores para para a classe FrameComponents.
  * 
@@ -13,7 +15,7 @@ public class LabelForm {
 
 
     String text;
-    String imageName;
+    Icon image;
     Color color;
     Font font;
 
@@ -27,14 +29,14 @@ public class LabelForm {
  * Construtor para criar os labels com imagens, recebe o parâmetro imagem e define a posição (x e y)
  * e a dimensão da imagem na tela definindo largura e altura (width e height).
  * 
- * @param imageName
+ * @param image
  * @param x
  * @param y
  * @param width
  * @param height
  */
-    public LabelForm(String imageName, int x, int y, int width, int height) {
-        this.imageName = imageName;
+    public LabelForm(Icon image, int x, int y, int width, int height) {
+        this.image = image;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -84,16 +86,16 @@ public class LabelForm {
  * 
  * @return
  */
-    public String getImageName() {
-        return imageName;
+    public Icon getImage() {
+        return image;
     }
 /**
  * Função que define a imagem a ser retornada quando chamada.
  * 
- * @param imageName
+ * @param image
  */
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setImage(Icon image) {
+        this.image = image;
     } 
 
 /**
