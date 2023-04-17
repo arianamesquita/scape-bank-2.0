@@ -1,5 +1,6 @@
 package MainScreen.Components;
 
+import AccessScreen.FrameComponents.CadastroComponents.Cadastro;
 import MainScreen.Components.CardsComponent.Cards;
 import MainScreen.Components.CustomJButton.Jbutton;
 import MainScreen.Components.CustomJTextField.JtextField;
@@ -8,6 +9,8 @@ import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 
 import javax.swing.*;
+
+import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.Color;
 import java.awt.event.FocusListener;
@@ -31,7 +34,7 @@ public class TesteMain {
         frame = new Jframe();
         frame.setTitle("Scape Bank");
         frame.setLayout(null);
-        frame.setSize(1300,650);
+        frame.setSize(1300,850);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
@@ -39,7 +42,8 @@ public class TesteMain {
         for (int i = 0; i < 6; i++) {
             buttons[i]= new Jbutton();
             buttons[i].setVisible(true);
-        }
+        }        Cadastro cadastro = new Cadastro(500,160,500,500);
+
         MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
         String[] text = {"Extrato -->","Empréstimo -->","Saldo -->","Cartões -->","Pix -->","Pagamentos -->"};
         JButton[] buttonsCards;
@@ -48,15 +52,14 @@ public class TesteMain {
             buttonsCards[i]= new JButton("oi");
             buttonsCards[i].setVisible(true);
         }
-        
-
         Cards cards = new Cards(buttonsCards, text, 400, 160);
         buttons[1].addActionListener(e -> {
             frame.add(cards);
+            frame.remove(cadastro);
             frame.repaint();
         });
         buttons[2].addActionListener(e -> {
-            frame.remove(cards);
+            frame.remove(cards);        frame.add(cadastro);
             frame.repaint();});
         buttons[3].addActionListener(e -> JOptionPane.showMessageDialog(null, "Pagamento"));
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
@@ -72,8 +75,8 @@ public class TesteMain {
         buttons2[2] = new JButton("");
         buttons2[3] = new JButton("");
         buttons2[4] = new JButton("");
-
-        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 80, searchField, buttons2);
+        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
+        searchField.setHorizontalAlignment(JTextField.CENTER);
         searchField.addFocusListener(new FocusListener(){
                 public void focusGained(FocusEvent e){
                 if (searchField.getText().equals("Pesquisar..")){
