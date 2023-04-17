@@ -9,6 +9,10 @@ import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ * Classe que reune todas as imagens utilizadas na Tela Inicial.
+ * 
+ */
 public class Images {
 
     public static Image ImagemJframe(){

@@ -9,10 +9,6 @@ import java.awt.Font;
  */
 public class ColorFontPaletas {
         
-/**
-* Definindo as fontes e cores que serão utilizadas nos labels de textos.
-* 
-*/
     public static Font font1(){return new Font("Broadway", Font.PLAIN, 80);}
     public static Font font2(){return new Font("Century Gothic", Font.BOLD, 24);}
     public static Font font3(){return new Font("Century Gothic", Font.PLAIN, 55);}
