@@ -130,38 +130,7 @@ public class FrameComponents extends JFrame {
         JCB.setVisible(true);
         frame.add(JCB); //adiciona o checkBox na tela inicial, ou seja, no frame criado para ela.
 
-
-        /**
-         * Aqui começamos a criar as imagens definidas na tela inicial criando dois vetores, um para os labels 
-         * das imagens porque algumas possuem parâmetros específicos e um vetor para definir as informações de
-         * cada imagem que serão parametrizadas através do construtor da classe LabelForm.
-         * 
-         */
-        JLabel[] labels2 = new JLabel[6];
-        LabelForm[] labelImage = new LabelForm[6];
-        labelImage[0] = new LabelForm(Images.Financeiro(), 510, 80, 150, 150);
-        labelImage[1] = new LabelForm(Images.S_Color(), 80, 45, 150, 200);
-        labelImage[2] = new LabelForm(Images.B_Color(), 160, 180, 150, 200);
-        labelImage[3] = new LabelForm(Images.GradientPlugin(), 600, 80, 460, 450);
-        labelImage[4] = new LabelForm(Images.Hands(), 1050, 80, 250, 450);
-        labelImage[5] = new LabelForm(Images.GrayFrame(), 77, 80, 575, 450);
-
-
-        /**
-         * Laço de repetição que define cada label do vetor com as informações parametrizadas para cada imagem
-         * através do vetor da classe LabelForm utilizados acima.
-         * 
-         */
-        for(int j = 0; j < 6; j++){
-            labels2[j] = new JLabel();
-            labels2[j].setIcon(labelImage[j].getImage());
-            labels2[j].setBounds(labelImage[j].getX(), labelImage[j].getY(), labelImage[j].getWidth(), labelImage[j].getHeight());
-            frame.add(labels2[j]); //adiciona o label de imagem na tela inicial, ou seja, no frame criado para ela.
-        }
-        labels2[4].setOpaque(true); //deixa a imagem com as mãos com o fundo transparente ou não.
-        labels2[0].setOpaque(false); //deixa a imagem com o $ com o fundo transparente ou não.
-
-
+        
         /**
          * Começando a criação do campo de texto (textField) e do campo de senha (passwordField) inicializando
          * as variáveis utilizadas para cada um deles.
@@ -200,7 +169,41 @@ public class FrameComponents extends JFrame {
         JPF.setVisible(true);
         JPF.setEchoChar('\u0000'); //define o char que aparece quando a senha for digitada sem o checkBox.
         frame.add(JPF); //adiciona o passwordField ou campo de senha na tela inicial, ou seja, no frame criado para ela.
-               
+       
+
+
+        /**
+         * Aqui começamos a criar as imagens definidas na tela inicial criando dois vetores, um para os labels 
+         * das imagens porque algumas possuem parâmetros específicos e um vetor para definir as informações de
+         * cada imagem que serão parametrizadas através do construtor da classe LabelForm.
+         * 
+         */
+        JLabel[] labels2 = new JLabel[6];
+        LabelForm[] labelImage = new LabelForm[6];
+        labelImage[0] = new LabelForm(Images.Financeiro(), 510, 80, 150, 150);
+        labelImage[1] = new LabelForm(Images.S_Color(), 80, 45, 150, 200);
+        labelImage[2] = new LabelForm(Images.B_Color(), 160, 180, 150, 200);
+        labelImage[3] = new LabelForm(Images.GradientPlugin(), 600, 80, 460, 450);
+        labelImage[4] = new LabelForm(Images.Hands(), 1050, 80, 250, 450);
+        labelImage[5] = new LabelForm(Images.GrayFrame(), 77, 80, 575, 450);
+
+
+        /**
+         * Laço de repetição que define cada label do vetor com as informações parametrizadas para cada imagem
+         * através do vetor da classe LabelForm utilizados acima.
+         * 
+         */
+        for(int j = 0; j < 6; j++){
+            labels2[j] = new JLabel();
+            labels2[j].setIcon(labelImage[j].getImage());
+            labels2[j].setBounds(labelImage[j].getX(), labelImage[j].getY(), labelImage[j].getWidth(), labelImage[j].getHeight());
+            frame.add(labels2[j]); //adiciona o label de imagem na tela inicial, ou seja, no frame criado para ela.
+        }
+        labels2[4].setOpaque(true); //deixa a imagem com as mãos com o fundo transparente ou não.
+        labels2[0].setOpaque(false); //deixa a imagem com o $ com o fundo transparente ou não.
+
+
+        
 
         frame.setVisible(true); //libera as informações adicionadas no frame da tela inicial para serem visíveis.
     }
