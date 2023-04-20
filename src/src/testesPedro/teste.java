@@ -29,36 +29,43 @@ public class teste extends JFrame {
         list.setBounds(10, 50, 200, 100);
         list.setBackground(Color.white);
         list.setForeground(Color.darkGray);
-        list.setVisible(true);
         list.setModel(model);
+        list.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                MostrarPesquisa();
+                list.setVisible(true);
+                super.mousePressed(e);
+            }
+        });
+        list.setVisible(true);
+
 
         jcb = new JtextField();
         jcb.setBounds(10, 10, 200, 40);
         jcb.setBackground(Color.white);
         jcb.setForeground(Color.darkGray);
         jcb.setVisible(true);
-        jcb.addActionListener(null);
+        jcb.addActionListener(e -> {
+            list.setVisible(false);
+            enter = 1;
+        });
+        jcb.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (enter == 0) {
+                    ListadePesquisa();
+                } else
+                    enter = 0;
+                super.keyReleased(e);
+            }
+        });
         add(jcb);
 
         setVisible(true);
     }
 
-    private void PesquisarNome(ActionEvent event) {
-        list.setVisible(false);
-        enter = 1;
-    }
 
-    private void PesquizarnomeKeyreelease(MouseEvent event) {
-        if (enter == 0) {
-            ListadePesquisa();
-        } else
-            enter = 0;
-    }
-
-    private void ListaMousepressed(MouseEvent event) {
-        MostrarPesquisa();
-        list.setVisible(true);
-    }
 
     public void ListadePesquisa() {
         try {
