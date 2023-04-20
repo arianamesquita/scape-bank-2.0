@@ -26,9 +26,9 @@ public class teste extends JFrame {
         conexao.conecta();
         model = new DefaultListModel<>();
         list = new JList<>();
-        list.setBounds(10, 50, 200, 100);
-        list.setBackground(Color.white);
-        list.setForeground(Color.darkGray);
+        list.setBounds(10, 60, 200, 100);
+        list.setBackground(Color.darkGray);
+        list.setForeground(Color.white);
         list.setModel(model);
         list.addMouseListener(new MouseAdapter() {
             @Override
@@ -59,8 +59,10 @@ public class teste extends JFrame {
                     enter = 0;
                 super.keyReleased(e);
             }
+
         });
         add(jcb);
+        add(list);
 
         setVisible(true);
     }
