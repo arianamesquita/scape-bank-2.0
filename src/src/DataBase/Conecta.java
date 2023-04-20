@@ -16,12 +16,12 @@ public class Conecta {
 		
 		
 		final String DRIVER = "com.mysql.cj.jdbc.Driver";
-		final String URL = "jdbc:mysql://127.0.0.1:3306/?user=administrator"; //ajustado para novo teste
+		final String URL = "jdbc:mysql://containers-us-west-181.railway.app:7682/?user=root"; //ajustado para novo teste
 		
 
 		try {
 			Class.forName(DRIVER);
-			Connection connection = DriverManager.getConnection(URL, "administrator", "@Ari1#Ped2");
+			Connection connection = DriverManager.getConnection(URL, "root", "RzbUN31XmK9QvBX2JbWC");
 			JOptionPane.showMessageDialog(null, "Conexão realizada com sucesso");
 			connection.close();	
 		} catch (ClassNotFoundException erro) {
