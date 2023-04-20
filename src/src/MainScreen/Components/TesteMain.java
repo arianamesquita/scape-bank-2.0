@@ -42,7 +42,8 @@ public class TesteMain {
         for (int i = 0; i < 6; i++) {
             buttons[i]= new Jbutton();
             buttons[i].setVisible(true);
-        }        Cadastro cadastro = new Cadastro(500,160,500,500);
+        }
+        Cadastro cadastro = new Cadastro(500,160);
 
         MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
         String[] text = {"Extrato -->","Empréstimo -->","Saldo -->","Cartões -->","Pix -->","Pagamentos -->"};
@@ -90,6 +91,7 @@ public class TesteMain {
                 }
             }
         });
+
 
 
 
