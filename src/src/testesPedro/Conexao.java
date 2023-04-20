@@ -16,7 +16,7 @@ public class Conexao {
         try {
             Class.forName(driver);
             conexao = DriverManager.getConnection(url,usuario,senha);
-            JOptionPane.showMessageDialog(null, "conexão realizada com sucesso");
+            System.out.println("conexao realizada");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "driver não localizado");
         } catch (SQLException e) {
