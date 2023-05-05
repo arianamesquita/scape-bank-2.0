@@ -7,7 +7,7 @@ public class Conexao {
     final private String url ="jdbc:mysql://localhost:3306/?user=root";
     final  private String driver = "com.mysql.cj.jdbc.Driver";
     final  private  String usuario ="root";
-    final  private String senha= "";
+    final  private String senha= "Peheje5u$";
     private Connection conexao;
     public Statement statement;
     public ResultSet resultSet;
@@ -41,8 +41,24 @@ public class Conexao {
     public static void main(String[] args) {
         Conexao conexao1 = new Conexao();
         conexao1.conecta();
+        conexao1.ExecutaSql("select * from filmes");
+        try {
+        while (conexao1.resultSet.next()){
+            System.out.println(conexao1.resultSet.getString("titulo"));
+            conexao1.resultSet.close();
+            conexao1.statement.close();
+            conexao1.Desconecta();
+        }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
     }
 
 
 
-}
+

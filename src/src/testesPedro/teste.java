@@ -4,31 +4,34 @@ import MainScreen.Components.CustomJTextField.JtextField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 public class teste extends JFrame {
     Conexao conexao = new Conexao();
-    DefaultListModel<Object> model;
+    DefaultListModel<String> model;
     int enter = 0;
 
     JtextField jcb;
-    JList<Object> list;
+    Jlist list;
 
     public teste() {
 
         setTitle("Scape Bank");
         setLayout(null);
-        setSize(getMaximumSize());
+        setSize(500,500);
         setLocationRelativeTo(null);
-        setExtendedState(MAXIMIZED_BOTH);
+        getContentPane().setBackground(Color.white);
         setResizable(false);
         conexao.conecta();
         model = new DefaultListModel<>();
-        list = new JList<>();
-        list.setBounds(10, 60, 200, 100);
-        list.setBackground(Color.darkGray);
-        list.setForeground(Color.white);
+        list = new Jlist();
+        list.setBounds(10, 50, 200, 100);
+        list.setBackground(Color.lightGray);
+        list.setForeground(Color.darkGray);
         list.setModel(model);
         list.addMouseListener(new MouseAdapter() {
             @Override
@@ -38,7 +41,8 @@ public class teste extends JFrame {
                 super.mousePressed(e);
             }
         });
-        list.setVisible(true);
+        list.setVisible(false);
+
 
 
         jcb = new JtextField();
@@ -53,13 +57,11 @@ public class teste extends JFrame {
         jcb.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                if (enter == 0) {
+                if (enter==0){
                     ListadePesquisa();
-                } else
-                    enter = 0;
+                }else enter=0;
                 super.keyReleased(e);
             }
-
         });
         add(jcb);
         add(list);
@@ -70,6 +72,7 @@ public class teste extends JFrame {
 
 
     public void ListadePesquisa() {
+
         try {
             conexao.ExecutaSql("SELECT * FROM estados where nome like '" + jcb.getText() + "%' ORDER BY nome");
             model.removeAllElements();
@@ -87,7 +90,7 @@ public class teste extends JFrame {
     public void MostrarPesquisa() {
         int linha = list.getSelectedIndex();
         if (linha >= 0) {
-            conexao.ExecutaSql("SELECT *FROM municipios where nome like'" +
+            conexao.ExecutaSql("SELECT * FROM municipios where nome '" +
                     "" + jcb.getText() + "%' ORDER BY nome LIMITE " + linha + " ,1");
             ResultadoPesquisa();
         }

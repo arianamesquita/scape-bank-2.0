@@ -12,7 +12,7 @@ import javax.swing.*;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 
@@ -34,7 +34,7 @@ public class TesteMain {
         frame = new Jframe();
         frame.setTitle("Scape Bank");
         frame.setLayout(null);
-        frame.setSize(1300,850);
+        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
