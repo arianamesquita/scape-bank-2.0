@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.sql.*;
 
 public class Conexao {
-    final private String url ="jdbc:mysql://localhost:3306/?user=root";
+    final private String url ="jdbc:mysql://localhost:3306/banco";
     final  private String driver = "com.mysql.cj.jdbc.Driver";
     final  private  String usuario ="root";
     final  private String senha= "Peheje5u$";
     private Connection conexao;
-    public Statement statement;
+    public PreparedStatement statement;
     public ResultSet resultSet;
 
     public void conecta(){
@@ -32,7 +32,9 @@ public class Conexao {
     }
     public void  ExecutaSql(String sql){
         try {
-            statement = conexao.createStatement(resultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            statement = conexao.prepareStatement(sql);
+            statement.execute();
+            resultSet = statement.executeQuery();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "não foi possivel executar o comando sql"+" "+e+"\no comando passado foi"+sql);
         }
@@ -44,13 +46,16 @@ public class Conexao {
         conexao1.ExecutaSql("select * from filmes");
         try {
         while (conexao1.resultSet.next()){
-            System.out.println(conexao1.resultSet.getString("titulo"));
-            conexao1.resultSet.close();
-            conexao1.statement.close();
-            conexao1.Desconecta();
-        }
+            System.out.println(conexao1.resultSet.getString("titulo")+"\t\t\t"+conexao1.resultSet.getString("genero"));
+
+        }           
+        
+        conexao1.resultSet.close();
+        conexao1.statement.close();
+        conexao1.Desconecta();
 
             } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "deu erro"+e);
                 throw new RuntimeException(e);
             }
 
