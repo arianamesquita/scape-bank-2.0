@@ -1,7 +1,13 @@
 package testesPedro;
 
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
 import javax.swing.*;
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Conexao {
     final private String url ="jdbc:mysql://localhost:3306/banco";
@@ -15,7 +21,7 @@ public class Conexao {
     public void conecta(){
         try {
             Class.forName(driver);
-            conexao = DriverManager.getConnection(url,usuario,senha);
+            conexao = (Connection) DriverManager.getConnection(url,usuario,senha);
             System.out.println("conexao realizada");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "driver não localizado");
@@ -32,7 +38,7 @@ public class Conexao {
     }
     public void  ExecutaSql(String sql){
         try {
-            statement = conexao.prepareStatement(sql);
+            statement = (PreparedStatement) conexao.prepareStatement(sql);
             statement.execute();
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
