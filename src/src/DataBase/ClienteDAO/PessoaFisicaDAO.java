@@ -8,35 +8,12 @@ import DataBase.Factory;
 import DataBase.InterfaceDAO;
 import model.PessoaFisica;
 
-public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO {
+public class PessoaFisicaDAO  implements InterfaceDAO<PessoaFisica> {
 
     @Override
-    public void criar() {
-            Conexao conexao = null;
-        String query =  "INSERT INTO cliente (id, nome, endereco, telefone, cnpj, funcionarioResponsavel, rendaAtual, cpf) "+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try{
-            conexao = Factory.creatConnectionToMySQL();
-            conexao.Conecta();
-            conexao.setPstmt(conexao.getConnection().prepareStatement(query));
-            conexao.getPstmt().setInt(1, 2);
-            conexao.getPstmt().setString(2, getNome());
-            conexao.getPstmt().setString(3,getEndereco());
-            conexao.getPstmt().setString(4, getTelefone());
-            conexao.getPstmt().setString(5, null);
-            conexao.getPstmt().setString(6, null);
-            conexao.getPstmt().setDouble(7, getRendaAtual());
-            conexao.getPstmt().setString(8, getCpf());
-
-            conexao.getPstmt().executeUpdate();
-            conexao.getPstmt().close();
-
-            conexao.Desconecta();
-            System.out.println("Dados inseridos com sucesso na tabela pessoa fisica.");
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir dados na tabela pessoa: " + e.getMessage());
-        }
+    public void criar(PessoaFisica obT) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'criar'");
     }
 
     @Override
@@ -46,7 +23,7 @@ public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO {
     }
 
     @Override
-    public void atualizar(Object objeto) {
+    public void atualizar(PessoaFisica objeto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
     }
@@ -58,14 +35,14 @@ public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO {
     }
 
     @Override
-    public <E> List<E> listarTodos() {
+    public List<PessoaFisica> listarTodos() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
     }
-    public static void main(String[] args) {
-        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        pessoaFisicaDAO.criar();
-    }
+
+
+
+
 
 
 
