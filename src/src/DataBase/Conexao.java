@@ -15,9 +15,9 @@ public class Conexao {
     private String senha;
     private Connection connection;
     private Statement statement;
+    private PreparedStatement pstmt;
     private ResultSet resultSet;
     private String stringConexao;
-    private PreparedStatement pstmt;
 
     public Conexao(String local,String porta, String bd,  String user, String senha) {
         this.stringConexao = "jdbc:mysql://"+ local +":" + porta +"/"+ bd;
@@ -29,6 +29,7 @@ public class Conexao {
         try {
             Class.forName(getDriver());
             setConnection(DriverManager.getConnection(getStringConexao(), getUser(), getSenha()));
+
             JOptionPane.showMessageDialog(null, "banco de dados conectado com sucesso");
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "não foi possível conectar ao banco de dados erro:\n"+e);
@@ -124,5 +125,4 @@ public class Conexao {
     public void setPstmt(PreparedStatement pstmt) {
         this.pstmt = pstmt;
     }
-
 }

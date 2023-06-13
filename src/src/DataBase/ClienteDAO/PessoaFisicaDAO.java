@@ -8,30 +8,25 @@ import DataBase.Factory;
 import DataBase.InterfaceDAO;
 import model.PessoaFisica;
 
-public class PessoaFisicaDAO  implements InterfaceDAO {
-
-
-
-
+public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO {
 
     @Override
-    public void criar(Object object) {
-        PessoaFisica pessoaFisica = (PessoaFisica) object;
-        Conexao conexao = null;
+    public void criar() {
+            Conexao conexao = null;
         String query =  "INSERT INTO cliente (id, nome, endereco, telefone, cnpj, funcionarioResponsavel, rendaAtual, cpf) "+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             conexao.setPstmt(conexao.getConnection().prepareStatement(query));
-            conexao.getPstmt().setInt(1, pessoaFisica.getId());
-            conexao.getPstmt().setString(2, pessoaFisica.getNome());
-            conexao.getPstmt().setString(3, pessoaFisica.getEndereco());
-            conexao.getPstmt().setString(4, pessoaFisica.getTelefone());
+            conexao.getPstmt().setInt(1, 2);
+            conexao.getPstmt().setString(2, getNome());
+            conexao.getPstmt().setString(3,getEndereco());
+            conexao.getPstmt().setString(4, getTelefone());
             conexao.getPstmt().setString(5, null);
             conexao.getPstmt().setString(6, null);
-            conexao.getPstmt().setDouble(7, pessoaFisica.getRendaAtual());
-            conexao.getPstmt().setString(8, pessoaFisica.getCpf());
+            conexao.getPstmt().setDouble(7, getRendaAtual());
+            conexao.getPstmt().setString(8, getCpf());
 
             conexao.getPstmt().executeUpdate();
             conexao.getPstmt().close();
@@ -44,24 +39,39 @@ public class PessoaFisicaDAO  implements InterfaceDAO {
         }
     }
 
-    public Object ler(int id) {
-        return null;
+    @Override
+    public void ler(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ler'");
     }
 
-
+    @Override
     public void atualizar(Object objeto) {
-
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
     }
 
-
+    @Override
     public void deletar(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    }
 
+    @Override
+    public <E> List<E> listarTodos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
+    }
+    public static void main(String[] args) {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        pessoaFisicaDAO.criar();
     }
 
 
-    public List listarTodos() {
-        return null;
-    }
+
+
+
+
 
 
 }

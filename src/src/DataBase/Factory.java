@@ -1,7 +1,5 @@
 package DataBase;
 
-
-
 public class Factory {
 
     private static final String local = "containers-us-west-181.railway.app";
@@ -10,9 +8,9 @@ public class Factory {
     private static final String user = "root";
     private static final String senha = "RzbUN31XmK9QvBX2JbWC";
 
-	public static Conexao creatConnectionToMySQL(){
-		return new Conexao(getLocal(), getPorta(), getBd(), getUser(), getSenha());
-	}
+    public static Conexao creatConnectionToMySQL(){
+        return new Conexao(getLocal(),getPorta(),getBd(),getUser(),getSenha());
+    }
 
 
 	public static String getLocal() {
