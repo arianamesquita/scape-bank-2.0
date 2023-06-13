@@ -8,26 +8,31 @@ import DataBase.Factory;
 import DataBase.InterfaceDAO;
 import model.PessoaFisica;
 
-public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO<PessoaFisica>{
+public class PessoaFisicaDAO  implements InterfaceDAO {
+
+
+
+
 
     @Override
-    public void criar() {
+    public void criar(Object object) {
+        PessoaFisica pessoaFisica = (PessoaFisica) object;
         Conexao conexao = null;
         String query =  "INSERT INTO cliente (id, nome, endereco, telefone, cnpj, funcionarioResponsavel, rendaAtual, cpf) "+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-       
+
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             conexao.setPstmt(conexao.getConnection().prepareStatement(query));
-            conexao.getPstmt().setInt(1, getId());     
-            conexao.getPstmt().setString(2, getNome());   
-            conexao.getPstmt().setString(3, getEndereco());
-            conexao.getPstmt().setString(4, getTelefone());       
-            conexao.getPstmt().setString(5, null);            
-            conexao.getPstmt().setString(6, null);      
-            conexao.getPstmt().setDouble(7, getRendaAtual());     
-            conexao.getPstmt().setString(8, getCpf());     
-            
+            conexao.getPstmt().setInt(1, pessoaFisica.getId());
+            conexao.getPstmt().setString(2, pessoaFisica.getNome());
+            conexao.getPstmt().setString(3, pessoaFisica.getEndereco());
+            conexao.getPstmt().setString(4, pessoaFisica.getTelefone());
+            conexao.getPstmt().setString(5, null);
+            conexao.getPstmt().setString(6, null);
+            conexao.getPstmt().setDouble(7, pessoaFisica.getRendaAtual());
+            conexao.getPstmt().setString(8, pessoaFisica.getCpf());
+
             conexao.getPstmt().executeUpdate();
             conexao.getPstmt().close();
 
@@ -37,31 +42,26 @@ public class PessoaFisicaDAO extends PessoaFisica implements InterfaceDAO<Pessoa
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados na tabela pessoa: " + e.getMessage());
         }
+    }
+
+    public Object ler(int id) {
+        return null;
+    }
+
+
+    public void atualizar(Object objeto) {
 
     }
 
-    @Override
-    public PessoaFisica ler(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ler'");
-    }
 
-    @Override
-    public void atualizar(PessoaFisica objeto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
-    }
-
-    @Override
     public void deletar(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+
     }
 
-    @Override
-    public List<PessoaFisica> listarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
+
+    public List listarTodos() {
+        return null;
     }
-    
+
+
 }

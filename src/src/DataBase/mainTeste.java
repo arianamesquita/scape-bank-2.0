@@ -9,8 +9,8 @@ public class mainTeste {
     public static void main(String[] args) {
 		   
 		PessoaFisica pFisica = new PessoaFisica(1, "pedro", "um ai", "61 985439393", 2.2, "70718430158");
-        PessoaFisicaDAO pDao = (PessoaFisicaDAO) pFisica;
-        pDao.criar();
+        PessoaFisicaDAO pDao = new PessoaFisicaDAO();
+        pDao.criar(pFisica);
 
 
 		

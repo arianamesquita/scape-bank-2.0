@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public interface InterfaceDAO<T> {
-    void criar();
+    void criar(T object);
 
     T ler(int id);
 
