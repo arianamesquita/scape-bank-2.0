@@ -3,16 +3,16 @@ package DataBase;
 import java.util.List;
 
 
-public interface InterfaceDAO {
-    void criar();
+public interface InterfaceDAO<T> {
+    void criar(T obT);
 
     void ler(int id);
 
-    void atualizar(Object objeto);
+    void atualizar(T objeto);
 
     void deletar(int id);
 
-    <E> List<E> listarTodos();
+    List<T> listarTodos();
 }
 
 
