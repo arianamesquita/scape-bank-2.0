@@ -10,6 +10,7 @@ public class mainTeste {
 		   
 		PessoaFisica pFisica = new PessoaFisica(1, "pedro", "um ai", "61 985439393", 2.2, "70718430158");
     PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+    pFisica = pessoaFisicaDAO;
     pessoaFisicaDAO.criar();;
 
 
