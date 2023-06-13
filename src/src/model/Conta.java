@@ -17,12 +17,14 @@ public class Conta {
     public int idTransacao;
 
     Agencia agencia;
-
+    Emprestimo emprestimo;
+    Pagamentos pagamentos;
+    Cartao cartao;
 
     public Conta ( ) {  }
     public Conta(int id, String login, String senha, String senhaConta, String numeroConta, String numeroCartao,
             String numeroContaDestino, String tipoTransacao, Date dataTransacao, String valorTransacao, int idTransacao,
-            Agencia agencia) {
+            Agencia agencia, Emprestimo emprestimo, Pagamentos pagamentos, Cartao cartao) {
         this.id = id;
         this.login = login;
         Senha = senha;
@@ -35,8 +37,10 @@ public class Conta {
         this.valorTransacao = valorTransacao;
         this.idTransacao = idTransacao;
         this.agencia = agencia;
+        this.emprestimo = emprestimo;
+        this.pagamentos = pagamentos;
+        this.cartao = cartao;
     }
-
 
 
     public int getId() {
@@ -110,5 +114,25 @@ public class Conta {
     }
     public void setAgencia(Agencia agencia) {
         this.agencia = agencia;
+    }
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
+    }
+    public Pagamentos getPagamentos() {
+        return pagamentos;
+    }
+    public void setPagamentos(Pagamentos pagamentos) {
+        this.pagamentos = pagamentos;
+    }
+    public Cartao getCartao() {
+        return cartao;
+    }
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }   
+
+    
 }
