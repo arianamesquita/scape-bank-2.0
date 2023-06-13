@@ -1,6 +1,8 @@
 package model;
 
-public class Funcionario extends Pessoa{
+import java.io.Serializable;
+
+public class Funcionario extends Pessoa implements Serializable {
 
     public String cargo;
     public int codigoBanco;
