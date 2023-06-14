@@ -44,6 +44,10 @@ public class Conexao {
             if (getStatement() != null){
                 getStatement().close();
             }
+            if(getPstmt() != null){
+                getPstmt().close();
+            }
+            
             getConnection().close();
             JOptionPane.showMessageDialog(null, "banco de dados desconectado com sucesso");
 

@@ -6,7 +6,7 @@ import java.util.List;
 public interface InterfaceDAO<T> {
     void criar(T obT);
 
-    void ler(int id);
+    T ler(int id);
 
     void atualizar(T objeto);
 
