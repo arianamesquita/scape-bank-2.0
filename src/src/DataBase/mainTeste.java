@@ -8,10 +8,11 @@ import model.PessoaFisica;
 public class mainTeste {
     public static void main(String[] args) {
 		   
-		PessoaFisica pFisica = new PessoaFisica(1, "pedro", "um ai", "61 985439393", 2.2, "70718430158");
-    PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-    pFisica = pessoaFisicaDAO;
-    pessoaFisicaDAO.criar();
+		PessoaFisica pFisica = new PessoaFisica(4, "pedro uma grande gostosa", "um ai", "61 985439393", 2.2, "70718430259");
+
+    PessoaFisicaDAO pFisicaDAO = new PessoaFisicaDAO();
+    pFisicaDAO.deletar(1);
+    
 
 
 		
