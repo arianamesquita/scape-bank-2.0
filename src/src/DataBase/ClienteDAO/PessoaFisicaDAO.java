@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.JOptionPane;
 
@@ -48,7 +49,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
     @Override
     public PessoaFisica ler(int id) {
-        Conexao conexao;
+        Conexao conexao = null;
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -76,11 +77,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conexao.Desconecta();
-            } catch (final SQLException e) {
-                e.printStackTrace();
-            }
+            Objects.requireNonNull(conexao).Desconecta();
         }
 
         return pessoa;
@@ -97,7 +94,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
         String sql = "DELETE FROM cliente WHERE id = ?";
 
-        Conexao conexao;
+        Conexao conexao = null;
 
         try {
             conexao = Factory.creatConnectionToMySQL();
@@ -110,17 +107,19 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().execute();
             if (conexao.getPstmt().getUpdateCount() > 0) {
                 JOptionPane.showMessageDialog(null, "Removido com sucesso!");
-                conexao.getPstmt().close();
-                conexao.Desconecta();
+
             } else {
                 JOptionPane.showMessageDialog(null, "NÃ£o foi possi­vel remover!!");
-                conexao.Desconecta();
+
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }finally{
+            Objects.requireNonNull(conexao).Desconecta();
         }
     }
+
 
     @Override
     public List<PessoaFisica> listarTodos() {
