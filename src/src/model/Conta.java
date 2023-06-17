@@ -6,10 +6,12 @@ public class Conta {
 
     public int id;
     public String login;
-    public String Senha;
+    public String senha;
     public String senhaConta;
     public String numeroConta;
     public String numeroCartao;
+    public String validadeCartao;
+    public int cvc;
     public String numeroContaDestino;
     public String tipoTransacao;
     public Date dataTransacao;
@@ -19,18 +21,23 @@ public class Conta {
     Agencia agencia;
     Emprestimo emprestimo;
     Pagamentos pagamentos;
+    Funcionario funcionario;
     Cartao cartao;
+    PessoaFisica cliente;
 
     public Conta ( ) {  }
     public Conta(int id, String login, String senha, String senhaConta, String numeroConta, String numeroCartao,
-            String numeroContaDestino, String tipoTransacao, Date dataTransacao, String valorTransacao, int idTransacao,
-            Agencia agencia, Emprestimo emprestimo, Pagamentos pagamentos, Cartao cartao) {
+            String validadeCartao, int cvc, String numeroContaDestino, String tipoTransacao, Date dataTransacao, 
+            String valorTransacao, int idTransacao, Agencia agencia, Emprestimo emprestimo, Pagamentos pagamentos,
+            Cartao cartao, Funcionario funcionario, PessoaFisica cliente) {
         this.id = id;
         this.login = login;
-        Senha = senha;
+        this.senha = senha;
         this.senhaConta = senhaConta;
         this.numeroConta = numeroConta;
         this.numeroCartao = numeroCartao;
+        this.validadeCartao = validadeCartao;
+        this.cvc = cvc;
         this.numeroContaDestino = numeroContaDestino;
         this.tipoTransacao = tipoTransacao;
         this.dataTransacao = dataTransacao;
@@ -40,6 +47,8 @@ public class Conta {
         this.emprestimo = emprestimo;
         this.pagamentos = pagamentos;
         this.cartao = cartao;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
     }
 
 
@@ -56,10 +65,10 @@ public class Conta {
         this.login = login;
     }
     public String getSenha() {
-        return Senha;
+        return senha;
     }
     public void setSenha(String senha) {
-        Senha = senha;
+        this.senha = senha;
     }
     public String getSenhaConta() {
         return senhaConta;
@@ -132,7 +141,48 @@ public class Conta {
     }
     public void setCartao(Cartao cartao) {
         this.cartao = cartao;
-    }   
+    }
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }  
+    public PessoaFisica getCliente() {
+        return cliente;
+    }
+    public void setCliente(PessoaFisica cliente) {
+        this.cliente = cliente;
+    }
+    public String getValidadeCartao() {
+        return validadeCartao;
+    }
+    public void setValidadeCartao(String validadeCartao) {
+        this.validadeCartao = validadeCartao;
+    }
+    public int getCvc() {
+        return cvc;
+    }
+    public void setCvc(int cvc) {
+        this.cvc = cvc;
+    }
 
-    
+
+    @Override
+    public String toString() {
+        return "Conta - id = " + id +
+                ", numeroConta = " + numeroConta +
+                ", numeroCartao = " + numeroCartao +
+                ", validadeCartao = " + validadeCartao +
+                ", cvc = " + cvc +
+                ", numeroContaDestino = " + numeroContaDestino +
+                ", tipoTransacao = " + tipoTransacao +
+                ", dataTransacao = " + dataTransacao +
+                ", valorTransacao = " + valorTransacao +
+                ", idTransacao = " + idTransacao +
+                ", agencia = " + agencia +
+                ", funcionario = " + funcionario +
+                ", cliente = " + cliente;
+    }
+
 }
