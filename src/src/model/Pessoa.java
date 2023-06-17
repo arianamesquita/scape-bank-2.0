@@ -51,5 +51,10 @@ public class Pessoa implements Serializable {
     public void setRendaAtual(double rendaAtual) {
         this.rendaAtual = rendaAtual;
     }
+    @Override
+    public String toString() {
+        return "Pessoa [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
+                + ", rendaAtual=" + rendaAtual + "]";
+    }
     
 }

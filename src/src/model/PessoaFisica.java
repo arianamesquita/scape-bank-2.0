@@ -17,6 +17,10 @@ public class PessoaFisica extends Pessoa implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "PessoaFisica [cpf=" + cpf + "]"+ super.toString();
+    }
     public String getCpf() {
         return cpf;
     }
