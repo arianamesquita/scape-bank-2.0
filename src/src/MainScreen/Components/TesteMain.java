@@ -7,6 +7,7 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
+import testesDaAnna.PixField;
 
 import javax.swing.*;
 
@@ -36,7 +37,7 @@ public class TesteMain {
         frame.setLayout(null);
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         Jbutton[] buttons = new Jbutton[6];
         for (int i = 0; i < 6; i++) {
@@ -60,9 +61,22 @@ public class TesteMain {
             frame.repaint();
         });
         buttons[2].addActionListener(e -> {
-            frame.remove(cards);        frame.add(cadastro);
+                  frame.add(cadastro);
+
+            PixField pixField = new PixField();
+            pixField.setVisible(true);
+            pixField.repaint();
+            pixField.setBounds(500,300,500,180);
+
+            frame.remove(cards);
+            frame.add(pixField);
+            frame.setSize(frame.getSize().width,frame.getSize().height+1);
+            frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});
-        buttons[3].addActionListener(e -> JOptionPane.showMessageDialog(null, "Pagamento"));
+        buttons[3].addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Pagamento");
+
+        });
         buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
         buttons[5].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
@@ -109,7 +123,11 @@ public class TesteMain {
                 case "  "-> button.addActionListener(e -> JOptionPane.showMessageDialog(null, "abrir emprestimo"));
                 case "   "-> button.addActionListener(e -> JOptionPane.showMessageDialog(null, "abrir saldo"));
                 case "    "-> button.addActionListener(e -> JOptionPane.showMessageDialog(null, "abrir cartoes"));
-                case "     "-> button.addActionListener(e -> JOptionPane.showMessageDialog(null, "abrir pix"));
+                case "     "-> button.addActionListener(e -> {
+                    System.out.println("puta");
+
+                        }
+                );
                 case "      "-> button.addActionListener(e -> JOptionPane.showMessageDialog(null, "pagar contas"));
                 default -> System.out.println("erro -> 1");
             }

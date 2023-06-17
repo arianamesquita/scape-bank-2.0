@@ -5,7 +5,7 @@ import AccessScreen.FrameComponents.FrameComponents;
 public class TesteMain2 {
 
     /**
-     * Main teste para a tela inicial.
+     * PixField teste para a tela inicial.
      * @param args
      */
 
