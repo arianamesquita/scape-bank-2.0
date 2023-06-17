@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Funcionario extends Pessoa implements Serializable {
 
-    public String cargo;
+    public String cargo, cpf;
     public int codigoBanco;
 
 
@@ -13,11 +13,12 @@ public class Funcionario extends Pessoa implements Serializable {
         this.cargo = cargo;
         this.codigoBanco = codigoBanco;
     }
-    public Funcionario(int id, String nome, String endereco, String telefone, double rendaAtual, String cargo,
-            int codigoBanco) {
-        super(id, nome, endereco, telefone, rendaAtual);
+    public Funcionario(int id, String nome, String endereco, String telefone, double salario, String cargo,
+            int codigoBanco,String cpf) {
+        super(id, nome, endereco, telefone, salario);
         this.cargo = cargo;
         this.codigoBanco = codigoBanco;
+        this.cpf=cpf;
     }
 
 
@@ -32,6 +33,12 @@ public class Funcionario extends Pessoa implements Serializable {
     }
     public void setCodigoBanco(int codigoBanco) {
         this.codigoBanco = codigoBanco;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
 }

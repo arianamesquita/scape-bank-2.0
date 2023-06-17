@@ -29,11 +29,10 @@ public class Conexao {
         try {
             Class.forName(getDriver());
             setConnection(DriverManager.getConnection(getStringConexao(), getUser(), getSenha()));
-
-            JOptionPane.showMessageDialog(null, "banco de dados conectado com sucesso");
+            System.out.println("banco de dados conectado com sucesso");
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "não foi possível conectar ao banco de dados erro:\n"+e);
-        }
+            System.out.println( "não foi possível conectar ao banco de dados erro:\n"+e);
+                }
     }
     public void Desconecta(){
         try {
@@ -49,11 +48,11 @@ public class Conexao {
             }
             
             getConnection().close();
-            JOptionPane.showMessageDialog(null, "banco de dados desconectado com sucesso");
+          System.out.println("banco de dados desconectado com sucesso");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "não foi possível desconectar o banco de dados erro:\n"+e);
-        }
+            System.out.println("não foi possível desconectar o banco de dados erro:\n"+e);
+                }
     }
 
     public void ExecuteQuery(String stringSQL){

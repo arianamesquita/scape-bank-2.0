@@ -10,14 +10,13 @@ import javax.swing.JOptionPane;
 import DataBase.Conexao;
 import DataBase.Factory;
 import DataBase.InterfaceDAO;
-import model.PessoaFisica;
+import model.Funcionario;
 
-public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
-
+public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
     @Override
-    public void criar(PessoaFisica objeto) {
+    public void criar(Funcionario objeto) {
         Conexao conexao = null;
-        String query = "INSERT INTO cliente (id, nome, endereco, telefone, cnpj, funcionarioResponsavel, rendaAtual, cpf) "
+        String query = "INSERT INTO funcionario (id, nomeFuncionario, endereco, telefone, cargo, codigoBanco, cpf, salario) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -29,15 +28,16 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().setString(2, objeto.getNome());
             conexao.getPstmt().setString(3, objeto.getEndereco());
             conexao.getPstmt().setString(4, objeto.getTelefone());
-            conexao.getPstmt().setString(5, null);
-            conexao.getPstmt().setString(6, null);
-            conexao.getPstmt().setDouble(7, objeto.getRendaAtual());
-            conexao.getPstmt().setString(8, objeto.getCpf());
+            conexao.getPstmt().setString(5, objeto.getCargo());
+            conexao.getPstmt().setInt(6, objeto.getCodigoBanco());
+            conexao.getPstmt().setString(7, objeto.getCpf());
+            conexao.getPstmt().setDouble(8, objeto.getRendaAtual());
+
             conexao.getPstmt().executeUpdate();
-            System.out.println("Dados inseridos com sucesso na tabela pessoa fisica.");
+            System.out.println("Dados inseridos com sucesso na tabela funcionario.");
         } catch (SQLException e) {
 
-            System.out.println("Erro ao inserir dados na tabela pessoa: " + e.getMessage());
+            System.out.println("Erro ao inserir dados na tabela funcionario: " + e.getMessage());
 
         } finally {
             Objects.requireNonNull(conexao).Desconecta();
@@ -45,27 +45,29 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     }
 
     @Override
-    public PessoaFisica ler(int id) {
+    public Funcionario ler(int id) {
         Conexao conexao = null;
-        PessoaFisica pessoa = null;
+        Funcionario pessoa = null;
 
         try {
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
-            String sql = "SELECT * FROM cliente WHERE id = ?";
+            String sql = "SELECT * FROM funcionario WHERE id = ?";
             conexao.setPstmt(conexao.getConnection().prepareStatement(sql));
             conexao.getPstmt().setInt(1, id);
             conexao.setResultSet(conexao.getPstmt().executeQuery());
 
             if (conexao.getResultSet().next()) {
                 int pessoaId = conexao.getResultSet().getInt("id");
-                String nome = conexao.getResultSet().getString("nome");
+                String nome = conexao.getResultSet().getString("nomeFuncionario");
                 String endereco = conexao.getResultSet().getString("endereco");
                 String telefone = conexao.getResultSet().getString("telefone");
-                double rendaAtual = conexao.getResultSet().getDouble("rendaAtual");
+                double salario = conexao.getResultSet().getDouble("salario");
                 String cpf = conexao.getResultSet().getString("cpf");
+                String cargo = conexao.getResultSet().getString("cargo");
+                int codigoBanco = conexao.getResultSet().getInt("codigoBanco");
+                pessoa = new Funcionario(pessoaId, nome, endereco, telefone, salario, cargo, codigoBanco, cpf);
 
-                pessoa = new PessoaFisica(pessoaId, nome, endereco, telefone, rendaAtual, cpf);
             }
 
         } catch (SQLException e) {
@@ -79,10 +81,13 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     }
 
     @Override
-    public void atualizar(PessoaFisica objeto) {
+    public void atualizar(Funcionario objeto) {
         Conexao conexao = null;
+        // (int id, String nome, String endereco, String telefone, double salario,
+        // String cargo,int codigoBanco,String cpf)
 
-        String sql = "UPDATE cliente SET nome = ?, endereco = ?, telefone = ?, rendaAtual = ?, WHERE id = ?";
+        String sql = "UPDATE funcionario SET nomeFuncionario = ?, endereco = ?, telefone = ?, salario = ?, cargo = ?, codigoBanco = ?  WHERE id = ?";
+        ;
 
         try {
 
@@ -93,11 +98,14 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().setString(2, objeto.getEndereco());
             conexao.getPstmt().setString(3, objeto.getTelefone());
             conexao.getPstmt().setDouble(4, objeto.getRendaAtual());
-            conexao.getPstmt().setInt(5, objeto.getId());
+            conexao.getPstmt().setString(5, objeto.getCargo());
+            conexao.getPstmt().setInt(6, objeto.getCodigoBanco());
+
+            conexao.getPstmt().setInt(7, objeto.getId());
 
             conexao.getPstmt().executeUpdate();
 
-            System.out.println("pessoa fisica atualizada com sucesso");
+            System.out.println("funcionario atualizada com sucesso");
         } catch (SQLException e) {
             System.out.println("não foi possivel atualizar erro:\n" + e);
         } finally {
@@ -107,7 +115,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
     @Override
     public void deletar(int id) {
-        String sql = "DELETE FROM cliente WHERE id = ?";
+        String sql = "DELETE FROM funcionario WHERE id = ?";
 
         Conexao conexao = null;
 
@@ -118,7 +126,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().setInt(1, id);
             conexao.getPstmt().execute();
             if (conexao.getPstmt().getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+                System.out.println("Removido com sucesso!");
             } else {
                 JOptionPane.showMessageDialog(null, "NÃ£o foi possi­vel remover!!");
             }
@@ -129,36 +137,37 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         }
     }
 
-
-
     @Override
-    public List<PessoaFisica> listarTodos() {
-        List<PessoaFisica> listaPessoas = new ArrayList<>();
-       
-        String sql = "SELECT * FROM cliente";
+    public List<Funcionario> listarTodos() {
+        List<Funcionario> listaPessoas = new ArrayList<>();
+
+        String sql = "SELECT * FROM funcionario";
 
         Conexao conexao = null;
 
         try {
             conexao = Factory.creatConnectionToMySQL();
-            conexao.Conecta();    
+            conexao.Conecta();
             conexao.setPstmt(conexao.getConnection().prepareStatement(sql));
             conexao.setResultSet(conexao.getPstmt().executeQuery());
-            
+
             while (conexao.getResultSet().next()) {
                 int id = conexao.getResultSet().getInt("id");
-                String nome  = conexao.getResultSet().getString("nome");
+                String nome = conexao.getResultSet().getString("nomeFuncionario");
                 String endereco = conexao.getResultSet().getString("endereco");
                 String telefone = conexao.getResultSet().getString("telefone");
-                double rendaAtual = conexao.getResultSet().getDouble("rendaAtual");
+                double salario = conexao.getResultSet().getDouble("salario");
                 String cpf = conexao.getResultSet().getString("cpf");
-        
-                listaPessoas.add(new PessoaFisica(id, nome, endereco, telefone, rendaAtual, cpf));
+                String Cargo = conexao.getResultSet().getString("cargo");
+                int codigoBanco = conexao.getResultSet().getInt("codigoBanco");
+
+                listaPessoas.add(new Funcionario(id, nome, endereco, telefone, salario, Cargo, codigoBanco, cpf));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            Objects.requireNonNull(conexao).Desconecta();;
+            Objects.requireNonNull(conexao).Desconecta();
+            ;
         }
 
         return listaPessoas;
