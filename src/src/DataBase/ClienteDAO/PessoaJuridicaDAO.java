@@ -37,7 +37,7 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
 
             conexao.getPstmt().executeUpdate();
 
-            System.out.println("Dados inseridos com sucesso na tabela pessoa fisica.");
+            System.out.println("Dados inseridos com sucesso na tabela pessoa Juridica.");
 
         } catch (SQLException e) {
 
@@ -88,7 +88,7 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
     public void atualizar(PessoaJuridica objeto) {
         Conexao conexao = null;
 
-        String sql = "UPDATE cliente SET nome = ?, endereco = ?, telefone = ?, rendaAtual = ?, WHERE id = ?";
+        String sql = "UPDATE cliente SET nome = ?, endereco = ?, telefone = ?, rendaAtual = ? WHERE id = ?";;
 
         try {
 
@@ -124,7 +124,7 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
             conexao.getPstmt().setInt(1, id);
             conexao.getPstmt().execute();
             if (conexao.getPstmt().getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+               System.out.println("Removido com sucesso!");
             } else {
                 JOptionPane.showMessageDialog(null, "NÃ£o foi possi­vel remover!!");
             }
