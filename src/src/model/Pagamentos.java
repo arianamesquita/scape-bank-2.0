@@ -4,7 +4,7 @@ public class Pagamentos {
 
     public String chavePix;
 
-
+    public Pagamentos ( ) {   }
     public Pagamentos(String chavePix) {
         this.chavePix = chavePix;
     }

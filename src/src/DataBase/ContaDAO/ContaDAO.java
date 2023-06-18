@@ -22,8 +22,8 @@ public class ContaDAO {
 
     public void criar(Conta conta) {
 
-        String sql = "insert into conta(numeroConta, numeroCartao, login, senha, codigoBanco, idFuncionario,)" + 
-                        "idCliente, chavePix) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into conta(numeroConta, numeroCartao, login, senha, codigoBanco, idFuncionario," + 
+                        "idCliente) values (?,?,?,?,?,?,?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
@@ -37,7 +37,6 @@ public class ContaDAO {
             pstm.setInt(5, conta.getAgencia().getBanco().getCodigo());
             pstm.setInt(6, conta.getFuncionario().getId());
             pstm.setInt(7, conta.getCliente().getId());
-            pstm.setString(8, conta.getPagamentos().getChavePix());
 
             pstm.execute();
 
@@ -80,8 +79,8 @@ public class ContaDAO {
     public void update(Conta conta){
 
         String sql = "update conta set numeroConta = ?, numeroCartao = ?, login = ?, senha = ?, " + 
-                     "codigoBanco = ?, idFuncionario = ?, idCliente = ?, chavePix = ?) values" + 
-                     "(?,?,?,?,?,?,?,?)";
+                     "codigoBanco = ?, idFuncionario = ?, idCliente = ?) values" + 
+                     "(?,?,?,?,?,?,?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
