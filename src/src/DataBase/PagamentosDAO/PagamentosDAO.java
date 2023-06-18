@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import DataBase.Conexao;
 import DataBase.Factory;
 import model.Conta;
-import model.Emprestimo;
 import model.Pagamentos;
 
 public class PagamentosDAO {
