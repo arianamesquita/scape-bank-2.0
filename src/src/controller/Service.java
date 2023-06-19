@@ -3,7 +3,10 @@ package controller;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -90,6 +93,18 @@ public class Service {
             e.printStackTrace();
             return new JFormattedTextField();
         }
+    }
+    public  static ImageIcon getImage(String imageURL){
+        URL url;
+        try {
+            url = new URL(imageURL);
+            return new ImageIcon(url);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+        
     }
     
 }
