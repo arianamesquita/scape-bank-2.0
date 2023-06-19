@@ -7,6 +7,8 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
+import testesDaAnna.EmprestimoField;
+import testesDaAnna.PagamentosField;
 import testesDaAnna.PixField;
 
 import javax.swing.*;
@@ -74,10 +76,33 @@ public class TesteMain {
             frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});
         buttons[3].addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Pagamento");
+                  frame.add(cadastro);
 
-        });
-        buttons[4].addActionListener(e -> JOptionPane.showMessageDialog(null, "Empréstimo"));
+            PagamentosField pagField = new PagamentosField();
+            pagField.setVisible(true);
+            pagField.repaint();
+            pagField.setBounds(500,300,500,180);
+
+            frame.remove(cards);
+            frame.add(pagField);
+            frame.setSize(frame.getSize().width,frame.getSize().height+1);
+            frame.setSize(frame.getSize().width,frame.getSize().height-1);
+            frame.repaint();});
+
+        buttons[4].addActionListener(e -> {
+                frame.add(cadastro);
+
+            EmprestimoField empField = new EmprestimoField();
+            empField.setVisible(true);
+            empField.repaint();
+            empField.setBounds(500,300,500,180);
+
+            frame.remove(cards);
+            frame.add(empField);
+            frame.setSize(frame.getSize().width,frame.getSize().height+1);
+            frame.setSize(frame.getSize().width,frame.getSize().height-1);
+            frame.repaint();});
+
         buttons[5].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
         addActionListener(buttonsCards);
         JtextField searchField = new JtextField();
