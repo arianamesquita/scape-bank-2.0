@@ -11,11 +11,12 @@ public class TesteMain {
         JFrame frame = new JFrame();
         frame.setTitle("Scape Bank");
         frame.setLayout(new BorderLayout());
+        FuncionarioController fController = new FuncionarioController();
+        frame.add(fController.getFuncionarioGUI(),BorderLayout.CENTER);
         frame.setSize(500, 500);
         frame.setVisible(true);
 
-        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        pessoaFisicaDAO.deletar(0);
+       
         
 
 

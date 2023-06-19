@@ -11,12 +11,9 @@ public class EnderecoController {
 
     public EnderecoController() {
         this.egGui = new EnderecoGUI();
-        setEndereco("Digite a sua rua- -___- -Digite o seu bairro- -Digite o complemento- -Digite o seu estado- -Digite a sua cidade- -_____-___");
-
     }
 
     private void addFocusListeners() {
-          getEgGui().getRuaTextField().removeFocusListener( getEgGui().getRuaTextField().getFocusListeners()[0]);
         getEgGui().getRuaTextField()
                 .addFocusListener(new createFocusListenerTextField(getEgGui().getRuaTextField()));
         getEgGui().getNumeroTextField()
