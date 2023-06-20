@@ -1,6 +1,7 @@
 package testesDaAnna;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -16,9 +17,9 @@ public class PagamentosField extends JPanel {
         setLayout(new GridLayout(3, 3));
 
         this.valorTransferencia = new JLabel("Valor:");
-        this.destinatario = new JLabel("N° do cartão:");
+        this.destinatario = new JLabel("Chave pix:");
         this.valorField = new JTextField("Digite o valor da transferência");
-        this.destinField = new JTextField("Digite o número do cartão");
+        this.destinField = new JTextField("Digite a chave pix");
 
         valorField.addFocusListener(new FocusListener() {
             @Override
@@ -39,7 +40,7 @@ public class PagamentosField extends JPanel {
         destinField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (destinField.getText().equals("Digite o número do cartão")) {
+                if (destinField.getText().equals("Digite a chave pix")) {
                     destinField.setText("");
                 }
             }
@@ -47,13 +48,15 @@ public class PagamentosField extends JPanel {
             @Override
             public void focusLost(FocusEvent e) {
                 if (destinField.getText().isEmpty()) {
-                    destinField.setText("Digite o número do cartão");
+                    destinField.setText("Digite o número do pix");
                 }
             }
         });
 
         this.cancelar = new JButton("Cancelar");
         this.ok = new JButton("Ok");
+
+
 
         add(valorTransferencia);
         add(valorField);
@@ -64,4 +67,5 @@ public class PagamentosField extends JPanel {
 
         setVisible(true);
     }
+
 }

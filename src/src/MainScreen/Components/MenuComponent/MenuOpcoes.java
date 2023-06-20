@@ -111,7 +111,7 @@ public class MenuOpcoes extends JPanel
      * @author pedro
      * @version 1.0
      */
-    private static class PaintMenu extends JPanel {
+    public static class PaintMenu extends JPanel {
         int width,height;
 
         /**
@@ -126,6 +126,9 @@ public class MenuOpcoes extends JPanel
             setBounds(0,0,getWidth(),getHeight());
             setLayout(null);
             setVisible(true);
+        }
+
+        public PaintMenu() {
         }
 
         /**

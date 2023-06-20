@@ -82,5 +82,36 @@ public class PagamentosDAO {
         
         return pagamentos;
     }
+
+    public Conta pagamentoById(int id){
+        
+        String sql = "Select * from transacoes where id = ?";
+
+        Conta conta = new Conta();
+        Pagamentos pagamento = new Pagamentos();
+
+        try{
+
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+
+            while(rset.next()){
+
+                conta.setIdTransacao(rset.getInt("id"));
+                conta.setTipoTransacao(rset.getString("tipoTransacao"));
+                conta.setDataTransacao(rset.getDate("dataTransacao"));
+                conta.setValorTransacao(rset.getString("valorTransacao"));
+                pagamento.setChavePix(rset.getString("chavePix"));
+                conta.setPagamentos(pagamento);
+                conta.setId(rset.getInt("idOrigem"));
+            }
+            conexao.Desconecta();            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return conta;
+    }
     
 }
