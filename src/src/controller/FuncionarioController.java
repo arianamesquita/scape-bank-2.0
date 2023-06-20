@@ -27,7 +27,7 @@ public class FuncionarioController implements ActionListener {
 
     private void Salvar() {
         String nome = getFuncionarioGUI().getNomeTextField().getText();
-        String endereco = getFuncionarioGUI().getEnderecoController().getEndereco();
+        String endereco = getEnderecoController().getEndereco();
         String Telefone = getFuncionarioGUI().getTelefoneFormattedTextField().getText().replace("(", "").replace(")", "")
                 .replace("-", "");
         double rendaAtual = Double.parseDouble(getFuncionarioGUI().getsalarioLabelTextField().getText());
@@ -78,6 +78,14 @@ private int geraId() {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public EnderecoController getEnderecoController() {
+        return enderecoController;
+    }
+
+    public void setEnderecoController(EnderecoController enderecoController) {
+        this.enderecoController = enderecoController;
     }
 
 

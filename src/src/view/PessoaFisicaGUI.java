@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import MainScreen.Components.CustomJTextField.JtextField;
-import controller.EnderecoController;
 import controller.Service;
 
 public class PessoaFisicaGUI extends JPanel {
@@ -19,9 +18,9 @@ public class PessoaFisicaGUI extends JPanel {
     private JTextField nomeTextField, rendaAtualTextField;
     private JFormattedTextField cpfFormattedTextField, telefoneFormattedTextField;
     private JButton salvar, cancelar;
-    private EnderecoController enderecoController;
+    private EnderecoGUI enderecoGUI;
 
-    public PessoaFisicaGUI() {
+    public PessoaFisicaGUI(EnderecoGUI enderecoGUI) {
         nomeLabel = new JLabel("Nome:");
         nomeTextField = new JTextField();
         nomeTextField.setHorizontalAlignment(JtextField.CENTER);
@@ -43,7 +42,7 @@ public class PessoaFisicaGUI extends JPanel {
         salvar = new JButton("salvar");
         cancelar = new JButton("Cancelar");
 
-        enderecoController = new EnderecoController();
+        this.enderecoGUI = enderecoGUI;
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -108,7 +107,7 @@ public class PessoaFisicaGUI extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 2;
-        add(enderecoController.getEgGui(), gbc);
+        add(enderecoGUI, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -228,12 +227,12 @@ public class PessoaFisicaGUI extends JPanel {
         this.cancelar = cancelar;
     }
 
-    public EnderecoController getEnderecoController() {
-        return enderecoController;
+    public EnderecoGUI getEnderecoGUI() {
+        return enderecoGUI;
     }
 
-    public void setEnderecoController(EnderecoController enderecoController) {
-        this.enderecoController = enderecoController;
+    public void setEnderecoGUI(EnderecoGUI enderecoGUI) {
+        this.enderecoGUI = enderecoGUI;
     }
     
 }
