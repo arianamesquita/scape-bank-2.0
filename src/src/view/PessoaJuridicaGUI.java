@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import MainScreen.Components.CustomJTextField.JtextField;
-import controller.EnderecoController;
 import controller.Service;
 
 public class PessoaJuridicaGUI extends JPanel{
@@ -20,9 +19,9 @@ public class PessoaJuridicaGUI extends JPanel{
     private JTextField nomeTextField, rendaAtualTextField;
     private JFormattedTextField cnpJFormattedTextField, telefoneFormattedTextField;
     private JButton salvar, cancelar;
-    private EnderecoController enderecoController;
+    private EnderecoGUI enderecoGUI;
 
-    public PessoaJuridicaGUI() {
+    public PessoaJuridicaGUI(EnderecoGUI enderecoGUI) {
         nomeLabel = new JLabel("Nome:");
         nomeTextField = new JTextField();
         nomeTextField.setHorizontalAlignment(JtextField.CENTER);
@@ -44,7 +43,7 @@ public class PessoaJuridicaGUI extends JPanel{
         salvar = new JButton("salvar");
         cancelar = new JButton("Cancelar");
 
-        enderecoController = new EnderecoController();
+        this.enderecoGUI = enderecoGUI;
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -109,7 +108,7 @@ public class PessoaJuridicaGUI extends JPanel{
         gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 2;
-        add(enderecoController.getEgGui(), gbc);
+        add(enderecoGUI, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -229,13 +228,31 @@ public class PessoaJuridicaGUI extends JPanel{
         this.cancelar = cancelar;
     }
 
-    public EnderecoController getEnderecoController() {
-        return enderecoController;
+    public JLabel getCnpJLabel() {
+        return cnpJLabel;
     }
 
-    public void setEnderecoController(EnderecoController enderecoController) {
-        this.enderecoController = enderecoController;
+    public void setCnpJLabel(JLabel cnpJLabel) {
+        this.cnpJLabel = cnpJLabel;
     }
+
+    public JFormattedTextField getCnpJFormattedTextField() {
+        return cnpJFormattedTextField;
+    }
+
+    public void setCnpJFormattedTextField(JFormattedTextField cnpJFormattedTextField) {
+        this.cnpJFormattedTextField = cnpJFormattedTextField;
+    }
+
+    public EnderecoGUI getEnderecoGUI() {
+        return enderecoGUI;
+    }
+
+    public void setEnderecoGUI(EnderecoGUI enderecoGUI) {
+        this.enderecoGUI = enderecoGUI;
+    }
+
+
     
 }
 

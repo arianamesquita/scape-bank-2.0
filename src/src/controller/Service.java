@@ -77,7 +77,7 @@ public class Service {
 
         @Override
         public void focusLost(FocusEvent e) {
-            if (getfTextField().getText().equals(getHint())) {
+            if (getfTextField().getText().equals(getHint())||getfTextField().getText().isEmpty()) {
                 getfTextField().setText(getHint());
                 getfTextField().setBackground(Color.red);
             }
