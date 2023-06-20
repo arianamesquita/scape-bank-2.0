@@ -67,5 +67,43 @@ public class PagamentosField extends JPanel {
 
         setVisible(true);
     }
+    
+
+    public JLabel getValorTransferencia() {
+        return valorTransferencia;
+    }
+    public void setValorTransferencia(JLabel valorTransferencia) {
+        this.valorTransferencia = valorTransferencia;
+    }
+    public JLabel getDestinatario() {
+        return destinatario;
+    }
+    public void setDestinatario(JLabel destinatario) {
+        this.destinatario = destinatario;
+    }
+    public JTextField getValorField() {
+        return valorField;
+    }
+    public void setValorField(JTextField valorField) {
+        this.valorField = valorField;
+    }
+    public JTextField getDestinField() {
+        return destinField;
+    }
+    public void setDestinField(JTextField destinField) {
+        this.destinField = destinField;
+    }
+    public JButton getCancelar() {
+        return cancelar;
+    }
+    public void setCancelar(JButton cancelar) {
+        this.cancelar = cancelar;
+    }
+    public JButton getOk() {
+        return ok;
+    }
+    public void setOk(JButton ok) {
+        this.ok = ok;
+    }
 
 }

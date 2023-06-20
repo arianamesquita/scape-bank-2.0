@@ -50,6 +50,21 @@ public class Conta {
         this.funcionario = funcionario;
         this.cliente = cliente;
     }
+    public Conta(int id, String senhaConta, String numeroConta, String numeroContaDestino, String tipoTransacao,
+            Date dataTransacao, String valorTransacao, int idTransacao, Agencia agencia, Pagamentos pagamentos, 
+            PessoaFisica cliente){
+        this.id = id;
+        this.senhaConta = senhaConta;
+        this.numeroConta = numeroConta;
+        this.numeroContaDestino = numeroContaDestino;
+        this.tipoTransacao = tipoTransacao;
+        this.dataTransacao = dataTransacao;
+        this.valorTransacao = valorTransacao;
+        this.idTransacao = idTransacao;
+        this.agencia = agencia;
+        this.pagamentos = pagamentos;
+        this.cliente = cliente;
+    }
 
 
     public int getId() {

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Conta;
+import model.Pagamentos;
 import testesDaAnna.PagamentosField;
 import view.AreaPagamentoGUI;
 
@@ -16,8 +17,15 @@ public class PagamentosController {
 
     }
 
+int id, String senhaConta, String numeroConta, String numeroContaDestino, String tipoTransacao,
+            Date dataTransacao, String valorTransacao, int idTransacao, Agencia agencia, Pagamentos pagamentos, 
+            PessoaFisica cliente)
+
     public void enviarPix(){
-        conta.set
+        conta.setTipoTransacao("pix");
+        conta.setValorTransacao(pagamentosField.getValorField().getText());
+        conta.setNumeroContaDestino(pagamentosField.getDestinField().getText());
+        
     }
 
 
