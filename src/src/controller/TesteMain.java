@@ -7,25 +7,21 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import MainScreen.Components.CustomJButton.Jbutton;
-import MainScreen.Components.MenuComponent.MenuOpcoes.PaintMenu;
-import testesDaAnna.PagamentosField;
-import view.AreaPagamentoGUI;
+import DataBase.ClienteDAO.PessoaJuridicaDAO;
 
 public class TesteMain {
         public static void main(String[] args) {
         JFrame frame = new JFrame();
-        PaintMenu paintMenu = new PaintMenu();
-        frame.setLayout(null);
-        paintMenu.setBackground(Color.red);
-        paintMenu.setLayout(new FlowLayout());
-        JButton button = new JButton("botao");
-        paintMenu.setBounds(100, 100, 400, 400);
-        paintMenu.setOpaque(false);
-    
-        frame.add(paintMenu);
-        paintMenu.add(button);
+        frame.setTitle("Scape Bank");
+        frame.setLayout(new BorderLayout());
+       PessoaJuridicaController pfController = new PessoaJuridicaController();
+
+        frame.add(pfController.getPessoaJuridicaGUI(),BorderLayout.CENTER);
+        frame.setSize(500, 500);
         frame.setVisible(true);
+        pfController.setPessoaJuridica(new PessoaJuridicaDAO().ler(2));
+        new PessoaJuridicaDAO().deletar(1);
+                new PessoaJuridicaDAO().deletar(2);
 
        
         

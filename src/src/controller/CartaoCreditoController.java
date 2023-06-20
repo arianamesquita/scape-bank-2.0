@@ -11,45 +11,38 @@ public class CartaoCreditoController implements MouseListener {
 
     public CartaoCreditoController() {
         this.cartaoCreditoGUI = new CartaoCreditoGUI();
-        addMouseListener();
+        setInfoCard();
+
+    }
+    public void setInfoCard(){
+               
         getCartaoCreditoGUI().getNumeroCartaoLabel().setText("1234     1234     1234     1234");
+        getCartaoCreditoGUI().getNomeCartaoLabel().setText("pedro H.J.F");
+        getCartaoCreditoGUI().getValidadeCartaoLabel().setText("02/30");
+        getCartaoCreditoGUI().getNumeroContaLabel().setText("12345678-9");
+        getCartaoCreditoGUI().getCodigoSegurancaLabel().setText("142");
+        getCartaoCreditoGUI().getNomeCartaoLabel().setBounds(90 - getCartaoCreditoGUI().getNomeCartaoLabel().getText().length() * 4, 161, 128, 30);
+
+        addMouseListener();
     }
 
-    private void addMouseListener(){
-        getCartaoCreditoGUI().getCartaofrenteLabel().addMouseListener(this);
-        getCartaoCreditoGUI().getCartaoVersoLabel().addMouseListener(this);
+    private void addMouseListener() {
+        getCartaoCreditoGUI().getFrentPanel().addMouseListener(this);
+        getCartaoCreditoGUI().getVersoPanel().addMouseListener(this);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == getCartaoCreditoGUI().getCartaofrenteLabel()) {
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getCartaofrenteLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getCartaofrenteLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getNumeroCartaoLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getNomeCartaoLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getValidadeCartaoLabel());
-            getCartaoCreditoGUI().getScapeCardLabel().setBounds(100, 50, 140, 30);
-            getCartaoCreditoGUI().getNumeroContaLabel().setVisible(true);
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getNumeroContaLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getCodigoSegurancaLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getCartaoVersoLabel());
+        if (e.getSource() == getCartaoCreditoGUI().getFrentPanel()) {
+            getCartaoCreditoGUI().getFrentPanel().setVisible(false);
+            getCartaoCreditoGUI().getVersoPanel().setVisible(true);
+            getCartaoCreditoGUI().repaint();
 
-            getCartaoCreditoGUI().atualizar();
+        } else if (e.getSource() == getCartaoCreditoGUI().getVersoPanel()) {
+            getCartaoCreditoGUI().getFrentPanel().setVisible(true);
+            getCartaoCreditoGUI().getVersoPanel().setVisible(false);
+            getCartaoCreditoGUI().repaint();
 
-        } else if (e.getSource() == getCartaoCreditoGUI().getCartaoVersoLabel()) {
-
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getCodigoSegurancaLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getCartaoVersoLabel());
-            getCartaoCreditoGUI().remove(getCartaoCreditoGUI().getNumeroContaLabel());
-
-            getCartaoCreditoGUI().getScapeCardLabel().setBounds(10, 10, 140, 30);
-
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getCartaofrenteLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getCartaofrenteLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getNumeroCartaoLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getNomeCartaoLabel());
-            getCartaoCreditoGUI().add(getCartaoCreditoGUI().getValidadeCartaoLabel());
-            getCartaoCreditoGUI().atualizar();
         }
     }
 
