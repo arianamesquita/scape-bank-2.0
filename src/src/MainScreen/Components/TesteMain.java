@@ -10,6 +10,7 @@ import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 import testesDaAnna.EmprestimoField;
 import testesDaAnna.PagamentosField;
 import testesDaAnna.PixField;
+import view.AreaPagamentoGUI;
 
 import javax.swing.*;
 
@@ -78,13 +79,10 @@ public class TesteMain {
         buttons[3].addActionListener(e -> {
                   frame.add(cadastro);
 
-            PagamentosField pagField = new PagamentosField();
-            pagField.setVisible(true);
-            pagField.repaint();
-            pagField.setBounds(500,300,500,180);
+            //AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI();
 
             frame.remove(cards);
-            frame.add(pagField);
+            //frame.add(areaPagamentoGUI);
             frame.setSize(frame.getSize().width,frame.getSize().height+1);
             frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});
