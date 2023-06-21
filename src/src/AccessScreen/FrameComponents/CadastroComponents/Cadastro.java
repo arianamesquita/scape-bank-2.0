@@ -1,14 +1,19 @@
 package AccessScreen.FrameComponents.CadastroComponents;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import MainScreen.Components.Custom.ColorPaleta;
 import MainScreen.Components.CustomJButton.Jbutton;
 import MainScreen.Components.CustomJTextField.JtextField;
-import MainScreen.Components.CustomJframe.Jframe;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class Cadastro extends JPanel {
     private  int x, y, width, height;
@@ -770,19 +775,5 @@ public class Cadastro extends JPanel {
 
     }
 
-    public static void main(String[] args) {
-        Jframe frame = new Jframe();
-        frame.setTitle("Scape Bank");
-        frame.setLayout(null);
-        frame.setSize(1300,650);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        Cadastro cadastro1 = new Cadastro(10, 50);
-        cadastro1.addAtualizarCadastro();
-        frame.add(cadastro1);
-        cadastro1 = new Cadastro(550, 50);
-        cadastro1.addCadastro();
-        frame.add(cadastro1);
-        frame.setVisible(true);
-    }
+
 }

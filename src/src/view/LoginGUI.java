@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -23,6 +24,7 @@ public class LoginGUI extends Jframe implements ActionListener {
         setLayout(null);
         setExtendedState(MAXIMIZED_HORIZ);
         setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.panelCadastro = new JPanel();
         panelCadastro.setLayout(new BoxLayout(panelCadastro, BoxLayout.Y_AXIS));

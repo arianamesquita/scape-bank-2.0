@@ -1,11 +1,11 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -37,9 +37,10 @@ public class TelaPrincipalView extends Jframe {
 
         setTitle("Scape Bank");
         setLayout(null);
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setSize(1350,800);
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.pixField = new PixField();
         this.pagamentosField = new PagamentosField();
