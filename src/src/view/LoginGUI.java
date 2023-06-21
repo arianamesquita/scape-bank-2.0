@@ -37,14 +37,15 @@ public class LoginGUI extends Jframe implements ActionListener {
         cadastroGUI = new FrameComponents();
         addActionListener();
 
-
         add(cadastroGUI);
         add(panelCadastro);
         setSize(cadastroGUI.getSize());
         setVisible(true);
 
     }
-    private void addActionListener(){
+
+    private void addActionListener() {
+        cadastroGUI.getButton()[0].addActionListener(this);
         cadastroGUI.getButton()[1].addActionListener(this);
         pessoaFisicaController.getPessoaFisicaGUI().getCancelar().addActionListener(this);
         pessoaFisicaController.getPessoaFisicaGUI().getSalvar().addActionListener(this);
@@ -76,37 +77,35 @@ public class LoginGUI extends Jframe implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == getCadastroGUI().getButton()[1]) {
+
+        if (e.getSource() == getCadastroGUI().getButton()[0]) {
+            new TelaPrincipalView();
+            dispose();
+        }else if (e.getSource() == getCadastroGUI().getButton()[1]) {
             getPessoaFisicaController().updateInterface();
             getCadastroGUI().setVisible(false);
             setSize(getPanelCadastro().getSize());
             getPanelCadastro().setVisible(true);
-            
 
         } else if (e.getSource() == getPessoaFisicaController().getPessoaFisicaGUI().getCancelar()) {
             getCadastroGUI().setVisible(true);
             setSize(getCadastroGUI().getSize());
             getPanelCadastro().setVisible(false);
-        
 
         } else if (e.getSource() == getPessoaFisicaController().getPessoaFisicaGUI().getSalvar()) {
             getPessoaFisicaController().Salvar();
 
             while (!getPessoaFisicaController().isCadastrado()) {
             }
-            if(getPessoaFisicaController().isCadastrado()){
-            getCadastroGUI().setVisible(true);
-            setSize(getCadastroGUI().getSize());
-            getPanelCadastro().setVisible(false);
-            getPessoaFisicaController().setCadastrado(false);
-        }
-         
+            if (getPessoaFisicaController().isCadastrado()) {
+                getCadastroGUI().setVisible(true);
+                setSize(getCadastroGUI().getSize());
+                getPanelCadastro().setVisible(false);
+                getPessoaFisicaController().setCadastrado(false);
+            }
 
         }
 
-    }
-    public static void main(String[] args) {
-        new LoginGUI();
     }
 
 }
