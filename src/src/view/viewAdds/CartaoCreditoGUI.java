@@ -100,6 +100,9 @@ public class CartaoCreditoGUI extends JPanel {
         add(frentPanel);
         add(versoPanel);
 
+        frentPanel.setOpaque(false);
+        versoPanel.setOpaque(false);
+
         setOpaque(false);
         setVisible(true);
         repaint();

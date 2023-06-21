@@ -3,6 +3,7 @@ package view.viewAdds;
 import javax.swing.*;
 
 import AccessScreen.Custom.ColorFontPaletas;
+import MainScreen.Components.Custom.ColorPaleta;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -18,6 +19,7 @@ public class EmprestimoField extends JPanel {
 
     public EmprestimoField(){
         setLayout(new GridLayout(4, 2, 10, 5));
+        setBackground(ColorPaleta.rgbGrey());
 
         String[] ofertas = {"1 x 900", "2 x 450", "3 x 300", "4 x 275"};
 
@@ -53,7 +55,9 @@ public class EmprestimoField extends JPanel {
         });
 
         this.cancelar = new JButton("Cancelar");
+        cancelar.setBackground(ColorPaleta.buttonsColor());
         this.aceitar = new JButton("Aceitar");
+        aceitar.setBackground(ColorPaleta.buttonsColor());
 
         add(valorOfertado);
         add(limiteDisponivel);

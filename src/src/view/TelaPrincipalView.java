@@ -1,4 +1,4 @@
-package MainScreen.Components;
+package view;
 
 import AccessScreen.FrameComponents.CadastroComponents.Cadastro;
 import MainScreen.Components.CardsComponent.Cards;
@@ -7,11 +7,8 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
+import controller.CartaoCreditoController;
 import controller.PagamentosController;
-import model.Conta;
-import view.AreaEmprestimoGUI;
-import view.AreaPagamentoGUI;
-import view.AreaPixGui;
 import view.viewAdds.EmprestimoField;
 import view.viewAdds.PagamentosField;
 import view.viewAdds.PixField;
@@ -23,34 +20,41 @@ import java.awt.*;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 
-/**
- * class para teste de alguns objetos
- * @author pedro
- * @version 1.0
- */
-public class TesteMain {
+public class TelaPrincipalView extends Jframe {
 
-    static Jframe frame;
+    private PixField pixField;
+    private AreaPixGui areaPixGui;
+    private PagamentosField pagamentosField;
+    private AreaPagamentoGUI areaPagamentoGUI;
+    private EmprestimoField empField;
+    private AreaEmprestimoGUI areaEmprestimoGUI;
+    private Cards cards;
+    private CartaoCreditoController cartaoCreditoController;
+    private PagamentosController pagamentosController;
 
-    
-    /** 
-     * @param args
-     */
-    public static void main(String[] args) {
+    public TelaPrincipalView(){    
 
-        frame = new Jframe();
-        frame.setTitle("Scape Bank");
-        frame.setLayout(null);
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
+        setTitle("Scape Bank");
+        setLayout(null);
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setLocationRelativeTo(null);
+        setResizable(true);
+
+        this.pixField = new PixField();
+        this.pagamentosField = new PagamentosField();
+        this.areaPixGui = new AreaPixGui(pixField);
+        this.areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
+        this.empField = new EmprestimoField();
+        this.areaEmprestimoGUI = new AreaEmprestimoGUI(empField);
+        this.cartaoCreditoController = new CartaoCreditoController();
+        this.pagamentosController = new PagamentosController();
+
 
         Jbutton[] buttons = new Jbutton[6];
         for (int i = 0; i < 6; i++) {
             buttons[i]= new Jbutton();
             buttons[i].setVisible(true);
         }
-        Cadastro cadastro = new Cadastro(500,160);
 
         MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
         String[] text = {"Extrato -->","Empréstimo -->","Saldo -->","Cartões -->","Pix -->","Pagamentos -->"};
@@ -60,55 +64,56 @@ public class TesteMain {
             buttonsCards[i]= new JButton("oi");
             buttonsCards[i].setVisible(true);
         }
-        Cards cards = new Cards(buttonsCards, text, 400, 160);
+        this.cards = new Cards(buttonsCards, text, 400, 160);
         buttons[1].addActionListener(e -> {
-            frame.add(cards);
-            frame.remove(cadastro);
-            frame.repaint();
-        });
+            setInvisible();
+
+            cards.setVisible(true);
+
+            setSize(getSize().width,getSize().height+1);
+            setSize(getSize().width,getSize().height-1);
+            repaint();});
+
+
         buttons[2].addActionListener(e -> {
-                  frame.add(cadastro);
+            setInvisible();
 
-            PixField pixField = new PixField();
-            AreaPixGui areaPixGui = new AreaPixGui(pixField);
+            areaPixGui.setVisible(true);
 
-            frame.remove(cards);
-            frame.add(areaPixGui);
-            frame.setSize(frame.getSize().width,frame.getSize().height+1);
-            frame.setSize(frame.getSize().width,frame.getSize().height-1);
-            frame.repaint();});
+            setSize(getSize().width,getSize().height+1);
+            setSize(getSize().width,getSize().height-1);
+            repaint();});
         buttons[3].addActionListener(e -> {
-                  frame.add(cadastro);
+            setInvisible();
 
-            PagamentosField pagamentosField = new PagamentosField();
-            AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
+            pagamentosController.getAreaPagamentoGUI().setVisible(true);
                     
-            PagamentosController p = new PagamentosController(new Conta(), new AreaPagamentoGUI(new PagamentosField()));
-            p.initController();
-
-            frame.remove(cards);
-            frame.add(areaPagamentoGUI);
-            frame.setSize(frame.getSize().width,frame.getSize().height+1);
-            frame.setSize(frame.getSize().width,frame.getSize().height-1);
-            frame.repaint();});
+            setSize(getSize().width,getSize().height+1);
+            setSize(getSize().width,getSize().height-1);
+            repaint();});
 
         buttons[4].addActionListener(e -> {
-                frame.add(cadastro);
+            setInvisible();
 
-            EmprestimoField empField = new EmprestimoField();
-            AreaEmprestimoGUI areaEmprestimoGUI = new AreaEmprestimoGUI(empField);
+            areaEmprestimoGUI.setVisible(true);
 
-            frame.remove(cards);
-            frame.add(areaEmprestimoGUI);
-            frame.setSize(frame.getSize().width,frame.getSize().height+1);
-            frame.setSize(frame.getSize().width,frame.getSize().height-1);
-            frame.repaint();});
+            setSize(getSize().width,getSize().height+1);
+            setSize(getSize().width,getSize().height-1);
+            repaint();});
 
-        buttons[5].addActionListener(e -> JOptionPane.showMessageDialog(null, "Cartões"));
-        addActionListener(buttonsCards);
+        buttons[5].addActionListener(e -> {
+            setInvisible();
+
+            cartaoCreditoController.getCartaoCreditoGUI().setBounds(650, 250, 700, 570);
+            cartaoCreditoController.getCartaoCreditoGUI().setVisible(true);
+
+            setSize(getSize().width,getSize().height+1);
+            setSize(getSize().width,getSize().height-1);
+            repaint();});
+
+
         JtextField searchField = new JtextField();
         searchField.setVisible(true);
-
 
         JButton[] buttons2 = new JButton[5];
         buttons2[0] = new JButton("");
@@ -116,7 +121,7 @@ public class TesteMain {
         buttons2[2] = new JButton("");
         buttons2[3] = new JButton("");
         buttons2[4] = new JButton("");
-        MenuSuperior menuSuperior = new MenuSuperior(0, 0, frame.getWidth(), 100, searchField, buttons2);
+        MenuSuperior menuSuperior = new MenuSuperior(0, 0, getWidth(), 100, searchField, buttons2);
         searchField.setHorizontalAlignment(JTextField.CENTER);
         searchField.addFocusListener(new FocusListener(){
                 public void focusGained(FocusEvent e){
@@ -132,15 +137,22 @@ public class TesteMain {
             }
         });
 
+          
 
+        add(areaPixGui);
+        add(pagamentosController.getAreaPagamentoGUI());
+        add(areaEmprestimoGUI);
+        add(cartaoCreditoController.getCartaoCreditoGUI());
 
+        add(menuPrincipais);
+        add(menuSuperior);
+        add(cards);
 
-
-        frame.add(menuPrincipais);
-        frame.add(menuSuperior);
-        frame.add(cards);
-        frame.setVisible(true);
+        setInvisible();
+        cards.setVisible(true);
+        setVisible(true);
     }
+
    public static void addActionListener(JButton[]buttons){
 
         for (JButton button : buttons) {
@@ -159,5 +171,14 @@ public class TesteMain {
             }
 
         }
+    }
+    public void setInvisible(){
+
+    areaPixGui.setVisible(false);
+    areaEmprestimoGUI.setVisible(false);
+    cards.setVisible(false);
+    cartaoCreditoController.getCartaoCreditoGUI().setVisible(false);
+    pagamentosController.getAreaPagamentoGUI().setVisible(false);
+
     }
 }

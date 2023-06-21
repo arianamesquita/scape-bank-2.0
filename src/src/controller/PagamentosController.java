@@ -21,9 +21,11 @@ public class PagamentosController {
     private PagamentosField pagamentosField;
     private Conta conta;
 
-    public PagamentosController(Conta conta, AreaPagamentoGUI areaPagamentoGUI){
+    public PagamentosController(){
+        this.pagamentosField = new PagamentosField();
         this.areaPagamentoGUI =  new AreaPagamentoGUI(pagamentosField);
-        getPagamentosField().setVisible(true);
+
+        getAreaPagamentoGUI().setVisible(true);
 
     }
 
@@ -56,7 +58,7 @@ public class PagamentosController {
 
 
 
-    public AreaPagamentoGUI getAreaPagamentoGUI(PagamentosField pagamentosField) {
+    public AreaPagamentoGUI getAreaPagamentoGUI() {
         return areaPagamentoGUI;
     }
     public void setAreaPagamentoGUI(AreaPagamentoGUI areaPagamentoGUI) {

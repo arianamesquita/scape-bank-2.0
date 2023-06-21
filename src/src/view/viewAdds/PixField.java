@@ -3,6 +3,7 @@ package view.viewAdds;
 import javax.swing.*;
 
 import AccessScreen.Custom.ColorFontPaletas;
+import MainScreen.Components.Custom.ColorPaleta;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -16,6 +17,7 @@ public class PixField extends JPanel {
 
     public PixField() {
         setLayout(new GridLayout(3, 2, 10, 5));
+        setBackground(ColorPaleta.rgbGrey());
 
         this.chavePix = new JLabel("Chave pix:");
         chavePix.setFont(ColorFontPaletas.font6());
@@ -57,7 +59,9 @@ public class PixField extends JPanel {
             }
         });
         this.cancelar = new JButton("Cancelar");
+        cancelar.setBackground(ColorPaleta.buttonsColor());
         this.ok = new JButton("Ok");
+        ok.setBackground(ColorPaleta.buttonsColor());
 
         add(chavePix);
         add(nomeField);

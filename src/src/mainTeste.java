@@ -1,10 +1,14 @@
-package DataBase;
 
-import java.io.FileNotFoundException;
+
+
+import view.TelaPrincipalView;
 
 
 public class mainTeste {
 	public static void main(String[] args) {
+
+		new TelaPrincipalView();
+
 		
 	}
 
