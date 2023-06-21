@@ -2,6 +2,9 @@ package testesDaAnna;
 
 import javax.swing.*;
 
+import AccessScreen.Custom.ColorFontPaletas;
+import MainScreen.Components.Custom.ColorPaleta;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -14,12 +17,18 @@ public class PagamentosField extends JPanel {
     JButton cancelar, ok;
 
     public PagamentosField() {
-        setLayout(new GridLayout(3, 3));
+        setLayout(new GridLayout(3, 2, 10, 5));
+        setBackground(ColorPaleta.rgbGrey());
+        
 
         this.valorTransferencia = new JLabel("Valor:");
+        valorTransferencia.setFont(ColorFontPaletas.font6());
         this.destinatario = new JLabel("Chave pix:");
+        destinatario.setFont(ColorFontPaletas.font6());
         this.valorField = new JTextField("Digite o valor da transferência");
+        valorField.setFont(ColorFontPaletas.font6());
         this.destinField = new JTextField("Digite a chave pix");
+        destinField.setFont(ColorFontPaletas.font6());
 
         valorField.addFocusListener(new FocusListener() {
             @Override
@@ -54,7 +63,9 @@ public class PagamentosField extends JPanel {
         });
 
         this.cancelar = new JButton("Cancelar");
+        cancelar.setBackground(ColorPaleta.buttonsColor());
         this.ok = new JButton("Ok");
+        ok.setBackground(ColorPaleta.buttonsColor());
 
 
 

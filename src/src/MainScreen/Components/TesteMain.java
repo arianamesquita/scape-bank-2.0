@@ -7,10 +7,12 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
+import testesDaAnna.Comprovante;
 import testesDaAnna.EmprestimoField;
 import testesDaAnna.PagamentosField;
 import testesDaAnna.PixField;
 import view.AreaPagamentoGUI;
+import view.ComprovanteGUI;
 
 import javax.swing.*;
 
@@ -79,10 +81,13 @@ public class TesteMain {
         buttons[3].addActionListener(e -> {
                   frame.add(cadastro);
 
-            //AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI();
+            PagamentosField pagamentosField = new PagamentosField();
+            AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
+
+
 
             frame.remove(cards);
-            //frame.add(areaPagamentoGUI);
+            frame.add(areaPagamentoGUI);
             frame.setSize(frame.getSize().width,frame.getSize().height+1);
             frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});

@@ -1,7 +1,13 @@
 package controller;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+
+import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
-import model.Pagamentos;
 import testesDaAnna.PagamentosField;
 import view.AreaPagamentoGUI;
 
@@ -17,14 +23,15 @@ public class PagamentosController {
 
     }
 
-int id, String senhaConta, String numeroConta, String numeroContaDestino, String tipoTransacao,
-            Date dataTransacao, String valorTransacao, int idTransacao, Agencia agencia, Pagamentos pagamentos, 
-            PessoaFisica cliente)
 
     public void enviarPix(){
+
+        conta.setIdTransacao(geraId());
+        conta.setSenhaConta(confirmSenhaConta().toString());
         conta.setTipoTransacao("pix");
         conta.setValorTransacao(pagamentosField.getValorField().getText());
         conta.setNumeroContaDestino(pagamentosField.getDestinField().getText());
+
         
     }
 
@@ -50,6 +57,34 @@ int id, String senhaConta, String numeroConta, String numeroContaDestino, String
     }
 
 
+    private int geraId() {
+        int count = 0;
+        for (Conta conta2 : new TransacaoDAO().getTransacoes()) {
+            if (count < conta2.getId()) {
+                count = conta2.getId();
+            }
+        }
+        return count + 1;
+    }
+
+    private char[] confirmSenhaConta(){
+
+        JPasswordField password = new JPasswordField();
+        password.setEchoChar('*');
+
+        JLabel texto = new JLabel("Digite a senha da conta:");
+
+        JPanel entSenha = new JPanel();
+        entSenha.add(texto);
+        entSenha.add(password);
+
+        JOptionPane.showMessageDialog(null, entSenha, "Acesso seguro", JOptionPane.PLAIN_MESSAGE);
+
+        char[] senha = password.getPassword();
+
+        return senha;
+
+    }
 
 
 
