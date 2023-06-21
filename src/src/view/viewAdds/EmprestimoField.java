@@ -1,24 +1,40 @@
 package view.viewAdds;
 
 import javax.swing.*;
+
+import AccessScreen.Custom.ColorFontPaletas;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class EmprestimoField extends JPanel {
 
-    JLabel valorOfertado, valorSaque, vOferta;
+    JLabel valorOfertado, limiteDisponivel, valorSaque, espacoVazio;
     JTextField vSaqueField;
 
     JButton cancelar, aceitar;
+    private JComboBox<String> vOferta;
 
     public EmprestimoField(){
-        setLayout(new GridLayout(3,3));
+        setLayout(new GridLayout(4, 2, 10, 5));
+
+        String[] ofertas = {"1 x 900", "2 x 450", "3 x 300", "4 x 275"};
 
         this.valorSaque = new JLabel("Valor desejado:");
+        valorSaque.setFont(ColorFontPaletas.font6());
         this.valorOfertado = new JLabel("Valor ofertado:");
-        this.vOferta = new JLabel();
+        valorOfertado.setFont(ColorFontPaletas.font6());
+        this.limiteDisponivel = new JLabel();
+        limiteDisponivel.setFont(ColorFontPaletas.font6());
+        this.vOferta = new JComboBox<String>(ofertas);
+        vOferta.getSelectedIndex();
+		vOferta.setForeground(new Color(0, 0, 0));
+		vOferta.setBackground(new Color(124,150,171));
+        vOferta.setFont(ColorFontPaletas.font6());
+        this.espacoVazio = new JLabel();
         this.vSaqueField = new JTextField("Digite o valor desejado");
+        vSaqueField.setFont(ColorFontPaletas.font6());
 
         valorSaque.addFocusListener(new FocusListener() {
             @Override
@@ -40,9 +56,11 @@ public class EmprestimoField extends JPanel {
         this.aceitar = new JButton("Aceitar");
 
         add(valorOfertado);
+        add(limiteDisponivel);
         add(valorSaque);
-        add(vOferta);
         add(vSaqueField);
+        add(espacoVazio);
+        add(vOferta);
         add(cancelar);
         add(aceitar);
 

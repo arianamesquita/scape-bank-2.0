@@ -7,6 +7,9 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
+import controller.PagamentosController;
+import model.Conta;
+import view.AreaEmprestimoGUI;
 import view.AreaPagamentoGUI;
 import view.AreaPixGui;
 import view.viewAdds.EmprestimoField;
@@ -79,6 +82,9 @@ public class TesteMain {
 
             PagamentosField pagamentosField = new PagamentosField();
             AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
+                    
+            //PagamentosController p = new PagamentosController(new Conta(), new AreaPagamentoGUI(new PagamentosField()));
+            //p.initController();
 
             frame.remove(cards);
             frame.add(areaPagamentoGUI);
@@ -90,12 +96,10 @@ public class TesteMain {
                 frame.add(cadastro);
 
             EmprestimoField empField = new EmprestimoField();
-            empField.setVisible(true);
-            empField.repaint();
-            empField.setBounds(500,300,500,180);
+            AreaEmprestimoGUI areaEmprestimoGUI = new AreaEmprestimoGUI(empField);
 
             frame.remove(cards);
-            frame.add(empField);
+            frame.add(areaEmprestimoGUI);
             frame.setSize(frame.getSize().width,frame.getSize().height+1);
             frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});

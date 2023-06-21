@@ -116,5 +116,6 @@ public class PagamentosField extends JPanel {
     public void setOk(JButton ok) {
         this.ok = ok;
     }
+    
 
 }
