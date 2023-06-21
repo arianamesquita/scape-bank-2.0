@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,10 +21,14 @@ public class PagamentosController {
     private PagamentosField pagamentosField;
     private Conta conta;
 
-    public PagamentosController(){
+    public PagamentosController(Conta conta, AreaPagamentoGUI areaPagamentoGUI){
         this.areaPagamentoGUI =  new AreaPagamentoGUI(pagamentosField);
         getPagamentosField().setVisible(true);
 
+    }
+
+    public void initController(){
+        pagamentosField.getOk().addActionListener( e-> enviarPix());
     }
 
 
@@ -29,10 +37,21 @@ public class PagamentosController {
         conta.setIdTransacao(geraId());
         conta.setSenhaConta(confirmSenhaConta().toString());
         conta.setTipoTransacao("pix");
+        conta.setDataTransacao(new Date(0));
         conta.setValorTransacao(pagamentosField.getValorField().getText());
         conta.setNumeroContaDestino(pagamentosField.getDestinField().getText());
+        conta.setId(36480); //pegar o id da Conta conectada.
 
-        
+        System.out.println("Transação executada com sucesso.");
+
+        TransacaoDAO dao = new TransacaoDAO();
+
+        try{
+            dao.criar(conta);
+        } catch (Exception ex){
+            Logger.getLogger(PagamentosController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+
     }
 
 
@@ -85,8 +104,6 @@ public class PagamentosController {
         return senha;
 
     }
-
-
 
     
 }
