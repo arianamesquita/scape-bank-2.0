@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,10 +11,11 @@ import controller.Service.createFocusListenerTextField;
 import model.PessoaFisica;
 import view.PessoaFisicaGUI;
 
-public class PessoaFisicaController implements ActionListener {
+public class PessoaFisicaController  {
     private PessoaFisicaGUI pessoaFisicaGUI;
     private EnderecoController enderecoController;
-    PessoaFisica pessoaFisica;
+    private PessoaFisica pessoaFisica;
+    private boolean cadastrado;
 
     public PessoaFisicaController() {
         this.pessoaFisica = new PessoaFisica();
@@ -26,7 +25,6 @@ public class PessoaFisicaController implements ActionListener {
                 "Digite a sua rua- -___- -Digite o seu bairro- -Digite o complemento- -Digite o seu estado- -Digite a sua cidade- -_____-___");
         setPessoaFisica(
                 new PessoaFisica(0, "digite seu nome", enderecoController.getEndereco(), null, 0, null));
-        getPessoaFisicaGUI().getSalvar().addActionListener(this);
 
     }
 
@@ -43,7 +41,7 @@ public class PessoaFisicaController implements ActionListener {
         getPessoaFisicaGUI().repaint();
     }
 
-    private void Salvar() {
+    public void Salvar() {
         String nome = pessoaFisicaGUI.getNomeTextField().getText();
         String endereco = getEnderecoController().getEndereco();
         String Telefone = pessoaFisicaGUI.getTelefoneFormattedTextField().getText().replace("(", "").replace(")", "")
@@ -60,8 +58,18 @@ public class PessoaFisicaController implements ActionListener {
             Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        pessoaFisicaGUI.removeAll();
+    
         pessoaFisicaGUI.repaint();
+        setCadastrado(true);
+    }
+    public void updateInterface(){
+  
+
+        enderecoController.setEndereco(
+                "Digite a sua rua- -___- -Digite o seu bairro- -Digite o complemento- -Digite o seu estado- -Digite a sua cidade- -_____-___");
+        setPessoaFisica(
+                new PessoaFisica(0, "digite seu nome", enderecoController.getEndereco(), null, 0, null));
+
     }
 
     private int geraId() {
@@ -74,13 +82,7 @@ public class PessoaFisicaController implements ActionListener {
         return count + 1;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pessoaFisicaGUI.getSalvar()) {
-            Salvar();
-
-        }
-    }
+    
 
     public PessoaFisicaGUI getPessoaFisicaGUI() {
         return pessoaFisicaGUI;
@@ -110,6 +112,14 @@ public class PessoaFisicaController implements ActionListener {
         getPessoaFisicaGUI().getRendaAtualTextField().setText(String.valueOf(pessoaFisica.getRendaAtual()));
         getPessoaFisicaGUI().getCpfFormattedTextField().setText(pessoaFisica.getCpf());
         addFocusListener();
+    }
+
+    public boolean isCadastrado() {
+        return cadastrado;
+    }
+
+    public void setCadastrado(boolean cadastrado) {
+        this.cadastrado = cadastrado;
     }
 
 }

@@ -100,7 +100,6 @@ public class Service {
             url = new URL(imageURL);
             return new ImageIcon(url);
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;

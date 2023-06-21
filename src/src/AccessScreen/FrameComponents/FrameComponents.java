@@ -2,14 +2,13 @@ package AccessScreen.FrameComponents;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import AccessScreen.Custom.ColorFontPaletas;
 import AccessScreen.Custom.ImageCustom.Images;
-import AccessScreen.CustomJframe.Jframe;
 
 /**
  * 
@@ -19,12 +18,13 @@ import AccessScreen.CustomJframe.Jframe;
  * Aqui configuramos o frame, os textos, imagens e botões.
  * 
  */
-public class FrameComponents extends JFrame {
+public class FrameComponents extends JPanel {
+    private JButton[] button;
     
 /**
 * Inicializando o Jframe.
 */
-    static Jframe frame;
+    
 
 /**
  * Criando a classe FrameComponents.
@@ -37,12 +37,10 @@ public class FrameComponents extends JFrame {
          * (width e height), a posição relativa na tela e se o tamanho dela é ajustável à tela.
          * 
          */
-        frame = new Jframe();
-        frame.setTitle("Scape Bank");
-        frame.setLayout(null);
-        frame.setSize(1300,650);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+
+        setLayout(null);
+        setSize(1300,650);
+
         
         
         /**
@@ -79,7 +77,7 @@ public class FrameComponents extends JFrame {
             labels.setForeground(labelText[i].getColor());
             labels.setBounds(labelText[i].getX(), labelText[i].getY(), labelText[i].getWidth(), labelText[i].getHeight());
             labels.setVisible(true);
-            frame.add(labels); //adiciona o label de imagem na tela inial, ou seja, no frame criado para ela.
+            add(labels); //adiciona o label de imagem na tela inial, ou seja, no frame criado para ela.
         }
 
 
@@ -102,7 +100,7 @@ public class FrameComponents extends JFrame {
          * definidas no vetor do LabelForm.
          * 
          */
-        JButton[] button = new JButton[3];
+        this.button = new JButton[3];
         for(int k = 0; k < 3; k++){
             button[k] = new JButton(labelButton[k].getText());
             button[k].setBounds(labelButton[k].getX(), labelButton[k].getY(), labelButton[k].getWidth(),
@@ -111,7 +109,7 @@ public class FrameComponents extends JFrame {
             button[k].setFont(labelButton[k].getFont());
             button[k].setForeground(ColorFontPaletas.black());
             button[k].setVisible(true);
-            frame.add(button[k]); //adiciona o label de botões na tela inicial, ou seja, no frame criado para ela.
+            add(button[k]); //adiciona o label de botões na tela inicial, ou seja, no frame criado para ela.
         }
         button[2].setBorderPainted(false); //deixa o botão de "esqueci minha senha" sem borda definida.
         button[2].setOpaque(false); //deixa o botão de "esqueci minha senha" sem cor definida no fundo.
@@ -128,7 +126,7 @@ public class FrameComponents extends JFrame {
         JCB.setBackground(ColorFontPaletas.lightGray());
         JCB.setForeground(ColorFontPaletas.black());
         JCB.setVisible(true);
-        frame.add(JCB); //adiciona o checkBox na tela inicial, ou seja, no frame criado para ela.
+        add(JCB); //adiciona o checkBox na tela inicial, ou seja, no frame criado para ela.
 
         
         /**
@@ -152,7 +150,7 @@ public class FrameComponents extends JFrame {
         JTF.setFont(textField.getFont());
         JTF.setBackground(ColorFontPaletas.lightGray());
         JTF.setVisible(true);
-        frame.add(JTF); //adiciona o textField ou campo de texto na tela inicial, ou seja, no frame criado para ela.
+        add(JTF); //adiciona o textField ou campo de texto na tela inicial, ou seja, no frame criado para ela.
 
         /**
          * Chamando o construtor para organizar os parâmetros do passwordField (campo de senha), desta forma
@@ -168,7 +166,7 @@ public class FrameComponents extends JFrame {
         JPF.setBackground(ColorFontPaletas.lightGray());
         JPF.setVisible(true);
         JPF.setEchoChar('\u0000'); //define o char que aparece quando a senha for digitada sem o checkBox.
-        frame.add(JPF); //adiciona o passwordField ou campo de senha na tela inicial, ou seja, no frame criado para ela.
+        add(JPF); //adiciona o passwordField ou campo de senha na tela inicial, ou seja, no frame criado para ela.
        
 
 
@@ -197,7 +195,7 @@ public class FrameComponents extends JFrame {
             labels2[j] = new JLabel();
             labels2[j].setIcon(labelImage[j].getImage());
             labels2[j].setBounds(labelImage[j].getX(), labelImage[j].getY(), labelImage[j].getWidth(), labelImage[j].getHeight());
-            frame.add(labels2[j]); //adiciona o label de imagem na tela inicial, ou seja, no frame criado para ela.
+            add(labels2[j]); //adiciona o label de imagem na tela inicial, ou seja, no frame criado para ela.
         }
         labels2[4].setOpaque(true); //deixa a imagem com as mãos com o fundo transparente ou não.
         labels2[0].setOpaque(false); //deixa a imagem com o $ com o fundo transparente ou não.
@@ -205,6 +203,14 @@ public class FrameComponents extends JFrame {
 
         
 
-        frame.setVisible(true); //libera as informações adicionadas no frame da tela inicial para serem visíveis.
+        setVisible(true); //libera as informações adicionadas no frame da tela inicial para serem visíveis.
     }
+
+public JButton[] getButton() {
+    return button;
+}
+
+public void setButton(JButton[] button) {
+    this.button = button;
+}
 }
