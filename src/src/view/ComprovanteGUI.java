@@ -1,21 +1,20 @@
 package view;
 
-import java.sql.Date;
+import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AccessScreen.Custom.ColorFontPaletas;
-import AccessScreen.FrameComponents.LabelForm;
 
 public class ComprovanteGUI extends JPanel{
 
     JLabel[] labelSet = new JLabel[10];
 
-    int lblX = 0, lblWidth = 300, lblHeight = 150;
-    int lblX2 = 250;
-	int spaceBetween = 30;
-
+    int lblX = 0, lblWidth = 300, lblHeight = 120;
+    int lblX2 = 300;
+	int spaceBetween = 22;
 
 
     public ComprovanteGUI(String numeroConta, String numeroContaDestino, String tipoTransacao,
@@ -50,7 +49,6 @@ public class ComprovanteGUI extends JPanel{
 
 
         setVisible(true);
-
 
     }
     

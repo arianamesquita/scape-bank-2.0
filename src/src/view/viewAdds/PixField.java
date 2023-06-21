@@ -1,6 +1,9 @@
-package testesDaAnna;
+package view.viewAdds;
 
 import javax.swing.*;
+
+import AccessScreen.Custom.ColorFontPaletas;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -12,12 +15,16 @@ public class PixField extends JPanel {
     JButton cancelar, ok;
 
     public PixField() {
-        setLayout(new GridLayout(3, 3));
+        setLayout(new GridLayout(3, 2, 10, 5));
 
         this.chavePix = new JLabel("Chave pix:");
+        chavePix.setFont(ColorFontPaletas.font6());
         this.valor = new JLabel("Valor:");
+        valor.setFont(ColorFontPaletas.font6());
         this.nomeField = new JTextField("Digite a chave Pix do destinatário", 40);
+        nomeField.setFont(ColorFontPaletas.font6());
         this.valorField = new JTextField("Digite o valor da transferencia");
+        valorField.setFont(ColorFontPaletas.font6());
         nomeField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -51,7 +58,6 @@ public class PixField extends JPanel {
         });
         this.cancelar = new JButton("Cancelar");
         this.ok = new JButton("Ok");
-        chavePix.setForeground(Color.pink);
 
         add(chavePix);
         add(nomeField);

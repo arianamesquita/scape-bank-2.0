@@ -7,16 +7,14 @@ import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
-import testesDaAnna.Comprovante;
-import testesDaAnna.EmprestimoField;
-import testesDaAnna.PagamentosField;
-import testesDaAnna.PixField;
 import view.AreaPagamentoGUI;
-import view.ComprovanteGUI;
+import view.AreaPixGui;
+import view.viewAdds.EmprestimoField;
+import view.viewAdds.PagamentosField;
+import view.viewAdds.PixField;
 
 import javax.swing.*;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.*;
 import java.awt.event.FocusListener;
@@ -69,12 +67,10 @@ public class TesteMain {
                   frame.add(cadastro);
 
             PixField pixField = new PixField();
-            pixField.setVisible(true);
-            pixField.repaint();
-            pixField.setBounds(500,300,500,180);
+            AreaPixGui areaPixGui = new AreaPixGui(pixField);
 
             frame.remove(cards);
-            frame.add(pixField);
+            frame.add(areaPixGui);
             frame.setSize(frame.getSize().width,frame.getSize().height+1);
             frame.setSize(frame.getSize().width,frame.getSize().height-1);
             frame.repaint();});
@@ -83,8 +79,6 @@ public class TesteMain {
 
             PagamentosField pagamentosField = new PagamentosField();
             AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
-
-
 
             frame.remove(cards);
             frame.add(areaPagamentoGUI);

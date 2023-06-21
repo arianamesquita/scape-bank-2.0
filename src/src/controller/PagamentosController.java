@@ -8,8 +8,8 @@ import javax.swing.JPasswordField;
 
 import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
-import testesDaAnna.PagamentosField;
 import view.AreaPagamentoGUI;
+import view.viewAdds.PagamentosField;
 
 public class PagamentosController {
 

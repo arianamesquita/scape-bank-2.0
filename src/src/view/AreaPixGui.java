@@ -5,22 +5,21 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import MainScreen.Components.Custom.ColorPaleta;
-import view.viewAdds.PagamentosField;
+import view.viewAdds.PixField;
 
-public class AreaPagamentoGUI extends JPanel{
+public class AreaPixGui extends JPanel{
 
-    PagamentosField pagamentosField;
+    PixField pixField;
     PaintMenu paintMenu;
     ComprovanteGUI comprovante;
 
+    public AreaPixGui(PixField pixField) {
 
-    public AreaPagamentoGUI(PagamentosField pagamentosField) {
-
-        this.pagamentosField = pagamentosField;
+        this.pixField = pixField;
 
         setBounds(400, 160, 700, 570);
         setLayout(null);
-        pagamentosField.setBounds(60, 20, 600, 120);
+        pixField.setBounds(60, 20, 600, 120);
         
 
         comprovante = new ComprovanteGUI("36.480-00", "066.998.447-99", 
@@ -37,7 +36,7 @@ public class AreaPagamentoGUI extends JPanel{
         
 
         paintMenu.add(comprovante);
-        paintMenu.add(pagamentosField);
+        paintMenu.add(pixField);
 
         add(paintMenu);
 

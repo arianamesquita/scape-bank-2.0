@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import testesDaAnna.PagamentosField;
+import view.viewAdds.PagamentosField;
 
 public class PaintMenu extends JPanel{
     private int rounded = 10;
