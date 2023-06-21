@@ -170,7 +170,7 @@ public class MenuOpcoes extends JPanel
      * @version 1.0
      */
     private static class ButtonsMenu {
-        private  final int x,y,width,height;
+        private  final int y,width,height;
         private final Jbutton[]buttons;
         private String[] text = {"image","Menu Principal ->","Pix->", "Pagamentos->","Empréstimos->", "Cartões->"};
 
@@ -183,7 +183,6 @@ public class MenuOpcoes extends JPanel
          * @param buttons — botões.
          */
         public ButtonsMenu(int x, int y, int width, int height, Jbutton[] buttons) {
-            this.x = x;
             this.y = y;
             this.width = width;
             this.height = height;
@@ -191,14 +190,6 @@ public class MenuOpcoes extends JPanel
 
             setTextButtons(getButtons(),getText());
             setButtonsBound(getButtons());
-        }
-
-        /**
-         * Método da Subclass ButtonsMenu que retorna a posição x.
-         * @return — retornar o valor do atributo x.
-         */
-        public int getX() {
-            return x;
         }
 
         /**
@@ -231,14 +222,6 @@ public class MenuOpcoes extends JPanel
          */
         public String[] getText() {
             return text;
-        }
-
-        /**
-         * Método da Subclass ButtonsMenu que dar valor ao atributo text.
-         * @param text  — textos há serem inseridos nos botões.
-         */
-        public void setText(String[] text) {
-            this.text = text;
         }
 
         /**
@@ -309,10 +292,6 @@ public class MenuOpcoes extends JPanel
 
         public JLabel[] getLabels() {
             return labels;
-        }
-
-        public void setLabels(JLabel[] labels) {
-            this.labels = labels;
         }
 
         void setText(String[] text, JLabel[]labels){

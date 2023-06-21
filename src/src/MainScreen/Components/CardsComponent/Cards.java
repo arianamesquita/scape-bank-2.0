@@ -279,20 +279,6 @@ public class Cards extends JPanel
         }
 
         /**
-         * Método da Subclass ButtonsCards usado para inicializar os Botões.
-         * @param buttons — botões a serem instanciados.
-         * @param text — textos a serem colocados nos botões.
-         */
-        void InicializarButtons(JButton[] buttons,String[] text){
-            int count = 0;
-            for (String s:text)
-            {
-                buttons[count]=new JButton(s);
-                count++;
-            }
-        }
-
-        /**
          * Método da Subclass ButtonsCards que retorna os botões;
          * @return — retorna os botões do mesmo
          */
@@ -333,14 +319,6 @@ public class Cards extends JPanel
                 count++;
             }
         }
-
-        /**
-         * Método da Subclass ButtonsCards que define valor ao atributos da mesma.
-         * @param buttons — Botões a serem adicionados.
-         */
-        public void setButtons(JButton[] buttons) {
-            this.buttons = buttons;
-        }
     }
 
     private static class LabelsCards{
@@ -354,14 +332,9 @@ public class Cards extends JPanel
                 {"Pix","Pix"}};
         private String[] text;
         private int[][]ints;
-        private int x,y,widht,heidgth;
-
-
         public LabelsCards(String[]text, int[][] ints, int x, int y) {
             this.text = text;
             this.ints = ints;
-            this.x = x;
-            this.y = y;
             this.labels = new JLabel[6][2];
 
             InstanciaLabel(getLabels());
@@ -456,79 +429,16 @@ public class Cards extends JPanel
 
         }
 
-        public String[][] getTexto() {
-            return texto;
-        }
-
-        public void setTexto(String[][] texto) {
-            this.texto = texto;
-        }
-
-        void setBoundsLabels(JLabel[][]labels, int[][]ints){
-            int count = 0;
-            for (int i = 0; i < labels.length; i++) {
-                for (int j = 0; j < labels.length; j++) {
-
-                }
-            }
-
-        }
-
-
         public String[] getText() {
             return text;
-        }
-
-        public void setText(String[] text) {
-            this.text = text;
         }
 
         public JLabel[][] getLabels() {
             return labels;
         }
 
-        public void setLabels(JLabel[][] labels) {
-            this.labels = labels;
-        }
-
         public int[][] getInts() {
             return ints;
-        }
-
-        public void setInts(int[][] ints) {
-            this.ints = ints;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
-
-        public int getWidht() {
-            return widht;
-        }
-
-        public void setWidht(int widht) {
-            this.widht = widht;
-        }
-
-        public int getHeidgth() {
-            return heidgth;
-        }
-
-        public void setHeidgth(int heidgth) {
-            this.heidgth = heidgth;
         }
     }
 }

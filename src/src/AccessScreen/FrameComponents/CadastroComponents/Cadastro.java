@@ -593,7 +593,6 @@ public class Cadastro extends JPanel {
         public InfoPessoal() {
             this.jtexts = new JtextField[getText().length];
             this.labels = new JLabel[getText().length];
-            Endereco endereco = new Endereco();
             InicializarJtext(getJtexts());
             setTextsJtexts(getJtexts(), getText());
             addStylizationJtextFields(getJtexts());

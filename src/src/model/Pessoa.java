@@ -2,13 +2,13 @@ package model;
 
 import java.io.Serializable;
 
-public class Pessoa implements Serializable {
+abstract class Pessoa implements Serializable {
 
-    public int id;
-    public String nome;
-    public String endereco;
-    public String telefone;
-    public double rendaAtual;
+    protected int id;
+    protected String nome;
+    protected String endereco;
+    protected String telefone;
+    protected double rendaAtual;
 
 
     public Pessoa () { }
@@ -56,5 +56,5 @@ public class Pessoa implements Serializable {
         return "Pessoa [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
                 + ", rendaAtual=" + rendaAtual + "]";
     }
-    
+
 }

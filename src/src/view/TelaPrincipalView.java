@@ -1,6 +1,14 @@
 package view;
 
-import AccessScreen.FrameComponents.CadastroComponents.Cadastro;
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import MainScreen.Components.CardsComponent.Cards;
 import MainScreen.Components.CustomJButton.Jbutton;
 import MainScreen.Components.CustomJTextField.JtextField;
@@ -12,13 +20,6 @@ import controller.PagamentosController;
 import view.viewAdds.EmprestimoField;
 import view.viewAdds.PagamentosField;
 import view.viewAdds.PixField;
-
-import javax.swing.*;
-
-
-import java.awt.*;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
 
 public class TelaPrincipalView extends Jframe {
 
@@ -181,4 +182,78 @@ public class TelaPrincipalView extends Jframe {
     pagamentosController.getAreaPagamentoGUI().setVisible(false);
 
     }
+
+    public PixField getPixField() {
+        return pixField;
+    }
+
+    public void setPixField(PixField pixField) {
+        this.pixField = pixField;
+    }
+
+    public AreaPixGui getAreaPixGui() {
+        return areaPixGui;
+    }
+
+    public void setAreaPixGui(AreaPixGui areaPixGui) {
+        this.areaPixGui = areaPixGui;
+    }
+
+    public PagamentosField getPagamentosField() {
+        return pagamentosField;
+    }
+
+    public void setPagamentosField(PagamentosField pagamentosField) {
+        this.pagamentosField = pagamentosField;
+    }
+
+    public AreaPagamentoGUI getAreaPagamentoGUI() {
+        return areaPagamentoGUI;
+    }
+
+    public void setAreaPagamentoGUI(AreaPagamentoGUI areaPagamentoGUI) {
+        this.areaPagamentoGUI = areaPagamentoGUI;
+    }
+
+    public EmprestimoField getEmpField() {
+        return empField;
+    }
+
+    public void setEmpField(EmprestimoField empField) {
+        this.empField = empField;
+    }
+
+    public AreaEmprestimoGUI getAreaEmprestimoGUI() {
+        return areaEmprestimoGUI;
+    }
+
+    public void setAreaEmprestimoGUI(AreaEmprestimoGUI areaEmprestimoGUI) {
+        this.areaEmprestimoGUI = areaEmprestimoGUI;
+    }
+
+    public Cards getCards() {
+        return cards;
+    }
+
+    public void setCards(Cards cards) {
+        this.cards = cards;
+    }
+
+    public CartaoCreditoController getCartaoCreditoController() {
+        return cartaoCreditoController;
+    }
+
+    public void setCartaoCreditoController(CartaoCreditoController cartaoCreditoController) {
+        this.cartaoCreditoController = cartaoCreditoController;
+    }
+
+    public PagamentosController getPagamentosController() {
+        return pagamentosController;
+    }
+
+    public void setPagamentosController(PagamentosController pagamentosController) {
+        this.pagamentosController = pagamentosController;
+    }
+    
+
 }

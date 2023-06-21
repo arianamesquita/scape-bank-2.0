@@ -1,10 +1,8 @@
 package model;
 
-import java.io.Serializable;
+public class PessoaFisica extends Pessoa {
 
-public class PessoaFisica extends Pessoa implements Serializable {
-
-    public String cpf;
+    private String cpf;
 
 
     public PessoaFisica () {  } 
@@ -22,5 +20,6 @@ public class PessoaFisica extends Pessoa implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    
     
 }
