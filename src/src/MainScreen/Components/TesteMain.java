@@ -83,8 +83,8 @@ public class TesteMain {
             PagamentosField pagamentosField = new PagamentosField();
             AreaPagamentoGUI areaPagamentoGUI = new AreaPagamentoGUI(pagamentosField);
                     
-            //PagamentosController p = new PagamentosController(new Conta(), new AreaPagamentoGUI(new PagamentosField()));
-            //p.initController();
+            PagamentosController p = new PagamentosController(new Conta(), new AreaPagamentoGUI(new PagamentosField()));
+            p.initController();
 
             frame.remove(cards);
             frame.add(areaPagamentoGUI);

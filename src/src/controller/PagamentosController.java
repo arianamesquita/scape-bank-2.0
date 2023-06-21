@@ -56,7 +56,7 @@ public class PagamentosController {
 
 
 
-    public AreaPagamentoGUI getAreaPagamentoGUI() {
+    public AreaPagamentoGUI getAreaPagamentoGUI(PagamentosField pagamentosField) {
         return areaPagamentoGUI;
     }
     public void setAreaPagamentoGUI(AreaPagamentoGUI areaPagamentoGUI) {
