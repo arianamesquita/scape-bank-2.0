@@ -20,12 +20,7 @@ import AccessScreen.Custom.ImageCustom.Images;
  */
 public class FrameComponents extends JPanel {
     private JButton[] button;
-    
-/**
-* Inicializando o Jframe.
-*/
-    
-
+   
 /**
  * Criando a classe FrameComponents.
  */
