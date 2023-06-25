@@ -3,7 +3,7 @@ package MainScreen.Components.MenuComponent;
 import javax.swing.*;
 
 import MainScreen.Components.Custom.ColorPaleta;
-import MainScreen.Components.CustomJButton.Jbutton;
+import view.CustomComponents.Jbutton;
 
 import java.awt.*;
 import java.util.Objects;
@@ -241,7 +241,7 @@ public class MenuOpcoes extends JPanel
             Icon logo = new ImageIcon(Objects.requireNonNull(getClass().getResource("avatar.png")));
             button.setIcon(logo);
             button.setBounds(10,20,50,50);
-            button.setColors(ColorPaleta.White(),ColorPaleta.White(),ColorPaleta.White());
+            button.setColors(ColorPaleta.White());
             button.setBorderPainted(false);
             button.setText("");
             button.setVisible(true);
@@ -262,7 +262,7 @@ public class MenuOpcoes extends JPanel
                 }
                 button.setBounds(10, getY()+20+ count, getWidth()-20, (int) (0.0909090909*getHeight()));
                 count = (int) (0.10*getHeight()+ count);
-                button.setColors(ColorPaleta.buttonsColor(),Color.lightGray,Color.BLACK);
+                button.setColors(ColorPaleta.buttonsColor());
                 button.setForeground(ColorPaleta.White());
                 Font consolasButton = new Font("Century Gothic", 50, 18);
                 button.setFont(consolasButton);

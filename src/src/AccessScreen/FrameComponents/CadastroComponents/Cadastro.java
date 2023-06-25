@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import MainScreen.Components.Custom.ColorPaleta;
-import MainScreen.Components.CustomJButton.Jbutton;
-import MainScreen.Components.CustomJTextField.JtextField;
+import view.CustomComponents.Jbutton;
+import view.CustomComponents.JtextField;
 
 public class Cadastro extends JPanel {
     private  int x, y, width, height;
@@ -334,20 +334,20 @@ public class Cadastro extends JPanel {
     private void setColorButton(Jbutton[]buttons, int n){
         for (int i = 0; i < buttons.length; i++) {
             if (i==n){
-                buttons[i].setColors(Color.DARK_GRAY,Color.lightGray,ColorPaleta.blackColor());
+                buttons[i].setColors(Color.DARK_GRAY);
                 continue;
             }
-            buttons[i].setColors(ColorPaleta.rgbgray2Color(), Color.lightGray, ColorPaleta.rgbgray2Color());
+            buttons[i].setColors(ColorPaleta.rgbgray2Color());
 
         }
     }
     private void setColorButton2(Jbutton[]buttons, int n){
         for (int i = 0; i < buttons.length; i++) {
             if (i==n){
-                buttons[i].setColors(Color.DARK_GRAY,Color.DARK_GRAY,Color.DARK_GRAY);
+                buttons[i].setColors(Color.DARK_GRAY);
                 continue;
             }
-            buttons[i].setColors(ColorPaleta.rgbgray2Color(), ColorPaleta.rgbgray2Color(), ColorPaleta.rgbgray2Color());
+            buttons[i].setColors(ColorPaleta.rgbgray2Color());
 
         }
     }
@@ -378,14 +378,14 @@ public class Cadastro extends JPanel {
         }
         for (Jbutton button:buttons) {
             button.setText(text[count]);
-            button.setColors(ColorPaleta.rgbgray2Color(), Color.lightGray, ColorPaleta.blackColor());
+            button.setColors(ColorPaleta.rgbgray2Color());
             button.setForeground(ColorPaleta.White());
             count++;
         }
         count=0;
        for (Jbutton button:buttons2) {
             button.setText(text2[count]);
-            button.setColors(Color.DARK_GRAY, Color.lightGray, ColorPaleta.blackColor());
+            button.setColors(Color.DARK_GRAY);
             button.setForeground(ColorPaleta.White());
             count++;
         }

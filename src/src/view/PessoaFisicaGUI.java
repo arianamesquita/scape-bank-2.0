@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,132 +12,190 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import MainScreen.Components.CustomJTextField.JtextField;
+import MainScreen.Components.Custom.ColorPaleta;
 import controller.Service;
+import view.CustomComponents.JFormattedTextFieldCustom;
+import view.CustomComponents.Jbutton;
+import view.CustomComponents.JtextField;
+import view.CustomComponents.PaintMenu;
 
 public class PessoaFisicaGUI extends JPanel {
     private JLabel nomeLabel, cpfLabel, telefoneLabel, rendaAtual, enderecoLabel;
-    private JTextField nomeTextField, rendaAtualTextField;
-    private JFormattedTextField cpfFormattedTextField, telefoneFormattedTextField;
-    private JButton salvar, cancelar;
+    private JtextField nomeTextField, rendaAtualTextField;
+    private JFormattedTextFieldCustom cpfFormattedTextField, telefoneFormattedTextField;
+    private Jbutton salvar, cancelar;
     private EnderecoGUI enderecoGUI;
+    private view.CustomComponents.PaintMenu paintMenu;
 
     public PessoaFisicaGUI(EnderecoGUI enderecoGUI) {
+        Font fonte = new Font("Arial", Font.PLAIN, 15);
+        setLayout(new BorderLayout());
+        setBackground(ColorPaleta.rgbgray2Color());
+
+        paintMenu = new PaintMenu();
+        paintMenu.setBackground(getBackground());
+        paintMenu.setLayout(new GridBagLayout());
+        paintMenu.setOpaque(false);
+        paintMenu.setRounded(20);
         nomeLabel = new JLabel("Nome:");
-        nomeTextField = new JTextField();
+        nomeLabel.setFont(fonte);
+        nomeTextField = new JtextField();
         nomeTextField.setHorizontalAlignment(JtextField.CENTER);
 
         cpfLabel = new JLabel("CPF:");
+        cpfLabel.setFont(fonte);
         cpfFormattedTextField = Service.createFormattedTextField("###.###.###-##", '_');
         cpfFormattedTextField.setHorizontalAlignment(JFormattedTextField.CENTER);
 
         telefoneLabel = new JLabel("Telefone:");
+        telefoneLabel.setFont(fonte);
         telefoneFormattedTextField = Service.createFormattedTextField("(##) #####-####", '_');
         telefoneFormattedTextField.setHorizontalAlignment(JFormattedTextField.CENTER);
 
         rendaAtual = new JLabel("Renda Atual:");
-        rendaAtualTextField = new JTextField();
+        rendaAtual.setFont(fonte);
+        rendaAtualTextField = new JtextField();
         rendaAtualTextField.setHorizontalAlignment(JtextField.CENTER);
 
         enderecoLabel = new JLabel("Endereço:");
 
-        salvar = new JButton("salvar");
-        cancelar = new JButton("Cancelar");
+        salvar = new Jbutton("salvar");
+        cancelar = new Jbutton("Cancelar");
 
         this.enderecoGUI = enderecoGUI;
 
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 2, 5, 2);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+   
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-        gbc.gridwidth = 1;
-        add(nomeLabel, gbc);
+        JPanel panelnorth = new JPanel(new GridBagLayout());
+        panelnorth.setOpaque(false);
+        GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.insets = new Insets(5, 10, 5, 5);
+        gbc1.fill = GridBagConstraints.BOTH;
+        gbc1.gridx = 0;
+        gbc1.gridy = 0;
+        gbc1.weightx = 0;
+        gbc1.gridwidth = 1;
+        panelnorth.add(nomeLabel, gbc1);
 
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.gridwidth = 2;
-        add(nomeTextField, gbc);
+        gbc1.gridx = 1;
+        gbc1.gridy = 0;
+        gbc1.weightx = 1.0;
+        gbc1.gridwidth = 2;
+        panelnorth.add(nomeTextField, gbc1);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 0;
-        gbc.gridwidth = 1;
-        add(cpfLabel, gbc);
+        gbc1.gridx = 0;
+        gbc1.gridy = 1;
+        gbc1.weightx = 0;
+        gbc1.gridwidth = 1;
+        panelnorth.add(cpfLabel, gbc1);
 
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.gridwidth = 2;
-        add(cpfFormattedTextField, gbc);
+        gbc1.gridx = 1;
+        gbc1.gridy = 1;
+        gbc1.weightx = 1.0;
+        gbc1.gridwidth = 2;
+        panelnorth.add(cpfFormattedTextField, gbc1);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weightx = 0;
-        gbc.gridwidth = 1;
-        add(telefoneLabel, gbc);
+        gbc1.gridx = 0;
+        gbc1.gridy = 2;
+        gbc1.weightx = 0;
+        gbc1.gridwidth = 1;
+        panelnorth.add(telefoneLabel, gbc1);
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        gbc.gridwidth = 2;
-        add(telefoneFormattedTextField, gbc);
+        gbc1.gridx = 1;
+        gbc1.gridy = 2;
+        gbc1.weightx = 1.0;
+        gbc1.gridwidth = 2;
+        panelnorth.add(telefoneFormattedTextField, gbc1);
 
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.weightx = 0;
-        gbc.gridwidth = 1;
-        add(rendaAtual, gbc);
+        gbc1.gridx = 0;
+        gbc1.gridy = 3;
+        gbc1.weightx = 0;
+        gbc1.gridwidth = 1;
+        panelnorth.add(rendaAtual, gbc1);
 
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.weightx = 1.0;
-        gbc.gridwidth = 2;
-        add(rendaAtualTextField, gbc);
+        gbc1.gridx = 1;
+        gbc1.gridy = 3;
+        gbc1.weightx = 1.0;
+        gbc1.gridwidth = 2;
+        panelnorth.add(rendaAtualTextField, gbc1);
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        gbc.weightx = 0;
-        add(enderecoLabel, gbc);
+        JPanel panelcenter = new JPanel(new GridBagLayout());
+        panelcenter.setOpaque(false);
+         
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.fill = GridBagConstraints.BOTH;
+           gbc2.insets = new Insets(5, 10, 5, 5);
+   
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        gbc2.weightx = 0;
+        gbc2.gridwidth = 1;
+        panelcenter.add(enderecoLabel, gbc2);
 
     
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        add(enderecoGUI, gbc);
+        gbc2.gridx = 1;
+        gbc2.gridy = 0;
+        gbc2.weightx = 1.0;
+        gbc2.gridwidth = 2;
 
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        add(new JLabel(), gbc); // Espaço vazio para preencher a última célula
-        JPanel panel = new JPanel(getLayout());
+        panelcenter.add(enderecoGUI, gbc2);
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.weightx =1.0;
-        panel.add(cancelar, gbc);
+   
+        JPanel panelsouth = new JPanel(new GridBagLayout());
+        panelsouth.setOpaque(false);
+        GridBagConstraints gbc3 = new GridBagConstraints();
+        gbc3.fill = GridBagConstraints.BOTH;
+        gbc3.insets = new Insets(5, 10, 5, 5);
+      
 
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc3.gridx = 0;
+        gbc3.gridy = 0;
+        gbc3.gridwidth = 1;
+        gbc3.weightx =1.0;
+        panelsouth.add(cancelar, gbc3);
+
+        gbc3.gridx = 1;
+        gbc3.gridy = 0;
+        gbc3.weightx = 1.0;
+        gbc3.weightx =1.0;
+        panelsouth.add(new JLabel(), gbc3);
+
+        gbc3.gridx = 2;
+        gbc3.gridy = 0;
+        panelsouth.add(salvar, gbc3);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
-        gbc.weightx =1.0;
-        panel.add(new JLabel(), gbc);
-
-        gbc.gridx = 2;
+        gbc.weighty = 1.0;
+        gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(salvar, gbc);
+
+        gbc.anchor = GridBagConstraints.NORTH;
+        paintMenu.add(panelnorth, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 1;
         gbc.gridwidth = 3;
-        gbc.weightx =0;
-        add(panel, gbc);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        paintMenu.add(panelcenter, gbc);
+
+        gbc.gridwidth = 1;
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        paintMenu.add(panelsouth, gbc);
+         
+         
+
+
+    
+        add(paintMenu, BorderLayout.CENTER);
+        setOpaque(false);
+
+        setVisible(true);
 
     }
 
@@ -183,39 +243,54 @@ public class PessoaFisicaGUI extends JPanel {
         return nomeTextField;
     }
 
-    public void setNomeTextField(JTextField nomeTextField) {
-        this.nomeTextField = nomeTextField;
-    }
+
 
     public JTextField getRendaAtualTextField() {
         return rendaAtualTextField;
     }
 
-    public void setRendaAtualTextField(JTextField rendaAtualTextField) {
+
+
+    public void setNomeTextField(JtextField nomeTextField) {
+        this.nomeTextField = nomeTextField;
+    }
+
+    public void setRendaAtualTextField(JtextField rendaAtualTextField) {
         this.rendaAtualTextField = rendaAtualTextField;
+    }
+
+    public view.CustomComponents.PaintMenu getPaintMenu() {
+        return paintMenu;
+    }
+
+    public void setPaintMenu(view.CustomComponents.PaintMenu paintMenu) {
+        this.paintMenu = paintMenu;
     }
 
     public JFormattedTextField getCpfFormattedTextField() {
         return cpfFormattedTextField;
     }
 
-    public void setCpfFormattedTextField(JFormattedTextField cpfFormattedTextField) {
+
+
+    public void setCpfFormattedTextField(JFormattedTextFieldCustom cpfFormattedTextField) {
         this.cpfFormattedTextField = cpfFormattedTextField;
+    }
+
+    public void setTelefoneFormattedTextField(JFormattedTextFieldCustom telefoneFormattedTextField) {
+        this.telefoneFormattedTextField = telefoneFormattedTextField;
     }
 
     public JFormattedTextField getTelefoneFormattedTextField() {
         return telefoneFormattedTextField;
     }
 
-    public void setTelefoneFormattedTextField(JFormattedTextField telefoneFormattedTextField) {
-        this.telefoneFormattedTextField = telefoneFormattedTextField;
-    }
 
     public JButton getSalvar() {
         return salvar;
     }
 
-    public void setSalvar(JButton salvar) {
+    public void setSalvar(Jbutton salvar) {
         this.salvar = salvar;
     }
 
@@ -223,7 +298,7 @@ public class PessoaFisicaGUI extends JPanel {
         return cancelar;
     }
 
-    public void setCancelar(JButton cancelar) {
+    public void setCancelar(Jbutton cancelar) {
         this.cancelar = cancelar;
     }
 

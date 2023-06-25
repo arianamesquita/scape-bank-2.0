@@ -15,13 +15,12 @@ import model.PessoaFisica;
 public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
     @Override
-    public void criar(PessoaFisica objeto) {
+    public void criar(PessoaFisica objeto) throws SQLException {
+
         Conexao conexao = null;
         String query = "INSERT INTO cliente (id, nome, endereco, telefone, cnpj, funcionarioResponsavel, rendaAtual, cpf) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try {
-
+                
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             conexao.setPstmt(conexao.getConnection().prepareStatement(query));
@@ -34,14 +33,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().setDouble(7, objeto.getRendaAtual());
             conexao.getPstmt().setString(8, objeto.getCpf());
             conexao.getPstmt().executeUpdate();
-            System.out.println("Dados inseridos com sucesso na tabela pessoa fisica.");
-        } catch (SQLException e) {
-
-            System.out.println("Erro ao inserir dados na tabela pessoa: " + e.getMessage());
-
-        } finally {
-            Objects.requireNonNull(conexao).Desconecta();
-        }
+            conexao.Desconecta(); 
     }
 
     @Override

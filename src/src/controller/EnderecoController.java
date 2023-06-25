@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Color;
+
 import controller.Service.createFocusListenerFormatField;
 import controller.Service.createFocusListenerTextField;
 import view.EnderecoGUI;
@@ -30,7 +32,10 @@ public class EnderecoController {
                 .addFocusListener(new createFocusListenerFormatField(getEnderecoGUI().getCepTextField()));
 
     }
-
+    public void updateInterface(){
+        addFocusListeners();
+        getEnderecoGUI().repaint();
+    }
     public String getEndereco() {
         StringBuilder current = new StringBuilder();
         String concat = "- -";
@@ -61,6 +66,26 @@ public class EnderecoController {
         getEnderecoGUI().repaint();
         this.endereco = endereco;
     }
+
+    public void setErroAll(){
+        getEnderecoGUI().getRuaTextField().setBackground(Color.red);
+        getEnderecoGUI().getNumeroTextField().setBackground(Color.red);
+        getEnderecoGUI().getBairroTextField().setBackground(Color.red);
+        getEnderecoGUI().getComplementoTextField().setBackground(Color.red);
+        getEnderecoGUI().getEstadoTextField().setBackground(Color.red);
+        getEnderecoGUI().getCidadeTextField().setBackground(Color.red);
+        getEnderecoGUI().getCepTextField().setBackground(Color.red);
+    }
+        public void setBackgroundAll(){
+        getEnderecoGUI().getRuaTextField().setBackground(Color.white);
+        getEnderecoGUI().getNumeroTextField().setBackground(Color.white);
+        getEnderecoGUI().getBairroTextField().setBackground(Color.white);
+        getEnderecoGUI().getComplementoTextField().setBackground(Color.white);
+        getEnderecoGUI().getEstadoTextField().setBackground(Color.white);
+        getEnderecoGUI().getCidadeTextField().setBackground(Color.white);
+        getEnderecoGUI().getCepTextField().setBackground(Color.white);
+    }
+
 
 
     public EnderecoGUI getEnderecoGUI() {
