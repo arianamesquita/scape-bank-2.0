@@ -1,6 +1,5 @@
 package DataBase.BancoAgenciaDAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class BancoAgenciaDAO{
 
     Conexao conexao;
     PreparedStatement pstm;
-    ResultSet rset = null;
+    ResultSet rset;
 
     public void criarAgencia(Agencia agencia) {
 
@@ -212,9 +211,7 @@ public class BancoAgenciaDAO{
     public Agencia searchByCode(String numAgencia){
 
         String sql = "Select * from bancoAgencia where numeroAgencia = ?";
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet rset = null;
+
         Banco banco = new Banco();
         Agencia agencia = new Agencia();
 
@@ -236,18 +233,8 @@ public class BancoAgenciaDAO{
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        } 
+        conexao.Desconecta();
         return agencia;
 
     }
@@ -270,7 +257,6 @@ public class BancoAgenciaDAO{
         String numeroAg = null;
         for (Agencia agencia : agencias) {
             do{
-                System.out.println("entrou no laço");
                 Random ran = new Random();
                 int number = ran.nextInt(0,999);
                 numeroAg = ("000" + number);
