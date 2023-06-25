@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import MainScreen.Components.CustomJTextField.JtextField;
 import controller.Service;
+import view.CustomComponents.JtextField;
 
 public class FuncionarioGUI extends JPanel{
     private JLabel nomeLabel, cpfLabel, telefoneLabel, salarioLabel, enderecoLabel, cargoLabel, codBancLabel;

@@ -11,6 +11,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import view.CustomComponents.JFormattedTextFieldCustom;
+
 public class Service {
     
     public static class createFocusListenerTextField implements FocusListener {
@@ -69,7 +71,7 @@ public class Service {
         @Override
         public void focusGained(FocusEvent e) {
             if (getfTextField().getText().equals(getHint())) {
-                getfTextField().setText(getHint());
+                getfTextField().setText("");
                 getfTextField().setBackground(Color.white);
             }
 
@@ -78,20 +80,20 @@ public class Service {
         @Override
         public void focusLost(FocusEvent e) {
             if (getfTextField().getText().equals(getHint())||getfTextField().getText().isEmpty()) {
-                getfTextField().setText(getHint());
+                getfTextField().setText("getHint()");
                 getfTextField().setBackground(Color.red);
             }
         }
 
     }
-        public static JFormattedTextField createFormattedTextField(String mask, char placeholder) {
+        public static JFormattedTextFieldCustom createFormattedTextField(String mask, char placeholder) {
         try {
             MaskFormatter formatter = new MaskFormatter(mask);
             formatter.setPlaceholderCharacter(placeholder);
-            return new JFormattedTextField(formatter);
+            return new JFormattedTextFieldCustom(formatter);
         } catch (Exception e) {
             e.printStackTrace();
-            return new JFormattedTextField();
+            return new JFormattedTextFieldCustom();
         }
     }
     public  static ImageIcon getImage(String imageURL){

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import MainScreen.Components.Custom.ColorPaleta;
 import MainScreen.Components.Custom.ImageCustom.ImageIcons;
-import MainScreen.Components.CustomJTextField.JtextField;
+import view.CustomComponents.JtextField;
 
 public class MenuSuperior extends JPanel {
 

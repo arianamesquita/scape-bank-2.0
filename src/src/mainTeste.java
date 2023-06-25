@@ -1,9 +1,15 @@
 
 
 import DataBase.BancoAgenciaDAO.BancoAgenciaDAO;
+import DataBase.ClienteDAO.FuncionarioDAO;
+import DataBase.ClienteDAO.PessoaFisicaDAO;
 import DataBase.ContaDAO.ContaDAO;
 import model.Agencia;
+import model.Banco;
 import model.Conta;
+import model.Funcionario;
+import model.Pagamentos;
+import model.PessoaFisica;
 import view.LoginGUI;
 
 
@@ -14,9 +20,9 @@ public class mainTeste {
 
 
 		ContaDAO contaDAO = new ContaDAO();
-		/*Conta conta = new Conta();
+		Conta conta = new Conta();
 		conta.setLogin("arianameskita");
-		conta.setSenha("12345678");
+		conta.setSenha("123456");
 		Pagamentos pagamentos = new Pagamentos();
 		pagamentos.setChavePix("00055599974");
 		conta.setPagamentos(pagamentos);
@@ -29,10 +35,10 @@ public class mainTeste {
 		PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
 		PessoaFisica pessoaFisica = pessoaFisicaDAO.ler(1);
 		conta.setCliente(pessoaFisica);
-		conta.setSenhaConta("123456");*/
 
 
-		//System.out.println(ContaDAO.geraCVC());
+		contaDAO.criarConta(conta);
+		//System.out.println(ContaDAO.geraNumCartao());
 		
 		
 	}

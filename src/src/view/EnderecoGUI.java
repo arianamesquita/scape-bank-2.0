@@ -1,4 +1,5 @@
 package view;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -9,47 +10,55 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.Service;
+import view.CustomComponents.JtextField;
 
 public class EnderecoGUI extends JPanel {
     private JLabel ruaLabel, numeroLabel, bairroLabel, estadoLabel, cidadeLabel, complementoLabel, cepLabel;
-    private JTextField ruaTextField, bairroTextField, estadoTextField, cidadeTextField, complementoTextField;
+    private JtextField ruaTextField, bairroTextField, estadoTextField, cidadeTextField, complementoTextField;
     private JFormattedTextField numeroTextField, cepTextField;
 
     public EnderecoGUI() {
         setLayout(new GridBagLayout());
-
+         Font fonte = new Font("Arial", Font.PLAIN, 15);
         ruaLabel = new JLabel("Rua:");
-        ruaTextField = new JTextField();
+        ruaLabel.setFont(fonte);
+        ruaTextField = new JtextField();
         //ruaLabel.setHorizontalAlignment(JLabel.CENTER);
         ruaTextField.setHorizontalAlignment(JTextField.CENTER);
 
 
         numeroLabel = new JLabel("Número:");
+        numeroLabel.setFont(fonte);
         numeroTextField = Service.createFormattedTextField("###", '_');
         //numeroLabel.setHorizontalAlignment(JLabel.CENTER);
         numeroTextField.setHorizontalAlignment(JFormattedTextField.CENTER);
 
         bairroLabel = new JLabel("Bairro:");
-        bairroTextField = new JTextField();
+        bairroLabel.setFont(fonte);
+        bairroTextField = new JtextField();
         //bairroLabel.setHorizontalAlignment(JLabel.CENTER);
         bairroTextField.setHorizontalAlignment(JTextField.CENTER);
 
         complementoLabel = new JLabel("Complemento:");
-        complementoTextField = new JTextField();
+        complementoLabel.setFont(fonte);
+        complementoTextField = new JtextField();
        // complementoLabel.setHorizontalAlignment(JLabel.CENTER);
         complementoTextField.setHorizontalAlignment(JTextField.CENTER);
 
         estadoLabel = new JLabel("Estado:");
-        estadoTextField = new JTextField();
+        estadoLabel.setFont(fonte);
+        estadoTextField = new JtextField();
        // estadoLabel.setHorizontalAlignment(JLabel.CENTER);
         estadoTextField.setHorizontalAlignment(JTextField.CENTER);
 
         cidadeLabel = new JLabel("Cidade:");
-        cidadeTextField = new JTextField();
+        cidadeLabel.setFont(fonte);
+        cidadeTextField = new JtextField();
        // cidadeLabel.setHorizontalAlignment(JLabel.CENTER);
         cidadeTextField.setHorizontalAlignment(JTextField.CENTER);
 
         cepLabel = new JLabel("CEP:");
+        cepLabel.setFont(fonte);
         cepTextField = Service.createFormattedTextField("#####-###", '_');
         //cepLabel.setHorizontalAlignment(JLabel.CENTER);
         cepTextField.setHorizontalAlignment(JFormattedTextField.CENTER);
@@ -137,6 +146,7 @@ public class EnderecoGUI extends JPanel {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(cepTextField, gbc);
+        setOpaque(false);
 
     }
 
@@ -202,41 +212,61 @@ public class EnderecoGUI extends JPanel {
         return ruaTextField;
     }
 
-    public void setRuaTextField(JTextField ruaTextField) {
+ 
+
+    public void setRuaTextField(JtextField ruaTextField) {
         this.ruaTextField = ruaTextField;
     }
+
+
+
+    public void setBairroTextField(JtextField bairroTextField) {
+        this.bairroTextField = bairroTextField;
+    }
+
+
+
+    public void setEstadoTextField(JtextField estadoTextField) {
+        this.estadoTextField = estadoTextField;
+    }
+
+
+
+    public void setCidadeTextField(JtextField cidadeTextField) {
+        this.cidadeTextField = cidadeTextField;
+    }
+
+
+
+    public void setComplementoTextField(JtextField complementoTextField) {
+        this.complementoTextField = complementoTextField;
+    }
+
+
 
     public JTextField getBairroTextField() {
         return bairroTextField;
     }
 
-    public void setBairroTextField(JTextField bairroTextField) {
-        this.bairroTextField = bairroTextField;
-    }
+
 
     public JTextField getEstadoTextField() {
         return estadoTextField;
     }
 
-    public void setEstadoTextField(JTextField estadoTextField) {
-        this.estadoTextField = estadoTextField;
-    }
+ 
 
     public JTextField getCidadeTextField() {
         return cidadeTextField;
     }
 
-    public void setCidadeTextField(JTextField cidadeTextField) {
-        this.cidadeTextField = cidadeTextField;
-    }
+
 
     public JTextField getComplementoTextField() {
         return complementoTextField;
     }
 
-    public void setComplementoTextField(JTextField complementoTextField) {
-        this.complementoTextField = complementoTextField;
-    }
+   
 
     public JFormattedTextField getNumeroTextField() {
         return numeroTextField;

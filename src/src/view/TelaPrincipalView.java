@@ -1,22 +1,30 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import MainScreen.Components.CardsComponent.Cards;
-import MainScreen.Components.CustomJButton.Jbutton;
-import MainScreen.Components.CustomJTextField.JtextField;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 import controller.CartaoCreditoController;
 import controller.PagamentosController;
+import controller.PessoaFisicaController;
+import view.CustomComponents.Jbutton;
+import view.CustomComponents.JtextField;
 import view.viewAdds.EmprestimoField;
 import view.viewAdds.PagamentosField;
 import view.viewAdds.PixField;
@@ -32,6 +40,8 @@ public class TelaPrincipalView extends Jframe {
     private Cards cards;
     private CartaoCreditoController cartaoCreditoController;
     private PagamentosController pagamentosController;
+    private JPanel panelAtulCadastro;
+    private PessoaFisicaController pessoaFisicaController;
 
     public TelaPrincipalView(){    
 
@@ -51,6 +61,21 @@ public class TelaPrincipalView extends Jframe {
         this.cartaoCreditoController = new CartaoCreditoController();
         this.pagamentosController = new PagamentosController();
 
+
+        
+        panelAtulCadastro = new JPanel();
+        panelAtulCadastro.setOpaque(false);
+        panelAtulCadastro.setLayout(new BoxLayout(panelAtulCadastro, BoxLayout.Y_AXIS));
+        panelAtulCadastro.setVisible(true);
+        panelAtulCadastro.setBounds(400, 160, 700, 570);
+
+        JLabel label = new JLabel("atualizar informações pessoais");
+        label.setFont(new Font("Arial", Font.PLAIN, 25));
+        panelAtulCadastro.add(label);
+
+        this.pessoaFisicaController = new PessoaFisicaController();
+        pessoaFisicaController.getPessoaFisicaGUI().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panelAtulCadastro.add(pessoaFisicaController.getPessoaFisicaGUI());
 
         Jbutton[] buttons = new Jbutton[6];
         for (int i = 0; i < 6; i++) {
@@ -124,6 +149,17 @@ public class TelaPrincipalView extends Jframe {
         buttons2[3] = new JButton("");
         buttons2[4] = new JButton("");
         MenuSuperior menuSuperior = new MenuSuperior(0, 0, getWidth(), 100, searchField, buttons2);
+
+        buttons2[2].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             setInvisible();
+             panelAtulCadastro.setVisible(true);
+            }
+            
+        });
+
         searchField.setHorizontalAlignment(JTextField.CENTER);
         searchField.addFocusListener(new FocusListener(){
                 public void focusGained(FocusEvent e){
@@ -139,7 +175,7 @@ public class TelaPrincipalView extends Jframe {
             }
         });
 
-          
+          add(panelAtulCadastro);
 
         add(areaPixGui);
         add(pagamentosController.getAreaPagamentoGUI());
@@ -181,6 +217,7 @@ public class TelaPrincipalView extends Jframe {
     cards.setVisible(false);
     cartaoCreditoController.getCartaoCreditoGUI().setVisible(false);
     pagamentosController.getAreaPagamentoGUI().setVisible(false);
+    panelAtulCadastro.setVisible(false);
 
     }
 
