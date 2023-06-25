@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import DataBase.Conexao;
 import DataBase.Factory;
+import DataBase.ClienteDAO.PessoaFisicaDAO;
 import model.Agencia;
 import model.Conta;
 import model.Funcionario;
@@ -44,7 +45,7 @@ public class ContaDAO {
             pstm.setInt(7, 1);
             //conta.getFuncionario().getId()
             pstm.setInt(8, conta.getCliente().getId());
-            pstm.setString(9, conta.getPagamentos().getChavePix());
+            pstm.setString(9, geraChavePix(conta.getCliente()));
             pstm.setString(10, geraDataValidadeCartao());
             pstm.setInt(11, geraCVC());
             pstm.setString(12, conta.getSenhaConta());
@@ -211,6 +212,57 @@ public class ContaDAO {
         return conta;
     }
 
+    public void deleteChavePix(Conta conta){
+
+        String sql = "update conta set chavePix = null where id = ?";
+
+        try{
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+
+            pstm.setInt(1, conta.getId());
+
+            pstm.execute();
+            
+            if(pstm.getUpdateCount()>0){
+                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            } else 
+                JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+
+        } catch (Exception e){
+            e.printStackTrace();
+        } 
+        conexao.Desconecta();
+
+    }
+
+    public void criaChavePix(Conta conta){
+
+        String sql = "update conta set chavePix = ? where id = ?";
+        PessoaFisicaDAO pessoaFisica = new PessoaFisicaDAO();
+
+        try{
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+
+            pstm.setString(1, geraChavePix(pessoaFisica.ler(conta.getCliente().getId())));
+            pstm.setInt(2, conta.getId());
+
+            pstm.execute();
+            
+            if(pstm.getUpdateCount()>0){
+                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            } else 
+                JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+        } catch (Exception e){
+            e.printStackTrace();
+        } 
+        conexao.Desconecta();
+
+    }
+
     public static String geraNumConta() {
         List<Conta> contas = new ContaDAO().getContas();
         String numConta = null;
@@ -288,6 +340,18 @@ public class ContaDAO {
             } while (cvc == conta.getCvc());
         }
         return cvc;
+    }
+
+    public static String geraChavePix(PessoaFisica pessoaFisica){
+
+        Random ran = new Random();
+        String chavePix = null;
+        int opcao = ran.nextInt(1,3);
+        if (opcao == 1){
+            chavePix = pessoaFisica.getCpf();
+        } else chavePix = pessoaFisica.getTelefone();
+
+        return chavePix;
     }
 
 }
