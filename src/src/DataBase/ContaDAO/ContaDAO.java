@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -20,7 +21,7 @@ public class ContaDAO {
     PreparedStatement pstm;
     ResultSet rset = null;
 
-    public void criar(Conta conta) {
+    public void criarConta(Conta conta) {
 
         String sql = "insert into conta(numeroConta, numeroCartao, login, senha, codigoBanco, idFuncionario," + 
                         "idCliente) values (?,?,?,?,?,?,?)";
@@ -30,8 +31,8 @@ public class ContaDAO {
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
-            pstm.setString(1, conta.getNumeroConta());
-            pstm.setString(2, conta.getNumeroCartao());
+            pstm.setString(1, geraNumConta());
+            pstm.setString(2, geraNumCartao());
             pstm.setString(3, conta.getLogin());
             pstm.setString(4, conta.getSenha());
             pstm.setInt(5, conta.getAgencia().getBanco().getCodigo());
@@ -121,6 +122,8 @@ public class ContaDAO {
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
+            rset = pstm.executeQuery();
+
             while(rset.next()){
                 
                 Conta conta = new Conta();
@@ -153,6 +156,35 @@ public class ContaDAO {
         return contas;
     }
 
+    public static String geraNumConta() {
+        List<Conta> contas = new ContaDAO().getContas();
+        String numConta = null;
+        for (Conta conta : contas) {
+            do{
+                Random ran = new Random();
+                int number = ran.nextInt(0,999);
+                int digito = ran.nextInt(0, 9);
+                numConta = ("000" + number + "-" + digito);
+            } while (numConta.equals(conta.getNumeroConta()));
+        }
+        return numConta;
+    }
+
+    public static String geraNumCartao() {
+        List<Conta> contas = new ContaDAO().getContas();
+        String numCartao = null;
+        for (Conta conta : contas) {
+            do{
+                Random ran = new Random();
+                int number1 = ran.nextInt(0,9999);
+                int number2 = ran.nextInt(0,9999);
+                int number3 = ran.nextInt(0,9999);
+                int number4 = ran.nextInt(0,9999);
+                numCartao = (number1 + " " + number2 + " " + number3 + " " + number4);
+            } while (numCartao.equals(conta.getNumeroCartao()));
+        }
+        return numCartao;
+    }
 
 
 }

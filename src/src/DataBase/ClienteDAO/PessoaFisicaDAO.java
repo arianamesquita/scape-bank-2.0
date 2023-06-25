@@ -25,7 +25,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             conexao.setPstmt(conexao.getConnection().prepareStatement(query));
-            conexao.getPstmt().setInt(1, objeto.getId());
+            conexao.getPstmt().setInt(1, geraId());
             conexao.getPstmt().setString(2, objeto.getNome());
             conexao.getPstmt().setString(3, objeto.getEndereco());
             conexao.getPstmt().setString(4, objeto.getTelefone());
@@ -162,6 +162,19 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         }
 
         return listaPessoas;
+    }
+
+    public static int geraId() {
+        int count = 0, idPF = 0;
+        List<PessoaFisica> pessoasFisicas = new PessoaFisicaDAO().listarTodos();
+
+        for (PessoaFisica pessoaFisica : pessoasFisicas) {
+            if(count < pessoaFisica.getId()){
+                count = pessoaFisica.getId();
+            }
+        }
+        idPF = count + 1;
+        return idPF;
     }
 
 }
