@@ -2,7 +2,9 @@ package DataBase.ContaDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -13,18 +15,19 @@ import DataBase.Factory;
 import model.Agencia;
 import model.Conta;
 import model.Funcionario;
+import model.Pagamentos;
 import model.PessoaFisica;
 
 public class ContaDAO {
 
     Conexao conexao;
     PreparedStatement pstm;
-    ResultSet rset = null;
+    ResultSet rset;
 
     public void criarConta(Conta conta) {
 
         String sql = "insert into conta(id, numeroConta, numeroCartao, login, senha, numeroAgencia, idFuncionario," + 
-                        "idCliente, chavePix) values (?,?,?,?,?,?,?,?,?)";
+                        "idCliente, chavePix, validadeCartao, cvc, senhaConta) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
@@ -36,11 +39,15 @@ public class ContaDAO {
             pstm.setString(3, geraNumCartao());
             pstm.setString(4, conta.getLogin());
             pstm.setString(5, conta.getSenha());
-            pstm.setInt(6, conta.getAgencia().getBanco().getCodigo());
-            pstm.setInt(7, conta.getFuncionario().getId());
+            pstm.setInt(6, 1);
+            //conta.getAgencia().getBanco().getCodigo()
+            pstm.setInt(7, 1);
+            //conta.getFuncionario().getId()
             pstm.setInt(8, conta.getCliente().getId());
             pstm.setString(9, conta.getPagamentos().getChavePix());
-
+            pstm.setString(10, geraDataValidadeCartao());
+            pstm.setInt(11, geraCVC());
+            pstm.setString(12, conta.getSenhaConta());
 
             pstm.execute();
 
@@ -82,32 +89,29 @@ public class ContaDAO {
 
     public void update(Conta conta){
 
-        String sql = "update conta set numeroConta = ?, numeroCartao = ?, login = ?, senha = ?, " + 
-                     "codigoBanco = ?, idFuncionario = ?, idCliente = ?) values" + 
-                     "(?,?,?,?,?,?,?)";
+        String sql = "update conta set numeroCartao = ?, login = ?, senha = ?, " + 
+                    "chavePix = ?, senhaConta = ?) values" + 
+                     "(?,?,?,?,?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
-            pstm.setString(1, conta.getNumeroConta());
-            pstm.setString(2, conta.getNumeroCartao());
-            pstm.setString(3, conta.getLogin());
-            pstm.setString(4, conta.getSenha());
-            pstm.setInt(5, conta.getAgencia().getBanco().getCodigo());
-            pstm.setInt(6, conta.getFuncionario().getId());
-            pstm.setInt(7, conta.getCliente().getId());
-            pstm.setString(8, conta.getPagamentos().getChavePix());
+            pstm.setString(1, conta.getNumeroCartao());
+            pstm.setString(2, conta.getLogin());
+            pstm.setString(3, conta.getSenha());
+            pstm.setString(4, conta.getPagamentos().getChavePix());
+            pstm.setString(5, conta.getSenhaConta());
 
             pstm.execute();
             
-            conexao.Desconecta();
-
             if(pstm.getUpdateCount()>0){
-                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
             } else 
                 JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+
+            conexao.Desconecta();
         } catch (Exception e){
             e.printStackTrace();
         } 
@@ -133,6 +137,55 @@ public class ContaDAO {
                 Agencia agencia = new Agencia();
                 Funcionario funcionario = new Funcionario();
                 PessoaFisica cliente = new PessoaFisica();
+                Pagamentos pagamentos = new Pagamentos();
+
+                conta.setId(rset.getInt("id"));
+                conta.setLogin(rset.getString("login"));
+                conta.setSenha(rset.getString("senha"));
+                conta.setSenhaConta(rset.getString("senhaConta"));
+                conta.setNumeroConta(rset.getString("numeroConta"));
+                conta.setNumeroCartao(rset.getString("numeroCartao"));
+                conta.setValidadeCartao(rset.getString("validadeCartao"));
+                conta.setCvc(rset.getInt("cvc"));
+                agencia.setNumeroAgencia(rset.getString("numeroAgencia"));
+                conta.setAgencia(agencia);
+                funcionario.setId(rset.getInt("idFuncionario"));
+                conta.setFuncionario(funcionario);
+                cliente.setId(rset.getInt("idCliente"));
+                conta.setCliente(cliente);
+                pagamentos.setChavePix(rset.getString("chavePix"));
+                conta.setPagamentos(pagamentos);
+
+                contas.add(conta);
+            }
+           
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        conexao.Desconecta(); 
+        return contas;
+    }
+
+    public Conta searchById(int id){
+
+        String sql = "Select * from conta where id = ?";
+
+        Conta conta = new Conta();
+
+        try {
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+            pstm.setInt(1, id);
+
+            rset = pstm.executeQuery();
+
+            while(rset.next()){
+                
+                Agencia agencia = new Agencia();
+                Funcionario funcionario = new Funcionario();
+                PessoaFisica cliente = new PessoaFisica();
 
                 conta.setId(rset.getInt("id"));
                 conta.setLogin(rset.getString("login"));
@@ -149,14 +202,13 @@ public class ContaDAO {
                 cliente.setId(rset.getInt("idCliente"));
                 conta.setCliente(cliente);
 
-                contas.add(conta);
             }
-            conexao.Desconecta();            
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
+        } 
+        conexao.Desconecta(); 
 
-        return contas;
+        return conta;
     }
 
     public static String geraNumConta() {
@@ -212,6 +264,30 @@ public class ContaDAO {
             }
         }
         return count + 1;
+    }
+
+    public static String geraDataValidadeCartao() {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.YEAR, 4);
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        String data = s.format(c.getTime());      
+        return data;
+    }
+
+    public static int geraCVC() {
+        int cvc = 0;
+        List<Conta> contas = new ContaDAO().getContas();
+        if (contas.isEmpty()){
+            Random ran = new Random();
+            cvc = ran.nextInt(0,999);
+        }
+        for (Conta conta : contas) {
+            do{
+            Random ran = new Random();
+            cvc = ran.nextInt(0,999);
+            } while (cvc == conta.getCvc());
+        }
+        return cvc;
     }
 
 }
