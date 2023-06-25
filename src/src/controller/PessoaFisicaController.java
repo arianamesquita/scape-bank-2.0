@@ -78,6 +78,7 @@ public class PessoaFisicaController {
                 progressBar.setValue(25);
 
                 PessoaFisica pessoaFisica = new PessoaFisica(geraId(), nome, endereco, telefone, rendaAtual, cpf);
+                setPessoaFisica(pessoaFisica);
                 PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
                 progressBar.setValue(50);
                 try {
@@ -91,8 +92,12 @@ public class PessoaFisicaController {
                     progressBar.setValue(100);
 
                     pessoaFisicaGUI.repaint();
-                    getLoginGUI().getPanelCadastro().setVisible(false);
-                    getLoginGUI().getCadastroGUI().setVisible(true);
+                    getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().setVisible(false);
+                    getLoginGUI().getContaController().getContaGUI().setVisible(true);
+                    getLoginGUI().getContaController().setPessoaFisica(getPessoaFisica());
+                    getLoginGUI().getContaController().setLoginGUI(getLoginGUI());
+                    getLoginGUI().getContaController().updateInterface();
+
                 } catch (SQLException e) {
                     Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE,
                             "Erro ao inserir dados na tabela pessoa", e);
@@ -154,6 +159,11 @@ public class PessoaFisicaController {
         getPessoaFisicaGUI().getRendaAtualTextField().setBackground(Color.white);
         getPessoaFisicaGUI().getCpfFormattedTextField().setBackground(Color.white);
         getPessoaFisicaGUI().repaint();
+    }
+
+    public void apaga(){
+        new PessoaFisicaDAO().deletar(getPessoaFisica().getId());
+        updateInterface();
     }
 
     public PessoaFisicaGUI getPessoaFisicaGUI() {

@@ -1,8 +1,6 @@
 package controller;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -14,33 +12,40 @@ import model.Conta;
 import view.LoginGUI;
 import view.TelaPrincipalView;
 
-public class LoguinController implements ActionListener{
+public class LoginController implements ActionListener{
 
     private LoginGUI loginGUI;
 
 
-    public LoguinController(){
+    public LoginController(){
         loginGUI = new LoginGUI();
         addActionListener();
     }
-    private void verificaUser(){
-        List<Conta> listuser = new ContaDAO().getContas();
-        for (Conta conta : listuser) {
-            if(conta.getLogin().equals(getLoginGUI().getCadastroGUI().getJTF().getText())){
-                char[] password = getLoginGUI().getCadastroGUI().getJPF().getPassword();
-                String passwordString = new String(password);
-                if(conta.getSenha().equals(passwordString)){
-                    getLoginGUI().dispose();
-                    new TelaPrincipalView(conta);
+private void verificaUser() {
+    List<Conta> listuser = new ContaDAO().getContas();
+    String login = getLoginGUI().getCadastroGUI().getJTF().getText();
+    char[] password = getLoginGUI().getCadastroGUI().getJPF().getPassword();
+    String passwordString = new String(password);
+    boolean usuarioEncontrado = false;
 
-                }else{JOptionPane.showMessageDialog(loginGUI,"senha incorreta!!");}
-
-            } else{
-                JOptionPane.showMessageDialog(loginGUI,"usuario incorreto!!");
-            }
+    for (Conta conta : listuser) {
+        if (conta.getLogin().equals(login)) {
+            usuarioEncontrado = true;
+            if( conta.getSenhaConta().equals(passwordString)){
             
+            getLoginGUI().dispose();
+            new TelaPrincipalView(conta);
+            break;
+            }else JOptionPane.showMessageDialog(loginGUI, "senha incorreta");
+        
         }
     }
+
+    if (!usuarioEncontrado) {
+        JOptionPane.showMessageDialog(loginGUI, "Usuário incorreto!");
+    }
+}
+
 
 
     public LoginGUI getLoginGUI() {
@@ -56,6 +61,7 @@ public class LoguinController implements ActionListener{
         getLoginGUI().getCadastroGUI().getButton()[0].addActionListener(this);
         getLoginGUI().getCadastroGUI().getButton()[1].addActionListener(this);
         getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().getCancelar().addActionListener(this);
+        getLoginGUI().getContaController().getContaGUI().getCancelar().addActionListener(this);
 
     }
         @Override
@@ -69,17 +75,21 @@ public class LoguinController implements ActionListener{
             getLoginGUI().remove(getLoginGUI().getCadastroGUI());
             getLoginGUI().add(getLoginGUI().getPanelCadastro(), BorderLayout.CENTER);
             getLoginGUI().getPanelCadastro().setVisible(true);
-            getLoginGUI().setMinimumSize(new Dimension(1200, 650));
-         
+            getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().setVisible(true);
             getLoginGUI().repaint();   
             getLoginGUI().setSize(getLoginGUI().getMinimumSize());
 
         } else if (e.getSource() == getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().getCancelar()) {
             getLoginGUI().remove(getLoginGUI().getPanelCadastro());
-             getLoginGUI().setMinimumSize(new Dimension(1400, 700));
+        
             getLoginGUI().add(getLoginGUI().getCadastroGUI(), BorderLayout.CENTER);
-
             getLoginGUI().getCadastroGUI().setVisible(true);
+            getLoginGUI().repaint();
+
+        }else if (e.getSource() == getLoginGUI().getContaController().getContaGUI().getCancelar()) {
+            getLoginGUI().getContaController().getContaGUI().setVisible(false);
+            getLoginGUI().getPessoaFisicaController().apaga();
+            getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().setVisible(true);
             getLoginGUI().repaint();
 
         }

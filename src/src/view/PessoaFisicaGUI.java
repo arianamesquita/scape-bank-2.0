@@ -58,6 +58,7 @@ public class PessoaFisicaGUI extends JPanel {
         rendaAtualTextField.setHorizontalAlignment(JtextField.CENTER);
 
         enderecoLabel = new JLabel("Endereço:");
+        enderecoLabel.setFont(fonte);
 
         salvar = new Jbutton("salvar");
         cancelar = new Jbutton("Cancelar");
@@ -71,6 +72,7 @@ public class PessoaFisicaGUI extends JPanel {
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.insets = new Insets(5, 10, 5, 5);
         gbc1.fill = GridBagConstraints.BOTH;
+        gbc1.ipady = 15;
         gbc1.gridx = 0;
         gbc1.gridy = 0;
         gbc1.weightx = 0;
@@ -146,6 +148,7 @@ public class PessoaFisicaGUI extends JPanel {
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.fill = GridBagConstraints.BOTH;
         gbc3.insets = new Insets(5, 10, 5, 5);
+         gbc3.ipady = 15;
       
 
         gbc3.gridx = 0;
