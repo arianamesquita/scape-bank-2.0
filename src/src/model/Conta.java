@@ -9,19 +9,19 @@ import java.sql.Date;
 
 public class Conta {
 
-    public int id;
-    public String login;
-    public String senha;
-    public String senhaConta;
-    public String numeroConta;
-    public String numeroCartao;
-    public String validadeCartao;
-    public int cvc;
-    public String numeroContaDestino;
-    public String tipoTransacao;
-    public Date dataTransacao;
-    public String valorTransacao;
-    public int idTransacao;
+    private int id;
+    private String login;
+    private String senha;
+    private String senhaConta;
+    private String numeroConta;
+    private String numeroCartao;
+    private String validadeCartao;
+    private int cvc;
+    private String numeroContaDestino;
+    private String tipoTransacao;
+    private Date dataTransacao;
+    private String valorTransacao;
+    private int idTransacao;
 
     Agencia agencia;
     Emprestimo emprestimo;

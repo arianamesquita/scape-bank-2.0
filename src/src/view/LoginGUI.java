@@ -15,12 +15,14 @@ import javax.swing.JPanel;
 
 import AccessScreen.FrameComponents.FrameComponents;
 import MainScreen.Components.CustomJframe.Jframe;
+import controller.ContaController;
 import controller.PessoaFisicaController;
 
 public class LoginGUI extends Jframe  {
     private JPanel panelCadastro;
     private PessoaFisicaController pessoaFisicaController;
     private FrameComponents cadastroGUI;
+    private ContaController contaController;
 
     public LoginGUI() {
 
@@ -45,10 +47,16 @@ public class LoginGUI extends Jframe  {
         label.setFont(new Font("Arial", Font.PLAIN, 25));
         panel.add(label);
 
+        this.contaController = new ContaController();
+        contaController.getContaGUI().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.add(contaController.getContaGUI());
+        contaController.getContaGUI().setVisible(false);
+
         this.pessoaFisicaController = new PessoaFisicaController();
         pessoaFisicaController.setLoginGUI(this);
         pessoaFisicaController.getPessoaFisicaGUI().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.add(pessoaFisicaController.getPessoaFisicaGUI());
+        pessoaFisicaController.getPessoaFisicaGUI().setVisible(true);
 
         RainbowPanel rainbowPanel = new RainbowPanel();
         rainbowPanel.setBackground(Color.BLACK);
@@ -78,7 +86,7 @@ public class LoginGUI extends Jframe  {
         add(cadastroGUI, BorderLayout.CENTER);
         cadastroGUI.setVisible(true);
         setMinimumSize(new Dimension(1400, 700));
-        setMaximumSize(new Dimension(1400, 650));
+
         repaint();
         setSize(cadastroGUI.getSize());
         setSize(getMinimumSize());
@@ -110,6 +118,18 @@ public class LoginGUI extends Jframe  {
 
     public void setCadastroGUI(FrameComponents cadastroGUI) {
         this.cadastroGUI = cadastroGUI;
+    }
+
+
+
+    public ContaController getContaController() {
+        return contaController;
+    }
+
+
+
+    public void setContaController(ContaController contaController) {
+        this.contaController = contaController;
     }
 
     

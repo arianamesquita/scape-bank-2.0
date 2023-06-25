@@ -67,6 +67,7 @@ public class EnderecoGUI extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 3, 5, 3);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
 
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.JOptionPane;
-
 import DataBase.Conexao;
 import DataBase.Factory;
 import DataBase.InterfaceDAO;
@@ -110,9 +108,9 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             conexao.getPstmt().setInt(1, id);
             conexao.getPstmt().execute();
             if (conexao.getPstmt().getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+                System.out.println("Removido com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(null, "NÃ£o foi possi­vel remover!!");
+                System.out.println("NÃ£o foi possi­vel remover!!");
             }
         } catch (Exception e) {
             System.out.println("erro:\n" + e);

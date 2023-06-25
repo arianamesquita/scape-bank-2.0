@@ -290,23 +290,12 @@ public class MenuOpcoes extends JPanel
     }
     private class JlabelUser{
         private JLabel[] labels;
-        private Conta conta;
-
         public JlabelUser(Conta conta) {
-            this.conta = conta;
             this.labels = new JLabel[2];
             String[] text = {conta.getLogin(),"<html> conta: "+conta.getNumeroConta()+" <br> agencia: "+conta.getAgencia().getNumeroAgencia()+" <br> "+conta.getAgencia().getTelefone()+"</html>"};
             setText(text,getLabels());
             setBounds(getLabels());
 
-        }
-
-        public Conta getConta() {
-            return conta;
-        }
-
-        public void setConta(Conta conta) {
-            this.conta = conta;
         }
 
         public JLabel[] getLabels() {
