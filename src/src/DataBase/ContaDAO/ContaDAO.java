@@ -23,54 +23,57 @@ public class ContaDAO {
 
     public void criarConta(Conta conta) {
 
-        String sql = "insert into conta(numeroConta, numeroCartao, login, senha, codigoBanco, idFuncionario," + 
-                        "idCliente) values (?,?,?,?,?,?,?)";
+        String sql = "insert into conta(id, numeroConta, numeroCartao, login, senha, numeroAgencia, idFuncionario," + 
+                        "idCliente, chavePix) values (?,?,?,?,?,?,?,?,?)";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
-            pstm.setString(1, geraNumConta());
-            pstm.setString(2, geraNumCartao());
-            pstm.setString(3, conta.getLogin());
-            pstm.setString(4, conta.getSenha());
-            pstm.setInt(5, conta.getAgencia().getBanco().getCodigo());
-            pstm.setInt(6, conta.getFuncionario().getId());
-            pstm.setInt(7, conta.getCliente().getId());
+            pstm.setInt(1, geraId());
+            pstm.setString(2, geraNumConta());
+            pstm.setString(3, geraNumCartao());
+            pstm.setString(4, conta.getLogin());
+            pstm.setString(5, conta.getSenha());
+            pstm.setInt(6, conta.getAgencia().getBanco().getCodigo());
+            pstm.setInt(7, conta.getFuncionario().getId());
+            pstm.setInt(8, conta.getCliente().getId());
+            pstm.setString(9, conta.getPagamentos().getChavePix());
+
 
             pstm.execute();
-
-            conexao.Desconecta();
 
             if(pstm.getUpdateCount()>0){
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             } else 
                 JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+
+            conexao.Desconecta();
         } catch (Exception e){
             e.printStackTrace();
         } 
     }
 
-    public void removeById(String numeroConta){
+    public void removeById(int id){
 
-        String sql = "delete from conta where numeroConta = ?";
+        String sql = "delete from conta where id = ?";
 
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
-            pstm.setString(1, numeroConta);
+            pstm.setInt(1, id);
 
             pstm.execute();
             
-            conexao.Desconecta();
-
             if(pstm.getUpdateCount()>0){
-                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+                JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
             } else 
                 JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+
+            conexao.Desconecta();
         } catch (Exception e){
             e.printStackTrace();
         } 
@@ -159,6 +162,12 @@ public class ContaDAO {
     public static String geraNumConta() {
         List<Conta> contas = new ContaDAO().getContas();
         String numConta = null;
+        if (contas.isEmpty()){
+            Random ran = new Random();
+            int number = ran.nextInt(0,999);
+            int digito = ran.nextInt(0, 9);
+            numConta = ("000" + number + "-" + digito);
+        }
         for (Conta conta : contas) {
             do{
                 Random ran = new Random();
@@ -173,6 +182,14 @@ public class ContaDAO {
     public static String geraNumCartao() {
         List<Conta> contas = new ContaDAO().getContas();
         String numCartao = null;
+        if (contas.isEmpty()){
+            Random ran = new Random();
+            int number1 = ran.nextInt(0,9999);
+            int number2 = ran.nextInt(0,9999);
+            int number3 = ran.nextInt(0,9999);
+            int number4 = ran.nextInt(0,9999);
+            numCartao = (number1 + " " + number2 + " " + number3 + " " + number4);
+        }
         for (Conta conta : contas) {
             do{
                 Random ran = new Random();
@@ -186,5 +203,15 @@ public class ContaDAO {
         return numCartao;
     }
 
+    public static int geraId() {
+        int count = 0;
+        List<Conta> contas = new ContaDAO().getContas();
+        for (Conta conta : contas) {
+            if(count < conta.getId()){
+                count = conta.getId();
+            }
+        }
+        return count + 1;
+    }
 
 }

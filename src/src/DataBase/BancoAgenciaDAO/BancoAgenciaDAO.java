@@ -270,6 +270,7 @@ public class BancoAgenciaDAO{
         String numeroAg = null;
         for (Agencia agencia : agencias) {
             do{
+                System.out.println("entrou no laço");
                 Random ran = new Random();
                 int number = ran.nextInt(0,999);
                 numeroAg = ("000" + number);
