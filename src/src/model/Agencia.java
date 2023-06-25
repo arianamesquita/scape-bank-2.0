@@ -40,7 +40,7 @@ public class Agencia {
     }
 
     /**
-     *cadastro de numero agencia;
+     * cadastro de numero agencia;
      * @param numeroAgencia = parametro do metodo setNumeroAgencia que recebe numero agencia;
      */
     public void setNumeroAgencia(String numeroAgencia) {
