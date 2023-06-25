@@ -23,6 +23,7 @@ import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 import controller.CartaoCreditoController;
 import controller.PagamentosController;
 import controller.PessoaFisicaController;
+import model.Conta;
 import view.CustomComponents.Jbutton;
 import view.CustomComponents.JtextField;
 import view.viewAdds.EmprestimoField;
@@ -30,6 +31,7 @@ import view.viewAdds.PagamentosField;
 import view.viewAdds.PixField;
 
 public class TelaPrincipalView extends Jframe {
+    private Conta conta;
 
     private PixField pixField;
     private AreaPixGui areaPixGui;
@@ -43,7 +45,8 @@ public class TelaPrincipalView extends Jframe {
     private JPanel panelAtulCadastro;
     private PessoaFisicaController pessoaFisicaController;
 
-    public TelaPrincipalView(){    
+    public TelaPrincipalView(Conta conta){
+        this.conta = conta;    
 
         setTitle("Scape Bank");
         setLayout(null);
@@ -83,7 +86,7 @@ public class TelaPrincipalView extends Jframe {
             buttons[i].setVisible(true);
         }
 
-        MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,buttons);
+        MenuOpcoes menuPrincipais= new MenuOpcoes(20,160,300,570,conta,buttons);
         String[] text = {"Extrato -->","Empréstimo -->","Saldo -->","Cartões -->","Pix -->","Pagamentos -->"};
         JButton[] buttonsCards;
         buttonsCards = new JButton[text.length];
@@ -291,6 +294,30 @@ public class TelaPrincipalView extends Jframe {
 
     public void setPagamentosController(PagamentosController pagamentosController) {
         this.pagamentosController = pagamentosController;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    public JPanel getPanelAtulCadastro() {
+        return panelAtulCadastro;
+    }
+
+    public void setPanelAtulCadastro(JPanel panelAtulCadastro) {
+        this.panelAtulCadastro = panelAtulCadastro;
+    }
+
+    public PessoaFisicaController getPessoaFisicaController() {
+        return pessoaFisicaController;
+    }
+
+    public void setPessoaFisicaController(PessoaFisicaController pessoaFisicaController) {
+        this.pessoaFisicaController = pessoaFisicaController;
     }
     
 
