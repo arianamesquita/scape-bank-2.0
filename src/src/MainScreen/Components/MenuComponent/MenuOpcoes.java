@@ -3,6 +3,7 @@ package MainScreen.Components.MenuComponent;
 import javax.swing.*;
 
 import MainScreen.Components.Custom.ColorPaleta;
+import model.Conta;
 import view.CustomComponents.Jbutton;
 
 import java.awt.*;
@@ -17,6 +18,7 @@ import java.util.Objects;
 public class MenuOpcoes extends JPanel
 {
    private final int x, y, width, height;
+   private Conta conta;
      private  final Jbutton[] buttons ;
 
     /**
@@ -27,7 +29,8 @@ public class MenuOpcoes extends JPanel
      * @param height — comprimento.
      * @param buttons — botões a serem adicionados
      */
-    public MenuOpcoes(int x, int y, int width, int height, Jbutton[] buttons) {
+    public MenuOpcoes(int x, int y, int width, int height,Conta conta, Jbutton[] buttons) {
+        this.conta = conta;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -41,13 +44,19 @@ public class MenuOpcoes extends JPanel
         setVisible(true);
     }
     void addLabel(){
-        JlabelUser jlabelUser = new JlabelUser();
+        JlabelUser jlabelUser = new JlabelUser(getConta());
         for (JLabel label : jlabelUser.getLabels()) {
             add(label);
             
         }
     }
 
+    public Conta getConta() {
+        return conta;
+    }
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
     /**
      * Método da class MenuOpcoes que retorna a posição x.
      * @return — retornar o valor do atributo x.
@@ -281,13 +290,23 @@ public class MenuOpcoes extends JPanel
     }
     private class JlabelUser{
         private JLabel[] labels;
+        private Conta conta;
 
-        public JlabelUser() {
+        public JlabelUser(Conta conta) {
+            this.conta = conta;
             this.labels = new JLabel[2];
-            String[] text = {"pedro ferreira","<html> conta: 999999.99-8 <br> agencia: 0404 <br> banco:006</html>"};
+            String[] text = {conta.getLogin(),"<html> conta: "+conta.getNumeroConta()+" <br> agencia: "+conta.getAgencia().getNumeroAgencia()+" <br> "+conta.getAgencia().getTelefone()+"</html>"};
             setText(text,getLabels());
             setBounds(getLabels());
 
+        }
+
+        public Conta getConta() {
+            return conta;
+        }
+
+        public void setConta(Conta conta) {
+            this.conta = conta;
         }
 
         public JLabel[] getLabels() {

@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,7 +17,7 @@ import AccessScreen.FrameComponents.FrameComponents;
 import MainScreen.Components.CustomJframe.Jframe;
 import controller.PessoaFisicaController;
 
-public class LoginGUI extends Jframe implements ActionListener {
+public class LoginGUI extends Jframe  {
     private JPanel panelCadastro;
     private PessoaFisicaController pessoaFisicaController;
     private FrameComponents cadastroGUI;
@@ -75,7 +73,7 @@ public class LoginGUI extends Jframe implements ActionListener {
 
         cadastroGUI = new FrameComponents();
         cadastroGUI.setOpaque(false);
-        addActionListener();
+      
 
         add(cadastroGUI, BorderLayout.CENTER);
         cadastroGUI.setVisible(true);
@@ -88,12 +86,7 @@ public class LoginGUI extends Jframe implements ActionListener {
 
     }
 
-    private void addActionListener() {
-        cadastroGUI.getButton()[0].addActionListener(this);
-        cadastroGUI.getButton()[1].addActionListener(this);
-        pessoaFisicaController.getPessoaFisicaGUI().getCancelar().addActionListener(this);
 
-    }
 
     public JPanel getPanelCadastro() {
         return panelCadastro;
@@ -119,32 +112,7 @@ public class LoginGUI extends Jframe implements ActionListener {
         this.cadastroGUI = cadastroGUI;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    
 
-        if (e.getSource() == getCadastroGUI().getButton()[0]) {
-            new TelaPrincipalView();
-            dispose();
-        } else if (e.getSource() == getCadastroGUI().getButton()[1]) {
-            getPessoaFisicaController().updateInterface();
-            remove(getCadastroGUI());
-            add(getPanelCadastro(), BorderLayout.CENTER);
-            getPanelCadastro().setVisible(true);
-            setMinimumSize(new Dimension(1200, 650));
-         
-            repaint();   
-            setSize(getMinimumSize());
-
-        } else if (e.getSource() == getPessoaFisicaController().getPessoaFisicaGUI().getCancelar()) {
-            remove(getPanelCadastro());
-             setMinimumSize(new Dimension(1400, 700));
-            add(getCadastroGUI(), BorderLayout.CENTER);
-
-            getCadastroGUI().setVisible(true);
-            repaint();
-
-        }
-
-    }
 
 }

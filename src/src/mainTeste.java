@@ -1,14 +1,8 @@
 
 
 
-import DataBase.BancoAgenciaDAO.BancoAgenciaDAO;
-import DataBase.ClienteDAO.PessoaFisicaDAO;
 import DataBase.ContaDAO.ContaDAO;
-import controller.PessoaFisicaController;
-import model.Agencia;
-import model.Banco;
-import model.PessoaFisica;
-import view.LoginGUI;
+import controller.LoguinController;
 
 
 public class mainTeste {
@@ -28,6 +22,7 @@ public class mainTeste {
 		pessoaFisicaDao.criar(pessoaFisica);*/
 		//ContaDAO contaDAO = new ContaDAO();
 		System.out.println(ContaDAO.geraNumCartao());
+		LoguinController loguinController = new LoguinController();
 		
 		
 	}
