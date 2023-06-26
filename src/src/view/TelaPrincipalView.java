@@ -210,7 +210,7 @@ public class TelaPrincipalView extends Jframe {
             }
         });
         addActionListenergerenciarconta();
-   add(gerenciarConta);
+       add(gerenciarConta);
         add(panelAtulCadastro);
       
         add(areaPixGui);
@@ -223,7 +223,7 @@ public class TelaPrincipalView extends Jframe {
         add(cards);
 
         setInvisible();
-        buttons2[4].doClick();
+     
         cards.setVisible(true);
         setVisible(true);
     }
@@ -256,7 +256,7 @@ public class TelaPrincipalView extends Jframe {
     pagamentosController.getAreaPagamentoGUI().setVisible(false);
     panelAtulCadastro.setVisible(false);
     gerenciarConta.setVisible(false);
-    buttons2[4].doClick();
+  
 
     }
     private void addActionListenergerenciarconta(){
@@ -265,7 +265,7 @@ public class TelaPrincipalView extends Jframe {
             @Override
             public void actionPerformed(ActionEvent e) {
           setInvisible();
-        
+        buttons2[4].doClick();
           pessoaFisicaController.updateInterface();
           pessoaFisicaController.setPessoaFisica(conta.getCliente());
           pessoaFisicaController.setAtualizar(false);
@@ -283,6 +283,7 @@ public class TelaPrincipalView extends Jframe {
                  contaController.setAtualizar(false);
                  contaController.setConta(new ContaDAO().searchById(getConta().getId()));
                 setInvisible();
+                 buttons2[4].doClick();
            
           panelAtulCadastro.setVisible(true);
           pessoaFisicaController.getPessoaFisicaGUI().setVisible(false);
@@ -295,6 +296,7 @@ public class TelaPrincipalView extends Jframe {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                 buttons2[4].doClick();
       int choice = JOptionPane.showConfirmDialog(null, "Do you really want to delete your account?", "Confirmation", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
           setConta(new ContaDAO().searchById(getConta().getId()));

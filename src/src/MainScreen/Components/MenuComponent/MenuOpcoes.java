@@ -291,8 +291,8 @@ public class MenuOpcoes extends JPanel
     private class JlabelUser{
         private JLabel[] labels;
         public JlabelUser(Conta conta) {
-            this.labels = new JLabel[2];
-            String[] text = {conta.getLogin(),"<html> conta: "+conta.getNumeroConta()+" <br> agencia: "+conta.getAgencia().getNumeroAgencia()+" <br> "+conta.getAgencia().getTelefone()+"</html>"};
+            this.labels = new JLabel[3];
+            String[] text = {conta.getLogin(),"conta: "+conta.getNumeroConta(),"agencia: "+conta.getAgencia().getNumeroAgencia()};
             setText(text,getLabels());
             setBounds(getLabels());
 
@@ -315,7 +315,7 @@ public class MenuOpcoes extends JPanel
             Font arialButton = new Font("Arial", 50, 18);
             int count = 0;
             for (JLabel jLabel : labels) {
-                jLabel.setBounds(70,30+count,jLabel.getText().length()*11,(int) (jLabel.getText().length()*1.2));
+                jLabel.setBounds(70,30+count,150,20);
                 jLabel.setFont(arialButton);
                 jLabel.setBackground(ColorPaleta.darkgrayColor());
                 jLabel.setVisible(true);
