@@ -9,7 +9,7 @@ public interface InterfaceDAO<T> {
 
     T ler(int id);
 
-    void atualizar(T objeto);
+    void atualizar(T objeto) throws SQLException;
 
     void deletar(int id);
 

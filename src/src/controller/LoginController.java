@@ -20,6 +20,7 @@ public class LoginController implements ActionListener{
     public LoginController(){
         loginGUI = new LoginGUI();
         addActionListener();
+
     }
 private void verificaUser() {
     List<Conta> listuser = new ContaDAO().getContas();

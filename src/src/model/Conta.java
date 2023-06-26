@@ -80,6 +80,12 @@ public class Conta {
         this.cliente = cliente;
     }
 
+    public Conta(int id ,String login, String senhaConta) {
+        this.id = id;
+        this.login = login;
+        this.senhaConta = senhaConta;
+    }
+
     /**
      *
      * @param id = parametro do construtor da classe conta que recebe um id;

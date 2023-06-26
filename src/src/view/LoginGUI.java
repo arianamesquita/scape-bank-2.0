@@ -91,6 +91,7 @@ public class LoginGUI extends Jframe  {
         setSize(cadastroGUI.getSize());
         setSize(getMinimumSize());
         setVisible(true);
+  
 
     }
 

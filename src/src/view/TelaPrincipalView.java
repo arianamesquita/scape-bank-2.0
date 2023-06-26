@@ -16,11 +16,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import DataBase.ClienteDAO.PessoaFisicaDAO;
+import DataBase.ContaDAO.ContaDAO;
 import MainScreen.Components.CardsComponent.Cards;
+import MainScreen.Components.Custom.ColorPaleta;
 import MainScreen.Components.CustomJframe.Jframe;
 import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 import controller.CartaoCreditoController;
+import controller.ContaController;
+import controller.LoginController;
 import controller.PagamentosController;
 import controller.PessoaFisicaController;
 import model.Conta;
@@ -44,9 +49,13 @@ public class TelaPrincipalView extends Jframe {
     private PagamentosController pagamentosController;
     private JPanel panelAtulCadastro;
     private PessoaFisicaController pessoaFisicaController;
+    private GerenciarConta gerenciarConta;
+    private ContaController contaController;
+    private JButton[] buttons2;
 
     public TelaPrincipalView(Conta conta){
         this.conta = conta;    
+        conta.setCliente(new PessoaFisicaDAO().ler(conta.getCliente().getId()));
 
         setTitle("Scape Bank");
         setLayout(null);
@@ -63,6 +72,8 @@ public class TelaPrincipalView extends Jframe {
         this.areaEmprestimoGUI = new AreaEmprestimoGUI(empField);
         this.cartaoCreditoController = new CartaoCreditoController();
         this.pagamentosController = new PagamentosController();
+        this.gerenciarConta = new GerenciarConta();
+        this.contaController = new ContaController();
 
 
         
@@ -76,9 +87,18 @@ public class TelaPrincipalView extends Jframe {
         label.setFont(new Font("Arial", Font.PLAIN, 25));
         panelAtulCadastro.add(label);
 
+        this.contaController = new ContaController();
+        contaController.setePrincipalView(this);
+        contaController.getContaGUI().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panelAtulCadastro.add(contaController.getContaGUI());
+
+
+
         this.pessoaFisicaController = new PessoaFisicaController();
+        pessoaFisicaController.setePrincipalView(this);
         pessoaFisicaController.getPessoaFisicaGUI().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panelAtulCadastro.add(pessoaFisicaController.getPessoaFisicaGUI());
+  
 
         Jbutton[] buttons = new Jbutton[6];
         for (int i = 0; i < 6; i++) {
@@ -145,7 +165,7 @@ public class TelaPrincipalView extends Jframe {
         JtextField searchField = new JtextField();
         searchField.setVisible(true);
 
-        JButton[] buttons2 = new JButton[5];
+        buttons2 = new JButton[5];
         buttons2[0] = new JButton("");
         buttons2[1] = new JButton("");
         buttons2[2] = new JButton("");
@@ -153,15 +173,27 @@ public class TelaPrincipalView extends Jframe {
         buttons2[4] = new JButton("");
         MenuSuperior menuSuperior = new MenuSuperior(0, 0, getWidth(), 100, searchField, buttons2);
 
-        buttons2[2].addActionListener(new ActionListener() {
+
+        gerenciarConta.setBounds(1020, 100, 200, 200);
+        gerenciarConta.setBackground(ColorPaleta.buttonsColor());
+        buttons2[4].addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-             setInvisible();
-             panelAtulCadastro.setVisible(true);
+           
+             if(!gerenciarConta.isSelect()){
+                gerenciarConta.setVisible(true);
+        gerenciarConta.setSelect(true);}else{
+            gerenciarConta.setVisible(false);
+            gerenciarConta.setSelect(false);
+        }
+             
+
             }
             
         });
+
+
 
         searchField.setHorizontalAlignment(JTextField.CENTER);
         searchField.addFocusListener(new FocusListener(){
@@ -177,9 +209,10 @@ public class TelaPrincipalView extends Jframe {
                 }
             }
         });
-
-          add(panelAtulCadastro);
-
+        addActionListenergerenciarconta();
+   add(gerenciarConta);
+        add(panelAtulCadastro);
+      
         add(areaPixGui);
         add(pagamentosController.getAreaPagamentoGUI());
         add(areaEmprestimoGUI);
@@ -190,6 +223,7 @@ public class TelaPrincipalView extends Jframe {
         add(cards);
 
         setInvisible();
+        buttons2[4].doClick();
         cards.setVisible(true);
         setVisible(true);
     }
@@ -221,6 +255,61 @@ public class TelaPrincipalView extends Jframe {
     cartaoCreditoController.getCartaoCreditoGUI().setVisible(false);
     pagamentosController.getAreaPagamentoGUI().setVisible(false);
     panelAtulCadastro.setVisible(false);
+    gerenciarConta.setVisible(false);
+    buttons2[4].doClick();
+
+    }
+    private void addActionListenergerenciarconta(){
+        gerenciarConta.getAtuaUser().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+          setInvisible();
+        
+          pessoaFisicaController.updateInterface();
+          pessoaFisicaController.setPessoaFisica(conta.getCliente());
+          pessoaFisicaController.setAtualizar(false);
+          panelAtulCadastro.setVisible(true);
+          pessoaFisicaController.getPessoaFisicaGUI().setVisible(true);
+          contaController.getContaGUI().setVisible(false);
+            }
+            
+        });
+        gerenciarConta.getAtuaLoginSEnha().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 contaController.updateInterface();
+                 contaController.setAtualizar(false);
+                 contaController.setConta(new ContaDAO().searchById(getConta().getId()));
+                setInvisible();
+           
+          panelAtulCadastro.setVisible(true);
+          pessoaFisicaController.getPessoaFisicaGUI().setVisible(false);
+          contaController.updateInterface();
+          contaController.getContaGUI().setVisible(true);
+            }
+            
+        });
+        gerenciarConta.getDeletarconta().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+      int choice = JOptionPane.showConfirmDialog(null, "Do you really want to delete your account?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+          setConta(new ContaDAO().searchById(getConta().getId()));
+          getContaController().setConta(getConta());
+          getPessoaFisicaController().setPessoaFisica(new PessoaFisicaDAO().ler(getConta().getCliente().getId()));
+          getContaController().deletar();
+          getPessoaFisicaController().apagar();
+          dispose();
+          new LoginController();
+        
+        }else{ setInvisible();
+        getCards().setVisible(true);}
+            }
+            
+        });
 
     }
 
@@ -318,6 +407,30 @@ public class TelaPrincipalView extends Jframe {
 
     public void setPessoaFisicaController(PessoaFisicaController pessoaFisicaController) {
         this.pessoaFisicaController = pessoaFisicaController;
+    }
+
+    public GerenciarConta getGerenciarConta() {
+        return gerenciarConta;
+    }
+
+    public void setGerenciarConta(GerenciarConta gerenciarConta) {
+        this.gerenciarConta = gerenciarConta;
+    }
+
+    public ContaController getContaController() {
+        return contaController;
+    }
+
+    public void setContaController(ContaController contaController) {
+        this.contaController = contaController;
+    }
+
+    public JButton[] getButtons2() {
+        return buttons2;
+    }
+
+    public void setButtons2(JButton[] buttons2) {
+        this.buttons2 = buttons2;
     }
     
 

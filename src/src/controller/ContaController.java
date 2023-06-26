@@ -1,17 +1,20 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
 
 import DataBase.ContaDAO.ContaDAO;
 import controller.Service.createFocusListenerTextField;
@@ -20,6 +23,7 @@ import model.Pagamentos;
 import model.PessoaFisica;
 import view.ContaGUI;
 import view.LoginGUI;
+import view.TelaPrincipalView;
 
 public class ContaController implements ActionListener {
 
@@ -28,9 +32,11 @@ public class ContaController implements ActionListener {
     private Pagamentos pagamentos;
     private ContaGUI contaGUI;
     private LoginGUI loginGUI;
+    private TelaPrincipalView ePrincipalView;
 
     public ContaController() {
         this.contaGUI = new ContaGUI();
+
     }
 
     public ContaController(PessoaFisica pessoaFisica) {
@@ -55,38 +61,38 @@ public class ContaController implements ActionListener {
         SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
             @Override
             protected Void doInBackground() throws Exception {
-             
-               conta = new Conta();
-               pagamentos = new Pagamentos();
-               progressBar.setValue(25);
+
+                conta = new Conta();
+                pagamentos = new Pagamentos();
+                progressBar.setValue(25);
                 conta.setLogin(getContaGUI().getLoginField().getText());
                 conta.setSenha(null);
-                conta.setSenhaConta( getContaGUI().getSenhaField().getText());
+                conta.setSenhaConta(getContaGUI().getSenhaField().getText());
                 conta.setCliente(getPessoaFisica());
                 pagamentos.setChavePix(null);
                 conta.setPagamentos(pagamentos);
                 progressBar.setValue(50);
-        
+
                 System.out.println("Criando conta...");
                 ContaDAO contaDAO = new ContaDAO();
-               
+
                 try {
-                      System.out.println("2");
+                    System.out.println("2");
                     contaDAO.criarConta(conta);
                     progressBar.setValue(75);
-                   
 
                 } catch (Exception e) {
                     Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE, null, e);
                 }
                 listar();
-         progressBar.setValue(100);
+                progressBar.setValue(100);
+                JOptionPane.showMessageDialog(getLoginGUI(), "usuario cadastrado com sucesso!!");
 
-        getLoginGUI().add(getLoginGUI().getCadastroGUI(), BorderLayout.CENTER);
-        getLoginGUI().remove(getLoginGUI().getPanelCadastro());
-        getLoginGUI().getCadastroGUI().setVisible(true);
-    getLoginGUI().repaint();
-    
+                getLoginGUI().add(getLoginGUI().getCadastroGUI(), BorderLayout.CENTER);
+                getLoginGUI().remove(getLoginGUI().getPanelCadastro());
+                getLoginGUI().getCadastroGUI().setVisible(true);
+                getLoginGUI().repaint();
+
                 return null;
             }
 
@@ -100,29 +106,86 @@ public class ContaController implements ActionListener {
         dialog.setVisible(true);
     }
 
-    
+    public void setAtualizar(boolean aflag) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.ipady = 15;
+        gbc.gridwidth = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
 
-    private void atualizar() {
-        conta.setCartao(null);
-        conta.setLogin(null);
-        conta.setSenha(null);
-        pagamentos.setChavePix(null);
-        conta.setPagamentos(pagamentos);
-        conta.setSenhaConta(null);
-        System.out.println("Atualizando a conta...");
-        ContaDAO contaDAO = new ContaDAO();
-        try {
-            contaDAO.update(conta);
-            ;
-        } catch (Exception e) {
-            Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE, null, e);
+        if (aflag) {
+            getContaGUI().getPanelsouth().add(new JLabel(), gbc);
+            getContaGUI().getSalvar().setVisible(aflag);
+            getContaGUI().getCancelar().setVisible(aflag);
+        } else {
+            getContaGUI().getPanelsouth().add(getContaGUI().getAtualizar(), gbc);
+            getContaGUI().getSalvar().setVisible(aflag);
+            getContaGUI().getCancelar().setVisible(aflag);
         }
-        listar();
+
     }
 
-    private void deletar() {
-        conta.setId(0);
+    private void atualizar() {        
+        
+        JDialog dialog = new JDialog(getLoginGUI(), "Salvando...", true);
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setStringPainted(true);
+        dialog.add(progressBar);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setSize(300, 100);
+        dialog.setLocationRelativeTo(getContaGUI());
 
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+
+                String login = getContaGUI().getLoginField().getText();
+                String senha = getContaGUI().getSenhaField().getText();
+  
+                progressBar.setValue(25);
+
+                Conta conta = new Conta(getePrincipalView().getConta().getId(), login, senha);
+                
+             
+                ContaDAO contaDAO = new ContaDAO();
+                progressBar.setValue(50);
+                try {
+                    contaDAO.atualizar(conta);
+                    progressBar.setValue(75);  
+                    getContaGUI().repaint();
+                    progressBar.setValue(100);
+                    JOptionPane.showMessageDialog(progressBar," usuario e senha atualizado com sucesso");
+                    getePrincipalView().setInvisible();
+                    getePrincipalView().getCards().setVisible(true);
+                    
+            
+                } catch (SQLException e) {
+                    Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE,
+                            "Erro ao inserir dados na tabela pessoa", e);
+                    JOptionPane.showMessageDialog(getContaGUI(),
+                            "erro: dados informados corretamente tende denovo");
+                    updateInterface();
+
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                dialog.dispose();
+            }
+        };
+
+        worker.execute();
+        dialog.setVisible(true);
+
+    }
+
+    public void deletar() {
+        
         System.out.println("Deletando a conta...");
         ContaDAO contaDAO = new ContaDAO();
         try {
@@ -147,7 +210,7 @@ public class ContaController implements ActionListener {
 
         String[] colunas = { "id", "numeroConta", "numeroCartao", "login", "senha", "numeroAgencia", "idFuncionario",
                 "idCliente", "chavePix", "validadeCartao", "cvc", "senhaConta" };
-        DefaultTableModel tableModel = new DefaultTableModel(null, colunas);
+        
 
         // DefaultTableModel dados = (DefaultTableModel); //aqui na frente pegaria o
         // modelo da tela
@@ -180,21 +243,31 @@ public class ContaController implements ActionListener {
     }
 
     private boolean verificaUser() {
-        List<Conta> listuser = new ContaDAO().getContas();
-        for (Conta conta : listuser) {
-            if (!conta.getLogin().equals(getContaGUI().getLoginField().getText())) {
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(getContaGUI(), "usuario já existe");
-                return false;
-            }
+    List<Conta> listuser = new ContaDAO().getContas();
+    String login = getContaGUI().getLoginField().getText();
+ 
+    boolean usuarioEncontrado = false;
 
+    for (Conta conta : listuser) {
+        if (conta.getLogin().equals(login)) {
+            usuarioEncontrado = true;
         }
+    }
+
+    if (!usuarioEncontrado) {
+       return true;
+    }else {
+        JOptionPane.showMessageDialog(getContaGUI(),"usuario já existe");
         return false;
     }
 
+    }
+    
+    
+
     private void addListeners() {
         getContaGUI().getSalvar().addActionListener(this);
+        getContaGUI().getAtualizar().addActionListener(this);
         setTextField();
         addFocusListener();
     }
@@ -213,6 +286,7 @@ public class ContaController implements ActionListener {
     }
 
     private boolean verificaIgual() {
+
         if (getContaGUI().getLoginField().getText().equals(getContaGUI().getConLoginField().getText())) {
 
             if (getContaGUI().getSenhaField().getText().equals(getContaGUI().getConSenhaField().getText())) {
@@ -269,11 +343,24 @@ public class ContaController implements ActionListener {
         this.loginGUI = loginGUI;
     }
 
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == getContaGUI().getSalvar() && verificaIgual()) {
             if (verificaUser()) {
                 salvaInformacoes();
+            }
+
+        } else if (e.getSource() == getContaGUI().getAtualizar() && verificaIgual()) {
+            if (verificaUser()) {
+                atualizar();
             }
 
         }

@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -8,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
@@ -18,6 +21,7 @@ import controller.Service.createFocusListenerTextField;
 import model.PessoaFisica;
 import view.LoginGUI;
 import view.PessoaFisicaGUI;
+import view.TelaPrincipalView;
 
 public class PessoaFisicaController {
     private PessoaFisicaGUI pessoaFisicaGUI;
@@ -25,6 +29,8 @@ public class PessoaFisicaController {
     private PessoaFisica pessoaFisica;
     private boolean cadastrado;
     private LoginGUI loginGUI;
+    private TelaPrincipalView ePrincipalView;
+
 
     public PessoaFisicaController() {
         this.pessoaFisica = new PessoaFisica();
@@ -40,8 +46,79 @@ public class PessoaFisicaController {
             public void actionPerformed(ActionEvent e) {
                 Salvar();
             }
+       
 
         });
+        pessoaFisicaGUI.getAtualizar().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            atualizar();
+            }
+            
+        });
+
+    }
+    public void atualizar(){
+        JDialog dialog = new JDialog(getLoginGUI(), "Salvando...", true);
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setStringPainted(true);
+        dialog.add(progressBar);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setSize(300, 100);
+        dialog.setLocationRelativeTo(pessoaFisicaGUI);
+
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                String nome = pessoaFisicaGUI.getNomeTextField().getText();
+                String endereco = getEnderecoController().getEndereco();
+                String telefone = pessoaFisicaGUI.getTelefoneFormattedTextField().getText().replaceAll("[()-]", "");
+                double rendaAtual = Double.parseDouble(pessoaFisicaGUI.getRendaAtualTextField().getText());
+                String cpf = pessoaFisicaGUI.getCpfFormattedTextField().getText().replaceAll("[.-]", "");
+                progressBar.setValue(25);
+
+
+                System.out.println(getPessoaFisica().getId()+"iddddddddddddddddddddddd");
+                PessoaFisica pessoaFisica = new PessoaFisica(getPessoaFisica().getId(), nome, endereco, telefone, rendaAtual, cpf);
+                setPessoaFisica(pessoaFisica);
+                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+                progressBar.setValue(50);
+                try {
+                    pessoaFisicaDAO.atualizar(pessoaFisica);
+                    progressBar.setValue(75);
+                    setCadastrado(true);
+                    
+                    pessoaFisicaGUI.repaint();
+                    progressBar.setValue(100);
+                    JOptionPane.showMessageDialog(progressBar," usuario atualizado com sucesso");
+                    setPessoaFisica(pessoaFisica);
+                    getePrincipalView().setInvisible();
+                    getePrincipalView().getCards().setVisible(true);
+                    getePrincipalView().getPessoaFisicaController().setPessoaFisica(pessoaFisica);
+                    
+            
+                } catch (SQLException e) {
+                    Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE,
+                            "Erro ao inserir dados na tabela pessoa", e);
+                    JOptionPane.showMessageDialog(getPessoaFisicaGUI(),
+                            "erro: dados informados corretamente tende denovo");
+                    updateInterface();
+                    setErroAll();
+                    getPessoaFisicaGUI().repaint();
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                dialog.dispose();
+            }
+        };
+
+        worker.execute();
+        dialog.setVisible(true);
 
     }
 
@@ -120,6 +197,17 @@ public class PessoaFisicaController {
         worker.execute();
         dialog.setVisible(true);
     }
+    public void apagar(){
+     System.out.println("Deletando a conta...");
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        try {
+            pessoaFisicaDAO.deletar(getPessoaFisica().getId());
+            
+        } catch (Exception e) {
+            Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE, null, e);
+        }
+       
+    }
 
     public void updateInterface() {
 
@@ -152,7 +240,8 @@ public class PessoaFisicaController {
         getPessoaFisicaGUI().getCpfFormattedTextField().setBackground(Color.red);
         getPessoaFisicaGUI().repaint();
     }
-        public void setBackgroundAll() {
+
+    public void setBackgroundAll() {
         getPessoaFisicaGUI().getNomeTextField().setBackground(Color.white);
         getEnderecoController().setBackgroundAll();
         getPessoaFisicaGUI().getTelefoneFormattedTextField().setBackground(Color.white);
@@ -161,7 +250,29 @@ public class PessoaFisicaController {
         getPessoaFisicaGUI().repaint();
     }
 
-    public void apaga(){
+    public void setAtualizar(boolean aflag) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.ipady = 15;
+        gbc.gridwidth=1;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+
+       
+        if (aflag) {
+            getPessoaFisicaGUI().getPanelsouth().add(new JLabel(), gbc);
+            getPessoaFisicaGUI().getSalvar().setVisible(aflag);
+            getPessoaFisicaGUI().getCancelar().setVisible(aflag);
+        } else {
+            getPessoaFisicaGUI().getPanelsouth().add(getPessoaFisicaGUI().getAtualizar(), gbc);
+            getPessoaFisicaGUI().getSalvar().setVisible(aflag);
+            getPessoaFisicaGUI().getCancelar().setVisible(aflag);
+        }
+
+    }
+
+    public void apaga() {
         new PessoaFisicaDAO().deletar(getPessoaFisica().getId());
         updateInterface();
     }
@@ -189,11 +300,13 @@ public class PessoaFisicaController {
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
         getPessoaFisicaGUI().getNomeTextField().setText(pessoaFisica.getNome());
+        System.out.println(pessoaFisica.getEndereco());
         getEnderecoController().setEndereco(pessoaFisica.getEndereco());
         getPessoaFisicaGUI().getTelefoneFormattedTextField().setText(pessoaFisica.getTelefone());
         getPessoaFisicaGUI().getRendaAtualTextField().setText(String.valueOf(pessoaFisica.getRendaAtual()));
         getPessoaFisicaGUI().getCpfFormattedTextField().setText(pessoaFisica.getCpf());
         addFocusListener();
+        getPessoaFisicaGUI().repaint();
     }
 
     public boolean isCadastrado() {
@@ -210,6 +323,12 @@ public class PessoaFisicaController {
 
     public void setLoginGUI(LoginGUI loginGUI) {
         this.loginGUI = loginGUI;
+    }
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
     }
 
 }

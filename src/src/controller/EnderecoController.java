@@ -54,6 +54,7 @@ public class EnderecoController {
     }
 
     public void setEndereco(String endereco) {
+        this.endereco = endereco;
         String[] current = endereco.split("- -");
         getEnderecoGUI().getRuaTextField().setText(current[0]);
         getEnderecoGUI().getNumeroTextField().setText(current[1]);
@@ -64,7 +65,7 @@ public class EnderecoController {
         getEnderecoGUI().getCepTextField().setText(current[6]);
         addFocusListeners();
         getEnderecoGUI().repaint();
-        this.endereco = endereco;
+        
     }
 
     public void setErroAll(){

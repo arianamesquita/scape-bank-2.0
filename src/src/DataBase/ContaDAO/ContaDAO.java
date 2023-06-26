@@ -2,6 +2,7 @@ package DataBase.ContaDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,9 +54,9 @@ public class ContaDAO {
             pstm.execute();
 
             if(pstm.getUpdateCount()>0){
-                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+                System.out.println("Salvo com sucesso!");
             } else 
-                JOptionPane.showMessageDialog(null, "Não foi possível inserir!");
+                System.out.println("Não foi possível inserir!");
 
             conexao.Desconecta();
         } catch (Exception e){
@@ -87,10 +88,26 @@ public class ContaDAO {
         } 
     
     }
+    public void atualizar(Conta conta) throws SQLException{
+             Conexao conexao = null;
+        System.out.println(conta);
+
+        String sql = "UPDATE conta SET login = ?, senhaConta = ? WHERE id = ?";
+
+        conexao = Factory.creatConnectionToMySQL();
+        conexao.Conecta();
+        conexao.setPstmt(conexao.getConnection().prepareStatement(sql));
+        conexao.getPstmt().setString(1, conta.getLogin());
+        conexao.getPstmt().setString(2, conta.getSenhaConta());
+        conexao.getPstmt().setInt(3, conta.getId());
+
+        conexao.getPstmt().executeUpdate();
+        conexao.Desconecta();
+    }
 
     public void update(Conta conta){
 
-        String sql = "update conta set numeroCartao = ?, login = ?, senha = ?, " + 
+        String sql = "update conta set numeroCartao = ?, login = ?, senhaConta = ?, " + 
                     "chavePix = ?, senhaConta = ?) values" + 
                      "(?,?,?,?,?)";
 

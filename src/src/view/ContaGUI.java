@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,6 +20,7 @@ public class ContaGUI extends JPanel {
     private JtextField loginField, conLoginField, senhaField, conSenhaField;
     private Jbutton salvar, cancelar, atualizar;
     private PaintMenu paintMenu;
+    private JPanel panelnorth, panelcenter,panelsouth;
 
     public ContaGUI() {
         Font fonte = new Font("Arial", Font.PLAIN, 15);
@@ -57,11 +57,12 @@ public class ContaGUI extends JPanel {
         conSenhaField.setHorizontalAlignment(JtextField.CENTER);
 
         this.salvar = new Jbutton("salvar");
-        salvar.setColors(Color.gray);
+       
 
         this.cancelar = new Jbutton("cancelar");
+        this.atualizar = new Jbutton("atualizar");
 
-        JPanel panelnorth = new JPanel(new GridBagLayout());
+        this. panelnorth = new JPanel(new GridBagLayout());
         panelnorth.setOpaque(false);
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.fill = GridBagConstraints.BOTH;
@@ -93,7 +94,7 @@ public class ContaGUI extends JPanel {
         panelnorth.add(conLoginLabel, gbc1);
 
 
-        JPanel panelcenter = new JPanel(new GridBagLayout());
+        this. panelcenter = new JPanel(new GridBagLayout());
         panelcenter.setOpaque(false);
 
         GridBagConstraints gbc2 = new GridBagConstraints();
@@ -123,12 +124,13 @@ public class ContaGUI extends JPanel {
         gbc2.gridy = 1;
         panelcenter.add(conSenhaLabel, gbc2);
 
-        JPanel panelsouth = new JPanel(new GridBagLayout());
+        this. panelsouth = new JPanel(new GridBagLayout());
         panelsouth.setOpaque(false);
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.fill = GridBagConstraints.BOTH;
         gbc3.insets = new Insets(5, 10, 5, 5);
         gbc3.weightx = 1.0;
+        gbc3.ipady= 20;
        
 
         gbc3.gridx = 0;
@@ -268,6 +270,30 @@ public class ContaGUI extends JPanel {
 
     public void setPaintMenu(PaintMenu paintMenu) {
         this.paintMenu = paintMenu;
+    }
+
+    public JPanel getPanelnorth() {
+        return panelnorth;
+    }
+
+    public void setPanelnorth(JPanel panelnorth) {
+        this.panelnorth = panelnorth;
+    }
+
+    public JPanel getPanelcenter() {
+        return panelcenter;
+    }
+
+    public void setPanelcenter(JPanel panelcenter) {
+        this.panelcenter = panelcenter;
+    }
+
+    public JPanel getPanelsouth() {
+        return panelsouth;
+    }
+
+    public void setPanelsouth(JPanel panelsouth) {
+        this.panelsouth = panelsouth;
     }
 
 }

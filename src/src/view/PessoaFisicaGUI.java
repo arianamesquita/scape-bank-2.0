@@ -23,9 +23,10 @@ public class PessoaFisicaGUI extends JPanel {
     private JLabel nomeLabel, cpfLabel, telefoneLabel, rendaAtual, enderecoLabel;
     private JtextField nomeTextField, rendaAtualTextField;
     private JFormattedTextFieldCustom cpfFormattedTextField, telefoneFormattedTextField;
-    private Jbutton salvar, cancelar;
+    private Jbutton salvar, cancelar, atualizar;
     private EnderecoGUI enderecoGUI;
     private view.CustomComponents.PaintMenu paintMenu;
+    private JPanel panelnorth,panelcenter,panelsouth;
 
     public PessoaFisicaGUI(EnderecoGUI enderecoGUI) {
         Font fonte = new Font("Arial", Font.PLAIN, 15);
@@ -62,12 +63,13 @@ public class PessoaFisicaGUI extends JPanel {
 
         salvar = new Jbutton("salvar");
         cancelar = new Jbutton("Cancelar");
+        atualizar = new Jbutton("atualizar");
 
         this.enderecoGUI = enderecoGUI;
 
    
 
-        JPanel panelnorth = new JPanel(new GridBagLayout());
+        this.panelnorth = new JPanel(new GridBagLayout());
         panelnorth.setOpaque(false);
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.insets = new Insets(5, 10, 5, 5);
@@ -121,7 +123,7 @@ public class PessoaFisicaGUI extends JPanel {
         gbc1.gridwidth = 2;
         panelnorth.add(rendaAtualTextField, gbc1);
 
-        JPanel panelcenter = new JPanel(new GridBagLayout());
+        this.panelcenter = new JPanel(new GridBagLayout());
         panelcenter.setOpaque(false);
          
         GridBagConstraints gbc2 = new GridBagConstraints();
@@ -143,7 +145,7 @@ public class PessoaFisicaGUI extends JPanel {
         panelcenter.add(enderecoGUI, gbc2);
 
    
-        JPanel panelsouth = new JPanel(new GridBagLayout());
+        this.panelsouth = new JPanel(new GridBagLayout());
         panelsouth.setOpaque(false);
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.fill = GridBagConstraints.BOTH;
@@ -311,6 +313,38 @@ public class PessoaFisicaGUI extends JPanel {
 
     public void setEnderecoGUI(EnderecoGUI enderecoGUI) {
         this.enderecoGUI = enderecoGUI;
+    }
+
+    public Jbutton getAtualizar() {
+        return atualizar;
+    }
+
+    public void setAtualizar(Jbutton atualizar) {
+        this.atualizar = atualizar;
+    }
+
+    public JPanel getPanelnorth() {
+        return panelnorth;
+    }
+
+    public void setPanelnorth(JPanel panelnorth) {
+        this.panelnorth = panelnorth;
+    }
+
+    public JPanel getPanelcenter() {
+        return panelcenter;
+    }
+
+    public void setPanelcenter(JPanel panelcenter) {
+        this.panelcenter = panelcenter;
+    }
+
+    public JPanel getPanelsouth() {
+        return panelsouth;
+    }
+
+    public void setPanelsouth(JPanel panelsouth) {
+        this.panelsouth = panelsouth;
     }
     
 }
