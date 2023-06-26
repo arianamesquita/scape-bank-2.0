@@ -42,7 +42,7 @@ public class PessoaFisica extends Pessoa {
     }
 
     /**
-     *
+     * cadastra cpf;
      * @param cpf parametro do método setCpf que recebe cpf;
      */
     public void setCpf(String cpf) {
