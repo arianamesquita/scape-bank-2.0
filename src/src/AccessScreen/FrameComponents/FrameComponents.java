@@ -165,7 +165,7 @@ public class FrameComponents extends JPanel {
          * qualquer fica mais fácil fazer as modificações caso sejam necessárias.
          * 
          */
-        LabelForm passField = new LabelForm("digite sua senha:$", ColorFontPaletas.font7(),
+        LabelForm passField = new LabelForm("digite sua senha:", ColorFontPaletas.font7(),
                 ColorFontPaletas.darkGray(), 740, 380, 260, 24);
         JPF = new JPasswordField(passField.getText());
         JPF.setBounds(passField.getX(), passField.getY(), passField.getWidth(), passField.getHeight());
