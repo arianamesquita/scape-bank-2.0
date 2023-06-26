@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author ArianaMesquita
+ * classe que cria Pessoa
  */
 abstract class Pessoa implements Serializable {
 

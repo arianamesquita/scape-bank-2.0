@@ -2,6 +2,7 @@ package model;
 
 /**
  * @author ArianaMesquita
+ * classe que cria Pagamentos;
  */
 public class Pagamentos {
 
