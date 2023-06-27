@@ -44,7 +44,6 @@ public class PagamentosController {
         conta.setNumeroContaDestino(pagamentosField.getDestinField().getText());
         conta.setId(36480); //pegar o id da Conta conectada.
 
-        System.out.println("Transação executada com sucesso.");
 
         TransacaoDAO dao = new TransacaoDAO();
 

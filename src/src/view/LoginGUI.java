@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -29,7 +28,7 @@ public class LoginGUI extends Jframe  {
         setTitle("Scape Bank");
         setLayout(new BorderLayout());
         setExtendedState(MAXIMIZED_HORIZ);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.panelCadastro = new JPanel();
@@ -85,7 +84,7 @@ public class LoginGUI extends Jframe  {
 
         add(cadastroGUI, BorderLayout.CENTER);
         cadastroGUI.setVisible(true);
-        setMinimumSize(new Dimension(1400, 700));
+      
 
         repaint();
         setSize(cadastroGUI.getSize());

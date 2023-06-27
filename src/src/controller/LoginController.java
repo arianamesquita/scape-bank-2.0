@@ -78,7 +78,7 @@ private void verificaUser() {
             getLoginGUI().getPanelCadastro().setVisible(true);
             getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().setVisible(true);
             getLoginGUI().repaint();   
-            getLoginGUI().setSize(getLoginGUI().getMinimumSize());
+          
 
         } else if (e.getSource() == getLoginGUI().getPessoaFisicaController().getPessoaFisicaGUI().getCancelar()) {
             getLoginGUI().remove(getLoginGUI().getPanelCadastro());

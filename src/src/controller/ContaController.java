@@ -61,32 +61,35 @@ public class ContaController implements ActionListener {
         SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
             @Override
             protected Void doInBackground() throws Exception {
-
                 conta = new Conta();
                 pagamentos = new Pagamentos();
+
                 progressBar.setValue(25);
+
                 conta.setLogin(getContaGUI().getLoginField().getText());
                 conta.setSenha(null);
                 conta.setSenhaConta(getContaGUI().getSenhaField().getText());
                 conta.setCliente(getPessoaFisica());
                 pagamentos.setChavePix(null);
                 conta.setPagamentos(pagamentos);
+
                 progressBar.setValue(50);
 
-                System.out.println("Criando conta...");
                 ContaDAO contaDAO = new ContaDAO();
 
                 try {
-                    System.out.println("2");
                     contaDAO.criarConta(conta);
                     progressBar.setValue(75);
 
                 } catch (Exception e) {
                     Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE, null, e);
                 }
+
                 listar();
+
                 progressBar.setValue(100);
-                JOptionPane.showMessageDialog(getLoginGUI(), "usuario cadastrado com sucesso!!");
+
+                JOptionPane.showMessageDialog(progressBar, "usuario cadastrado com sucesso!!");
 
                 getLoginGUI().add(getLoginGUI().getCadastroGUI(), BorderLayout.CENTER);
                 getLoginGUI().remove(getLoginGUI().getPanelCadastro());
@@ -186,7 +189,6 @@ public class ContaController implements ActionListener {
 
     public void deletar() {
         
-        System.out.println("Deletando a conta...");
         ContaDAO contaDAO = new ContaDAO();
         try {
             contaDAO.removeById(conta.getId());

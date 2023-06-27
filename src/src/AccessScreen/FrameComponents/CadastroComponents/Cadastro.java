@@ -116,7 +116,6 @@ public class Cadastro extends JPanel {
         getButtons2()[0].addActionListener(e -> {
 
             if (count[0]==0){
-                System.out.println("b");
             } else if (count[0]==1) {
                 getButtons()[0].doClick();
                 setBoundsbutton(getButtons(), 0);
@@ -182,7 +181,6 @@ public class Cadastro extends JPanel {
                 repaint();
                 count[0]=2;
             } else if (count[0]==2) {
-                System.out.println("a");
             }
         });
 
@@ -302,7 +300,6 @@ public class Cadastro extends JPanel {
         getButtons2()[0].addActionListener(e -> {
 
             if (count[0]==0){
-                System.out.println("b");
             } else if (count[0]==1) {
                 getButtons()[0].doClick();
                 count[0]=0;
@@ -327,7 +324,6 @@ public class Cadastro extends JPanel {
                 getButtons()[2].doClick();
                 count[0]=2;
             } else if (count[0]==2) {
-                System.out.println("a");
             }
         });
     }

@@ -27,7 +27,6 @@ public class PessoaFisicaController {
     private PessoaFisicaGUI pessoaFisicaGUI;
     private EnderecoController enderecoController;
     private PessoaFisica pessoaFisica;
-    private boolean cadastrado;
     private LoginGUI loginGUI;
     private TelaPrincipalView ePrincipalView;
 
@@ -79,19 +78,20 @@ public class PessoaFisicaController {
                 progressBar.setValue(25);
 
 
-                System.out.println(getPessoaFisica().getId()+"iddddddddddddddddddddddd");
                 PessoaFisica pessoaFisica = new PessoaFisica(getPessoaFisica().getId(), nome, endereco, telefone, rendaAtual, cpf);
                 setPessoaFisica(pessoaFisica);
                 PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
                 progressBar.setValue(50);
                 try {
+
                     pessoaFisicaDAO.atualizar(pessoaFisica);
+
                     progressBar.setValue(75);
-                    setCadastrado(true);
-                    
                     pessoaFisicaGUI.repaint();
                     progressBar.setValue(100);
+
                     JOptionPane.showMessageDialog(progressBar," usuario atualizado com sucesso");
+
                     setPessoaFisica(pessoaFisica);
                     getePrincipalView().setInvisible();
                     getePrincipalView().getCards().setVisible(true);
@@ -162,9 +162,6 @@ public class PessoaFisicaController {
                     pessoaFisicaDAO.criar(pessoaFisica);
                     progressBar.setValue(75);
 
-                    setCadastrado(true);
-
-                    System.out.println("Pessoa gravada com sucesso");
 
                     progressBar.setValue(100);
 
@@ -198,7 +195,6 @@ public class PessoaFisicaController {
         dialog.setVisible(true);
     }
     public void apagar(){
-     System.out.println("Deletando a conta...");
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         try {
             pessoaFisicaDAO.deletar(getPessoaFisica().getId());
@@ -300,7 +296,6 @@ public class PessoaFisicaController {
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
         getPessoaFisicaGUI().getNomeTextField().setText(pessoaFisica.getNome());
-        System.out.println(pessoaFisica.getEndereco());
         getEnderecoController().setEndereco(pessoaFisica.getEndereco());
         getPessoaFisicaGUI().getTelefoneFormattedTextField().setText(pessoaFisica.getTelefone());
         getPessoaFisicaGUI().getRendaAtualTextField().setText(String.valueOf(pessoaFisica.getRendaAtual()));
@@ -309,13 +304,6 @@ public class PessoaFisicaController {
         getPessoaFisicaGUI().repaint();
     }
 
-    public boolean isCadastrado() {
-        return cadastrado;
-    }
-
-    public void setCadastrado(boolean cadastrado) {
-        this.cadastrado = cadastrado;
-    }
 
     public LoginGUI getLoginGUI() {
         return loginGUI;
