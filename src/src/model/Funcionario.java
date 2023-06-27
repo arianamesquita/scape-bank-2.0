@@ -75,5 +75,10 @@ public class Funcionario extends PessoaFisica {
         this.codigoBanco = codigoBanco;
     }
 
+    @Override
+    public String toString() {
+        return "Funcionario "+super.toString()+"[cargo=" + cargo + ", codigoBanco=" + codigoBanco + "]";
+    }
+
 
 }
