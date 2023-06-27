@@ -6,9 +6,9 @@ package model;
  * classe que cria Funcionario
  */
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends PessoaFisica {
 
-    private String cargo, cpf;
+    private String cargo;
     private int codigoBanco;
 
 
@@ -37,10 +37,10 @@ public class Funcionario extends Pessoa {
      */
     public Funcionario(int id, String nome, String endereco, String telefone, double salario, String cargo,
             int codigoBanco,String cpf) {
-        super(id, nome, endereco, telefone, salario);
+        super(id, nome, endereco, telefone, salario,cpf);
         this.cargo = cargo;
         this.codigoBanco = codigoBanco;
-        setDocIdentificacao(cpf);
+        
     }
 
     /**
@@ -75,29 +75,5 @@ public class Funcionario extends Pessoa {
         this.codigoBanco = codigoBanco;
     }
 
-
-    @Override
-    public String getDocIdentificacao() {
-        return getCpf();
-    }
-    @Override
-    public void setDocIdentificacao(String identificacao) {
-       setCpf(identificacao);
-        
-    }
-    /**
-     *
-     * @return método da classe Funcionario que retorna cpf;
-     */
-    protected String getCpf() {
-        return cpf;
-    }
-    /**
-     * cadastra cpf;
-     * @param cpf = parametro do método setCpf que recebe cpf;
-     */
-    protected void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
 }
