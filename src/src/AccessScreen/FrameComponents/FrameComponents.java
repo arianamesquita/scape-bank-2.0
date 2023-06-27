@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 
 import AccessScreen.Custom.ColorFontPaletas;
 import AccessScreen.Custom.ImageCustom.Images;
+import controller.Service.createFocusListenerTextField2;
+import controller.Service.CreateFocusListenerPasswordField;
 
 /**
  * 
@@ -155,6 +157,7 @@ public class FrameComponents extends JPanel {
         JTF.setForeground(textField.getColor());
         JTF.setFont(textField.getFont());
         JTF.setBackground(ColorFontPaletas.lightGray());
+        JTF.addFocusListener(new createFocusListenerTextField2(JTF));
         JTF.setVisible(true);
         add(JTF); // adiciona o textField ou campo de texto na tela inicial, ou seja, no frame
                   // criado para ela.
@@ -169,6 +172,7 @@ public class FrameComponents extends JPanel {
                 ColorFontPaletas.darkGray(), 740, 380, 260, 24);
         JPF = new JPasswordField(passField.getText());
         JPF.setBounds(passField.getX(), passField.getY(), passField.getWidth(), passField.getHeight());
+        JPF.addFocusListener( new CreateFocusListenerPasswordField(JPF));
         JPF.setForeground(passField.getColor());
         JPF.setFont(passField.getFont());
         JPF.setBackground(ColorFontPaletas.lightGray());

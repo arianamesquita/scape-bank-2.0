@@ -8,16 +8,18 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import AccessScreen.Custom.ColorFontPaletas;
 import view.CustomComponents.JFormattedTextFieldCustom;
 
 public class Service {
-    
+
     public static class createFocusListenerTextField implements FocusListener {
-        private  JTextField textField;
-        private  String hint;
+        private JTextField textField;
+        private String hint;
 
         public createFocusListenerTextField(JTextField textField) {
             this.textField = textField;
@@ -45,6 +47,41 @@ public class Service {
             if (getTextField().getText().isEmpty()) {
                 getTextField().setText(getHint());
                 getTextField().setBackground(Color.red);
+            }
+        }
+    }
+    public static class createFocusListenerTextField2 implements FocusListener {
+        private JTextField textField;
+        private String hint;
+
+        public createFocusListenerTextField2(JTextField textField) {
+            this.textField = textField;
+            this.hint = textField.getText();
+        }
+
+        public JTextField getTextField() {
+            return textField;
+        }
+
+        public String getHint() {
+            return hint;
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (getTextField().getText().equals(getHint())) {
+                getTextField().setText("");
+                getTextField().setBackground(ColorFontPaletas.lightGray());
+                getTextField().setForeground(ColorFontPaletas.darkGray());
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (getTextField().getText().isEmpty()) {
+                getTextField().setText(getHint());
+                getTextField().setBackground(Color.red);
+                getTextField().setForeground(Color.black);
             }
         }
     }
@@ -79,14 +116,51 @@ public class Service {
 
         @Override
         public void focusLost(FocusEvent e) {
-            if (getfTextField().getText().equals(getHint())||getfTextField().getText().isEmpty()) {
+            if (getfTextField().getText().equals(getHint()) || getfTextField().getText().isEmpty()) {
                 getfTextField().setText("getHint()");
                 getfTextField().setBackground(Color.red);
             }
         }
 
     }
-        public static JFormattedTextFieldCustom createFormattedTextField(String mask, char placeholder) {
+
+    public static class CreateFocusListenerPasswordField implements FocusListener {
+        private JPasswordField jPasswordField;
+        private String hint;
+
+        public CreateFocusListenerPasswordField(JPasswordField jPasswordField) {
+            this.jPasswordField = jPasswordField;
+            this.hint = String.valueOf(getJPasswordField().getPassword());
+        }
+
+        public JPasswordField getJPasswordField() {
+            return jPasswordField;
+        }
+
+        public String getHint() {
+            return hint;
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (String.valueOf(getJPasswordField().getPassword()).equals(getHint())) {
+                getJPasswordField().setText("");
+                getJPasswordField().setBackground(ColorFontPaletas.lightGray());
+                getJPasswordField().setForeground(ColorFontPaletas.darkGray());
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (String.valueOf(getJPasswordField().getPassword()).isEmpty()) {
+                getJPasswordField().setText(getHint());
+                getJPasswordField().setBackground(Color.RED);
+                getJPasswordField().setForeground(Color.black);
+            }
+        }
+    }
+
+    public static JFormattedTextFieldCustom createFormattedTextField(String mask, char placeholder) {
         try {
             MaskFormatter formatter = new MaskFormatter(mask);
             formatter.setPlaceholderCharacter(placeholder);
@@ -96,7 +170,8 @@ public class Service {
             return new JFormattedTextFieldCustom();
         }
     }
-    public  static ImageIcon getImage(String imageURL){
+
+    public static ImageIcon getImage(String imageURL) {
         URL url;
         try {
             url = new URL(imageURL);
@@ -105,7 +180,7 @@ public class Service {
             e.printStackTrace();
         }
         return null;
-        
+
     }
-    
+
 }
