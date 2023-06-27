@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import MainScreen.Components.Custom.ColorPaleta;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -8,15 +11,11 @@ import java.util.List;
 public class RainbowPanel extends JPanel {
 
     private static final List<Color> RAINBOW_COLORS = Arrays.asList(
-            new Color(0xFF0018), // Vermelho
-            new Color(0xFFA52C), // Laranja
-            new Color(0xFFFF00), // Amarelo
-            new Color(0x008018), // Verde
-            new Color(0x0000F9), // Azul
-            new Color(0xA000C8)  // Roxo
+            ColorPaleta.buttonsColor()
+          
     );
 
-    private static final String TEXT = "Scape Bank \n de um scape na burocracia!!";
+    private static final String TEXT = "Scape Bank \n     de um scape na burocracia!!";
 
     public RainbowPanel() {
        
@@ -29,7 +28,7 @@ public class RainbowPanel extends JPanel {
         int x = 10;
         int y = getHeight() / 2;
 
-        Font font = new Font("Arial", Font.BOLD, 30);
+        Font font = new Font("Arial", Font.BOLD, 35);
         FontMetrics fontMetrics = g.getFontMetrics(font);
 
         String[] lines = TEXT.split("\n");
@@ -54,19 +53,5 @@ public class RainbowPanel extends JPanel {
             x = 10;
             y += fontMetrics.getHeight();
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Rainbow Panel");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            RainbowPanel panel = new RainbowPanel();
-            frame.getContentPane().add(panel);
-
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
     }
 }
