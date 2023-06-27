@@ -13,12 +13,18 @@ import DataBase.Factory;
 import model.Agencia;
 import model.Banco;
 
+
 public class BancoAgenciaDAO{
 
     Conexao conexao;
     PreparedStatement pstm;
     ResultSet rset;
 
+    /**
+     * Cria uma nova agência no banco de dados.
+     *
+     * @param agencia A agência a ser criada.
+     */
     public void criarAgencia(Agencia agencia) {
 
         String sql = "insert into bancoAgencia(codigoBanco, numeroAgencia, enderecoAgencia," +
@@ -47,6 +53,11 @@ public class BancoAgenciaDAO{
         } 
     }
 
+    /**
+     * Cria um novo banco no banco de dados.
+     *
+     * @param banco O banco a ser criado.
+     */
     public void criarBanco(Banco banco) {
 
         String sql = "insert into bancoAgencia(nomeBanco, codigoBanco) values (?,?)";
@@ -72,6 +83,11 @@ public class BancoAgenciaDAO{
         } 
     }
 
+    /**
+     * Remove um banco do banco de dados com base no código do banco.
+     *
+     * @param codigoBanco O código do banco a ser removido.
+     */
     public void removeById(int codigoBanco){
         String sql = "delete from bancoAgencia where codigoBanco = ?";
 
@@ -95,6 +111,11 @@ public class BancoAgenciaDAO{
         } 
     }
 
+    /**
+     * Remove uma agência do banco de dados com base no número da agência.
+     *
+     * @param numAgencia O número da agência a ser removida.
+     */
     public void removeByNumAgencia(String numAgencia){
         String sql = "delete from bancoAgencia where numeroAgencia = ?";
 
@@ -118,6 +139,11 @@ public class BancoAgenciaDAO{
         } 
     }
 
+    /**
+     * Atualiza os dados de uma agência no banco de dados.
+     *
+     * @param agencia A agência com os dados atualizados.
+     */
     public void update (Agencia agencia){
         String sql = "update bancoAgencia set enderecoAgencia = ?, telefoneAgencia = ? where numeroAgencia = ?";
 
@@ -143,6 +169,11 @@ public class BancoAgenciaDAO{
         } 
     }
 
+    /**
+     * Retorna uma lista de todas as agências do banco de dados.
+     *
+     * @return Uma lista de agências.
+     */
     public List<Agencia> getAgencias(){
 
         String sql = "select * from bancoAgencia";
@@ -178,6 +209,11 @@ public class BancoAgenciaDAO{
         return agencias;
     }
 
+    /**
+     * Retorna uma lista de todos os bancos do banco de dados.
+     *
+     * @return Uma lista de bancos.
+     */
     public List<Banco> getBancos(){
 
         String sql = "select nomeBanco, codigoBanco from bancoAgencia;";
@@ -208,6 +244,12 @@ public class BancoAgenciaDAO{
         return bancos;
     }
 
+    /**
+     * Pesquisa uma agência com base no número da agência.
+     *
+     * @param numAgencia O número da agência a ser pesquisada.
+     * @return A agência encontrada ou null se não encontrada.
+     */
     public Agencia searchByCode(String numAgencia){
 
         String sql = "Select * from bancoAgencia where numeroAgencia = ?";
@@ -239,6 +281,11 @@ public class BancoAgenciaDAO{
 
     }
 
+    /**
+     * Gera um código de banco único para ser usado ao criar um novo banco.
+     *
+     * @return O código de banco gerado.
+     */
     public static int geraCodBanco() {
         int count = 0;
         List<Banco> bancos = new BancoAgenciaDAO().getBancos();
@@ -252,6 +299,11 @@ public class BancoAgenciaDAO{
         return codigoBanco;
     }
 
+    /**
+     * Gera um número de agência único para ser usado ao criar uma nova agência.
+     *
+     * @return O número de agência gerado.
+     */
     public static String geraNumAgencia() {
         List<Agencia> agencias = new BancoAgenciaDAO().getAgencias();
         String numeroAg = null;
