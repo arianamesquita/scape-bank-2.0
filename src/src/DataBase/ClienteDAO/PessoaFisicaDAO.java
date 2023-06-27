@@ -29,7 +29,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         conexao.getPstmt().setString(5, null);
         conexao.getPstmt().setString(6, null);
         conexao.getPstmt().setDouble(7, objeto.getRendaAtual());
-        conexao.getPstmt().setString(8, objeto.getCpf());
+        conexao.getPstmt().setString(8, objeto.getDocIdentificacao());
         conexao.getPstmt().executeUpdate();
         conexao.Desconecta();
     }

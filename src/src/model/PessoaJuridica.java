@@ -20,25 +20,33 @@ public class PessoaJuridica extends Pessoa {
      */
     public PessoaJuridica(int id, String nome, String endereco, String telefone, double rendaAtual, String cpnj) {
         super(id, nome, endereco, telefone, rendaAtual);
-        this.cpnj = cpnj;
+        setDocIdentificacao(cpnj);;
     }
 
 
     public PessoaJuridica () { }
 
+
+    @Override
+    public String getDocIdentificacao() {
+       return getCpnj();
+    }
+    @Override
+    public void setDocIdentificacao(String identificacao) {
+        setCpnj(identificacao);
+    }
     /**
      *
      * @return método da classe PessoaJuridica que retorna cnpj;
      */
-    public String getCpnj() {
+    protected String getCpnj() {
         return cpnj;
     }
-
     /**
      * cadastra cnpj;
      * @param cpnj = parametro do método setCpnj que recebe cnpj;
      */
-    public void setCpnj(String cpnj) {
+    protected void setCpnj(String cpnj) {
         this.cpnj = cpnj;
     }
     

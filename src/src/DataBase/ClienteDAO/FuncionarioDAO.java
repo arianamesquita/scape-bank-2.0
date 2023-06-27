@@ -30,7 +30,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
             conexao.getPstmt().setString(4, objeto.getTelefone());
             conexao.getPstmt().setString(5, objeto.getCargo());
             conexao.getPstmt().setInt(6, objeto.getCodigoBanco());
-            conexao.getPstmt().setString(7, objeto.getCpf());
+            conexao.getPstmt().setString(7, objeto.getDocIdentificacao());
             conexao.getPstmt().setDouble(8, objeto.getRendaAtual());
 
             conexao.getPstmt().executeUpdate();

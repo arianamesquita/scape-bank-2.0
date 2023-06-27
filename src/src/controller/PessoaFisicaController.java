@@ -304,7 +304,7 @@ public class PessoaFisicaController {
         getEnderecoController().setEndereco(pessoaFisica.getEndereco());
         getPessoaFisicaGUI().getTelefoneFormattedTextField().setText(pessoaFisica.getTelefone());
         getPessoaFisicaGUI().getRendaAtualTextField().setText(String.valueOf(pessoaFisica.getRendaAtual()));
-        getPessoaFisicaGUI().getCpfFormattedTextField().setText(pessoaFisica.getCpf());
+        getPessoaFisicaGUI().getCpfFormattedTextField().setText(pessoaFisica.getDocIdentificacao());
         addFocusListener();
         getPessoaFisicaGUI().repaint();
     }

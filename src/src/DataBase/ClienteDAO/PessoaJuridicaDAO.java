@@ -30,7 +30,7 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
             conexao.getPstmt().setString(2, objeto.getNome());
             conexao.getPstmt().setString(3, objeto.getEndereco());
             conexao.getPstmt().setString(4, objeto.getTelefone());
-            conexao.getPstmt().setString(5, objeto.getCpnj());
+            conexao.getPstmt().setString(5, objeto.getDocIdentificacao());
             conexao.getPstmt().setString(6, null);
             conexao.getPstmt().setDouble(7, objeto.getRendaAtual());
             conexao.getPstmt().setString(8, null);

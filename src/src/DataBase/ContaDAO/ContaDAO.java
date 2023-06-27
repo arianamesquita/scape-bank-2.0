@@ -366,7 +366,7 @@ public class ContaDAO {
         String chavePix = null;
         int opcao = ran.nextInt(1,3);
         if (opcao == 1){
-            chavePix = pessoaFisica.getCpf();
+            chavePix = pessoaFisica.getDocIdentificacao();
         } else chavePix = pessoaFisica.getTelefone();
 
         return chavePix;

@@ -122,5 +122,8 @@ abstract class Pessoa implements Serializable {
         return "Pessoa [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
                 + ", rendaAtual=" + rendaAtual + "]";
     }
+    public abstract String getDocIdentificacao();
+
+    public abstract void setDocIdentificacao(String identificacao);
 
 }

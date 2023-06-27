@@ -30,14 +30,14 @@ public class PessoaFisica extends Pessoa {
      */
     public PessoaFisica(int id, String nome, String endereco, String telefone, double rendaAtual, String cpf) {
         super(id, nome, endereco, telefone, rendaAtual);
-        this.cpf = cpf;
+        setDocIdentificacao(cpf);
     }
 
     /**
      *
      * @return método da classe PessoaFisica que retorna cpf;
      */
-    public String getCpf() {
+    protected String getCpf() {
         return cpf;
     }
 
@@ -45,8 +45,18 @@ public class PessoaFisica extends Pessoa {
      * cadastra cpf;
      * @param cpf parametro do método setCpf que recebe cpf;
      */
-    public void setCpf(String cpf) {
+    protected void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    @Override
+    public String getDocIdentificacao() {
+       
+       return getCpf();
+    }
+    @Override
+    public void setDocIdentificacao(String identificacao) {
+       setCpf(identificacao);
+        
     }
     @Override
     public String toString() {

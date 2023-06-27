@@ -114,7 +114,7 @@ public class PessoaJuridicaController implements ActionListener {
         getEnderecoController().setEndereco(pessoaJuridica.getEndereco());
         getPessoaJuridicaGUI().getTelefoneFormattedTextField().setText(pessoaJuridica.getTelefone());
         getPessoaJuridicaGUI().getRendaAtualTextField().setText(String.valueOf(pessoaJuridica.getRendaAtual()));
-        getPessoaJuridicaGUI().getCnpJFormattedTextField().setText(pessoaJuridica.getCpnj());
+        getPessoaJuridicaGUI().getCnpJFormattedTextField().setText(pessoaJuridica.getDocIdentificacao());
         addFocusListener();
     }
 

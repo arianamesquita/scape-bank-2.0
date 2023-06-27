@@ -111,7 +111,7 @@ public class FuncionarioController implements ActionListener {
         getFuncionarioGUI().getsalarioLabelTextField().setText(String.valueOf(funcionario.getRendaAtual()));
         getFuncionarioGUI().getCargoTextField().setText(funcionario.getCargo());
         getFuncionarioGUI().getCodBancoJTextField().setText(String.valueOf(funcionario.getCodigoBanco()));
-        getFuncionarioGUI().getCpfFormattedTextField().setText(funcionario.getCpf());
+        getFuncionarioGUI().getCpfFormattedTextField().setText(funcionario.getDocIdentificacao());
         addFocusListener();
 
     }

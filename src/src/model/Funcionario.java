@@ -40,7 +40,7 @@ public class Funcionario extends Pessoa {
         super(id, nome, endereco, telefone, salario);
         this.cargo = cargo;
         this.codigoBanco = codigoBanco;
-        this.cpf=cpf;
+        setDocIdentificacao(cpf);
     }
 
     /**
@@ -75,19 +75,28 @@ public class Funcionario extends Pessoa {
         this.codigoBanco = codigoBanco;
     }
 
+
+    @Override
+    public String getDocIdentificacao() {
+        return getCpf();
+    }
+    @Override
+    public void setDocIdentificacao(String identificacao) {
+       setCpf(identificacao);
+        
+    }
     /**
      *
      * @return método da classe Funcionario que retorna cpf;
      */
-    public String getCpf() {
+    protected String getCpf() {
         return cpf;
     }
-
     /**
      * cadastra cpf;
      * @param cpf = parametro do método setCpf que recebe cpf;
      */
-    public void setCpf(String cpf) {
+    protected void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class PaintMenu extends JPanel{
+    
     private int rounded = 10;
   
     @Override
