@@ -12,6 +12,12 @@ import model.PessoaFisica;
 
 public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
+    /**
+     * Cria um novo registro de PessoaFisica no banco de dados.
+     *
+     * @param objeto O objeto PessoaFisica a ser criado.
+     * @throws SQLException Se ocorrer um erro durante a execução da consulta SQL.
+     */
     @Override
     public void criar(PessoaFisica objeto) throws SQLException {
 
@@ -34,6 +40,12 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         conexao.Desconecta();
     }
 
+    /**
+     * Retorna um objeto PessoaFisica com base no ID fornecido.
+     *
+     * @param id O ID do objeto a ser lido.
+     * @return O objeto PessoaFisica correspondente ao ID, ou null se não encontrado.
+     */
     @Override
     public PessoaFisica ler(int id) {
         Conexao conexao = null;
@@ -68,6 +80,12 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
     }
 
+    /**
+     * Atualiza um registro de PessoaFisica no banco de dados com base no objeto fornecido.
+     *
+     * @param objeto O objeto PessoaFisica a ser atualizado.
+     * @throws SQLException Se ocorrer um erro durante a execução da consulta SQL.
+     */
     @Override
     public void atualizar(PessoaFisica objeto) throws SQLException {
         Conexao conexao = null;
@@ -87,6 +105,11 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         conexao.Desconecta();
     }
 
+    /**
+     * Deleta um registro de PessoaFisica do banco de dados com base no ID fornecido.
+     *
+     * @param id O ID do objeto a ser deletado.
+     */
     @Override
     public void deletar(int id) {
         String sql = "DELETE FROM cliente WHERE id = ?";
@@ -111,6 +134,11 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         }
     }
 
+    /**
+     * Retorna uma lista de todos os registros de PessoaFisica do banco de dados.
+     *
+     * @return Uma lista contendo todos os objetos PessoaFisica.
+     */
     @Override
     public List<PessoaFisica> listarTodos() {
         List<PessoaFisica> listaPessoas = new ArrayList<>();
@@ -145,6 +173,11 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         return listaPessoas;
     }
 
+    /**
+     * Gera um novo ID para uma PessoaFisica.
+     *
+     * @return O novo ID gerado.
+     */
     public static int geraId() {
         int count = 0, idPF = 0;
         List<PessoaFisica> pessoasFisicas = new PessoaFisicaDAO().listarTodos();
