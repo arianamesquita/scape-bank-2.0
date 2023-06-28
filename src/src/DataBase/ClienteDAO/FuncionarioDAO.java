@@ -12,7 +12,16 @@ import DataBase.Factory;
 import DataBase.InterfaceDAO;
 import model.Funcionario;
 
+/**
+ * Classe responsável por acessar e manipular os dados dos funcionários no banco de dados.
+ */
 public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
+
+    /**
+     * Cria um novo registro de funcionário no banco de dados.
+     *
+     * @param objeto o objeto Funcionario a ser criado
+     */
     @Override
     public void criar(Funcionario objeto) {
         Conexao conexao = null;
@@ -44,6 +53,12 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
         }
     }
 
+    /**
+     * Lê um funcionário do banco de dados com base no ID fornecido.
+     *
+     * @param id o ID do funcionário a ser lido
+     * @return o objeto Funcionario correspondente ao ID, ou null se não for encontrado
+     */
     @Override
     public Funcionario ler(int id) {
         Conexao conexao = null;
@@ -80,6 +95,11 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
 
     }
 
+    /**
+     * Atualiza os dados de um funcionário existente no banco de dados.
+     *
+     * @param objeto o objeto Funcionario com os novos dados
+     */
     @Override
     public void atualizar(Funcionario objeto) {
         Conexao conexao = null;
@@ -113,6 +133,11 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
         }
     }
 
+    /**
+     * Deleta um funcionário do banco de dados com base no ID fornecido.
+     *
+     * @param id o ID do funcionário a ser deletado
+     */
     @Override
     public void deletar(int id) {
         String sql = "DELETE FROM funcionario WHERE id = ?";
@@ -137,6 +162,11 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
         }
     }
 
+    /**
+     * Lista todos os funcionários registrados no banco de dados.
+     *
+     * @return uma lista de objetos Funcionario com todos os funcionários registrados
+     */
     @Override
     public List<Funcionario> listarTodos() {
         List<Funcionario> listaPessoas = new ArrayList<>();
