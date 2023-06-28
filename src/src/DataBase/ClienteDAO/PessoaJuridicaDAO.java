@@ -12,9 +12,16 @@ import DataBase.Factory;
 import DataBase.InterfaceDAO;
 import model.PessoaJuridica;
 
+/**
+ * A classe PessoaJuridicaDAO implementa a interface InterfaceDAO e define as operações de acesso a dados para a entidade PessoaJuridica.
+ */
 public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
-   
 
+    /**
+     * Cria uma nova entrada para PessoaJuridica na tabela cliente do banco de dados.
+     *
+     * @param objeto o objeto PessoaJuridica a ser criado
+     */
     @Override
     public void criar(PessoaJuridica objeto) {
         Conexao conexao = null;
@@ -48,6 +55,12 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
         }
     }
 
+    /**
+     * Lê uma entrada de PessoaJuridica da tabela cliente com o ID fornecido.
+     *
+     * @param id o ID da PessoaJuridica a ser lida
+     * @return o objeto PessoaJuridica lido do banco de dados
+     */
     @Override
     public PessoaJuridica ler(int id) {
         Conexao conexao = null;
@@ -84,6 +97,12 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
         return pessoa;
 
     }
+
+    /**
+     * Atualiza os dados de uma entrada de PessoaJuridica na tabela cliente.
+     *
+     * @param objeto o objeto PessoaJuridica a ser atualizado
+     */
     @Override
     public void atualizar(PessoaJuridica objeto) {
         Conexao conexao = null;
@@ -111,6 +130,11 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
         }
     }
 
+    /**
+     * Deleta uma entrada de PessoaJuridica da tabela cliente com o ID fornecido.
+     *
+     * @param id o ID da PessoaJuridica a ser deletada
+     */
     @Override
     public void deletar(int id) {
         String sql = "DELETE FROM cliente WHERE id = ?";
@@ -135,6 +159,11 @@ public class PessoaJuridicaDAO implements InterfaceDAO<PessoaJuridica> {
         }
     }
 
+    /**
+     * Retorna uma lista de todas as entradas de PessoaJuridica na tabela cliente.
+     *
+     * @return uma lista contendo objetos PessoaJuridica presentes no banco de dados
+     */
     @Override
     public List<PessoaJuridica> listarTodos() {
         List<PessoaJuridica> listaPessoas = new ArrayList<>();
