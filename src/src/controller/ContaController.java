@@ -36,16 +36,31 @@ public class ContaController implements ActionListener {
 
     public ContaController() {
         this.contaGUI = new ContaGUI();
+        addActionListener();
 
     }
 
-    public ContaController(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
-
+    public void addActionListener() {
+        getContaGUI().getAtualizar().addActionListener(this);
+        getContaGUI().getSalvar().addActionListener(this);
     }
 
     public void updateInterface() {
         addListeners();
+    }
+
+    private void addListeners() {
+        setTextField();
+        addFocusListener();
+
+    }
+
+    private void setTextField() {
+        getContaGUI().getLoginField().setText("digite seu login");
+        getContaGUI().getConLoginField().setText("confirme seu login");
+        getContaGUI().getSenhaField().setText("digite sua senha");
+        getContaGUI().getConSenhaField().setText("comfirme sua senha");
+
     }
 
     private void salvaInformacoes() {
@@ -85,8 +100,6 @@ public class ContaController implements ActionListener {
                     Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE, null, e);
                 }
 
-                listar();
-
                 progressBar.setValue(100);
 
                 JOptionPane.showMessageDialog(progressBar, "usuario cadastrado com sucesso!!");
@@ -109,29 +122,8 @@ public class ContaController implements ActionListener {
         dialog.setVisible(true);
     }
 
-    public void setAtualizar(boolean aflag) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5, 10, 5, 5);
-        gbc.ipady = 15;
-        gbc.gridwidth = 1;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+    private void atualizar() {
 
-        if (aflag) {
-            getContaGUI().getPanelsouth().add(new JLabel(), gbc);
-            getContaGUI().getSalvar().setVisible(aflag);
-            getContaGUI().getCancelar().setVisible(aflag);
-        } else {
-            getContaGUI().getPanelsouth().add(getContaGUI().getAtualizar(), gbc);
-            getContaGUI().getSalvar().setVisible(aflag);
-            getContaGUI().getCancelar().setVisible(aflag);
-        }
-
-    }
-
-    private void atualizar() {        
-        
         JDialog dialog = new JDialog(getLoginGUI(), "Salvando...", true);
         JProgressBar progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
@@ -146,32 +138,30 @@ public class ContaController implements ActionListener {
 
                 String login = getContaGUI().getLoginField().getText();
                 String senha = getContaGUI().getSenhaField().getText();
-  
+
                 progressBar.setValue(25);
 
                 Conta conta = new Conta(getePrincipalView().getConta().getId(), login, senha);
-                
-             
+
                 ContaDAO contaDAO = new ContaDAO();
                 progressBar.setValue(50);
                 try {
                     contaDAO.atualizar(conta);
-                    progressBar.setValue(75);  
+                    progressBar.setValue(75);
                     getContaGUI().repaint();
-                    progressBar.setValue(100);
-                    JOptionPane.showMessageDialog(progressBar," usuario e senha atualizado com sucesso");
-                    getePrincipalView().setInvisible();
-                    getePrincipalView().getCards().setVisible(true);
-                    
-            
+
                 } catch (SQLException e) {
-                    Logger.getLogger(PessoaFisicaController.class.getName()).log(Level.SEVERE,
+                    Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE,
                             "Erro ao inserir dados na tabela pessoa", e);
                     JOptionPane.showMessageDialog(getContaGUI(),
                             "erro: dados informados corretamente tende denovo");
                     updateInterface();
 
                 }
+                progressBar.setValue(100);
+                JOptionPane.showMessageDialog(progressBar, " usuario e senha atualizado com sucesso");
+                getePrincipalView().setInvisible();
+                getePrincipalView().getCards().setVisible(true);
 
                 return null;
             }
@@ -188,7 +178,7 @@ public class ContaController implements ActionListener {
     }
 
     public void deletar() {
-        
+
         ContaDAO contaDAO = new ContaDAO();
         try {
             contaDAO.removeById(conta.getId());
@@ -199,23 +189,11 @@ public class ContaController implements ActionListener {
         listar();
     }
 
-    private void setTextField() {
-        getContaGUI().getLoginField().setText("digite seu login");
-        getContaGUI().getConLoginField().setText("confirme seu login");
-        getContaGUI().getSenhaField().setText("digite sua senha");
-        getContaGUI().getConSenhaField().setText("comfirme sua senha");
-
-    }
-
     private void listar() {
         ContaDAO dao = new ContaDAO();
 
         String[] colunas = { "id", "numeroConta", "numeroCartao", "login", "senha", "numeroAgencia", "idFuncionario",
                 "idCliente", "chavePix", "validadeCartao", "cvc", "senhaConta" };
-        
-
-        // DefaultTableModel dados = (DefaultTableModel); //aqui na frente pegaria o
-        // modelo da tela
 
         List<Conta> contas = null;
         try {
@@ -238,53 +216,9 @@ public class ContaController implements ActionListener {
             dado[9] = conta.getValidadeCartao();
             dado[10] = Integer.toString(conta.getCvc());
             dado[11] = conta.getSenhaConta();
-            // dados.addRow(dado); ---> linha comentada ali em cima.
+
         }
 
-        // setvisible
-    }
-
-    private boolean verificaUser() {
-    List<Conta> listuser = new ContaDAO().getContas();
-    String login = getContaGUI().getLoginField().getText();
- 
-    boolean usuarioEncontrado = false;
-
-    for (Conta conta : listuser) {
-        if (conta.getLogin().equals(login)) {
-            usuarioEncontrado = true;
-        }
-    }
-
-    if (!usuarioEncontrado) {
-       return true;
-    }else {
-        JOptionPane.showMessageDialog(getContaGUI(),"usuario já existe");
-        return false;
-    }
-
-    }
-    
-    
-
-    private void addListeners() {
-        getContaGUI().getSalvar().addActionListener(this);
-        getContaGUI().getAtualizar().addActionListener(this);
-        setTextField();
-        addFocusListener();
-    }
-
-    private void addFocusListener() {
-        getContaGUI().getLoginField()
-                .addFocusListener(new createFocusListenerTextField(getContaGUI().getLoginField()));
-
-        getContaGUI().getConLoginField().addFocusListener(
-                new createFocusListenerTextField(getContaGUI().getConLoginField()));
-        getContaGUI().getSenhaField()
-                .addFocusListener(new createFocusListenerTextField(getContaGUI().getSenhaField()));
-        getContaGUI().getConSenhaField()
-                .addFocusListener(new createFocusListenerTextField(getContaGUI().getConSenhaField()));
-        getContaGUI().repaint();
     }
 
     private boolean verificaIgual() {
@@ -302,6 +236,61 @@ public class ContaController implements ActionListener {
             JOptionPane.showMessageDialog(contaGUI, "os logins estão diferentes digite novamente!");
             return false;
         }
+    }
+
+    private boolean verificaUser() {
+        List<Conta> listuser = new ContaDAO().getContas();
+        String login = getContaGUI().getLoginField().getText();
+
+        boolean usuarioEncontrado = false;
+
+        for (Conta conta : listuser) {
+            if (conta.getLogin().equals(login) && !conta.getLogin().equals(getConta().getLogin())) {
+                usuarioEncontrado = true;
+            }
+        }
+
+        if (!usuarioEncontrado) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(getContaGUI(), "usuario já existe");
+            return false;
+        }
+
+    }
+
+    private void addFocusListener() {
+        getContaGUI().getLoginField()
+                .addFocusListener(new createFocusListenerTextField(getContaGUI().getLoginField()));
+
+        getContaGUI().getConLoginField().addFocusListener(
+                new createFocusListenerTextField(getContaGUI().getConLoginField()));
+        getContaGUI().getSenhaField()
+                .addFocusListener(new createFocusListenerTextField(getContaGUI().getSenhaField()));
+        getContaGUI().getConSenhaField()
+                .addFocusListener(new createFocusListenerTextField(getContaGUI().getConSenhaField()));
+        getContaGUI().repaint();
+    }
+
+    public void setAtualizar(boolean aflag) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.ipady = 15;
+        gbc.gridwidth = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+
+        if (aflag) {
+            getContaGUI().getPanelsouth().add(new JLabel(), gbc);
+            getContaGUI().getSalvar().setVisible(aflag);
+            getContaGUI().getCancelar().setVisible(aflag);
+        } else {
+            getContaGUI().getPanelsouth().add(getContaGUI().getAtualizar(), gbc);
+            getContaGUI().getSalvar().setVisible(aflag);
+            getContaGUI().getCancelar().setVisible(aflag);
+        }
+
     }
 
     public Conta getConta() {

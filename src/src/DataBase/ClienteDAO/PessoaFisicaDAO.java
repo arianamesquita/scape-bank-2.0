@@ -71,8 +71,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     @Override
     public void atualizar(PessoaFisica objeto) throws SQLException {
         Conexao conexao = null;
-        System.out.println(objeto);
-
+ 
         String sql = "UPDATE cliente SET nome = ?, endereco = ?, telefone = ?, rendaAtual = ? WHERE id = ?";
 
         conexao = Factory.creatConnectionToMySQL();
@@ -103,7 +102,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             if (conexao.getPstmt().getUpdateCount() > 0) {
                 System.out.println("Removido com sucesso!");
             } else {
-                System.out.println("NÃ£o foi possi­vel remover!!");
+                System.out.println("Não foi possi­vel remover!!");
             }
         } catch (Exception e) {
             System.out.println("erro:\n" + e);

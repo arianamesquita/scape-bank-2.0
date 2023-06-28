@@ -89,9 +89,7 @@ public class ContaDAO {
     
     }
     public void atualizar(Conta conta) throws SQLException{
-             Conexao conexao = null;
-        System.out.println(conta);
-
+        Conexao conexao = null;
         String sql = "UPDATE conta SET login = ?, senhaConta = ? WHERE id = ?";
 
         conexao = Factory.creatConnectionToMySQL();
@@ -332,7 +330,7 @@ public class ContaDAO {
                 count = conta.getId();
             }
         }
-        System.out.println(count+1);
+       
         return count + 1;
     }
 
