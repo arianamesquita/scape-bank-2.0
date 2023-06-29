@@ -352,6 +352,7 @@ public class ContaController implements ActionListener {
         } else if (e.getSource() == getContaGUI().getAtualizar() && verificaIgual()) {
             if (verificaUser()) {
                 atualizar();
+                getePrincipalView().updateInfoPessoais();
             }
 
         }

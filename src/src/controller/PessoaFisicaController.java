@@ -53,6 +53,7 @@ public class PessoaFisicaController {
             @Override
             public void actionPerformed(ActionEvent e) {
             atualizar();
+            getePrincipalView().updateInfoPessoais();
             }
             
         });

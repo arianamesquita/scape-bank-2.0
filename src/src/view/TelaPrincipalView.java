@@ -18,16 +18,17 @@ import javax.swing.JTextField;
 
 import DataBase.ClienteDAO.PessoaFisicaDAO;
 import DataBase.ContaDAO.ContaDAO;
+import DataBase.ContaDAO.TransacaoDAO;
 import MainScreen.Components.CardsComponent.Cards;
 import MainScreen.Components.Custom.ColorPaleta;
 import MainScreen.Components.CustomJframe.Jframe;
-import MainScreen.Components.MenuComponent.MenuOpcoes;
 import MainScreen.Components.MenuSuperiorComponent.MenuSuperior;
 import controller.CartaoCreditoController;
 import controller.ContaController;
 import controller.LoginController;
 import controller.PagamentosController;
 import controller.PessoaFisicaController;
+import controller.VerificadorNotificacoes;
 import model.Conta;
 import view.CustomComponents.Jbutton;
 import view.CustomComponents.JtextField;
@@ -52,10 +53,13 @@ public class TelaPrincipalView extends Jframe {
     private GerenciarConta gerenciarConta;
     private ContaController contaController;
     private JButton[] buttons2;
+    private view.MenuOpcoes menuOpcoes;
 
     public TelaPrincipalView(Conta conta) {
         this.conta = conta;
         conta.setCliente(new PessoaFisicaDAO().ler(conta.getCliente().getId()));
+
+       
 
         setTitle("Scape Bank");
         setLayout(null);
@@ -75,6 +79,9 @@ public class TelaPrincipalView extends Jframe {
         pagamentosController.setConta(getConta());
         this.gerenciarConta = new GerenciarConta();
         this.contaController = new ContaController();
+        this.menuOpcoes= new view.MenuOpcoes();
+        pagamentosController.setePrincipalView(this);;
+         updateInfoPessoais();
 
         panelAtulCadastro = new JPanel();
         panelAtulCadastro.setOpaque(false);
@@ -103,8 +110,9 @@ public class TelaPrincipalView extends Jframe {
             buttons[i] = new Jbutton();
             buttons[i].setVisible(true);
         }
+        
+        menuOpcoes.setBounds(20, 160, 300, 570);
 
-        MenuOpcoes menuPrincipais = new MenuOpcoes(20, 160, 300, 570, conta, buttons);
         String[] text = { "Extrato -->", "Empréstimo -->", "Saldo -->", "Cartões -->", "Pix -->", "Pagamentos -->" };
         JButton[] buttonsCards;
         buttonsCards = new JButton[text.length];
@@ -113,7 +121,7 @@ public class TelaPrincipalView extends Jframe {
             buttonsCards[i].setVisible(true);
         }
         this.cards = new Cards(buttonsCards, text, 400, 160);
-        buttons[1].addActionListener(e -> {
+        menuOpcoes.getMenuprincipal().addActionListener(e -> {
             setInvisible();
 
             cards.setVisible(true);
@@ -123,7 +131,8 @@ public class TelaPrincipalView extends Jframe {
             repaint();
         });
 
-        buttons[2].addActionListener(e -> {
+        
+        menuOpcoes.getPix().addActionListener(e -> {
             setInvisible();
 
             areaPixGui.setVisible(true);
@@ -132,7 +141,7 @@ public class TelaPrincipalView extends Jframe {
             setSize(getSize().width, getSize().height - 1);
             repaint();
         });
-        buttons[3].addActionListener(e -> {
+        menuOpcoes.getPagamento().addActionListener(e -> {
             setInvisible();
 
             pagamentosController.getAreaPagamentoGUI().setVisible(true);
@@ -142,7 +151,7 @@ public class TelaPrincipalView extends Jframe {
             repaint();
         });
 
-        buttons[4].addActionListener(e -> {
+        menuOpcoes.getEmprestimo().addActionListener(e -> {
             setInvisible();
 
             areaEmprestimoGUI.setVisible(true);
@@ -152,7 +161,7 @@ public class TelaPrincipalView extends Jframe {
             repaint();
         });
 
-        buttons[5].addActionListener(e -> {
+        menuOpcoes.getCartao().addActionListener(e -> {
             setInvisible();
 
             cartaoCreditoController.getCartaoCreditoGUI().setBounds(650, 250, 700, 570);
@@ -211,19 +220,21 @@ public class TelaPrincipalView extends Jframe {
         addActionListenergerenciarconta();
         add(gerenciarConta);
         add(panelAtulCadastro);
+        add(menuOpcoes);
 
         add(areaPixGui);
         add(pagamentosController.getAreaPagamentoGUI());
         add(areaEmprestimoGUI);
         add(cartaoCreditoController.getCartaoCreditoGUI());
 
-        add(menuPrincipais);
         add(menuSuperior);
         add(cards);
 
         setInvisible();
+        ativanotify();
 
         cards.setVisible(true);
+        menuOpcoes.setVisible(true);
         setVisible(true);
     }
 
@@ -243,6 +254,23 @@ public class TelaPrincipalView extends Jframe {
             }
 
         }
+    }
+    public void ativanotify(){
+           VerificadorNotificacoes verificador = new VerificadorNotificacoes(getConta().getId());
+        Thread thread = new Thread(verificador);
+
+        // Iniciar o thread
+        thread.start();
+
+        // Aguardar um tempo antes de parar a verificação
+        try {
+            Thread.sleep(100); // 10 segundos
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Parar a verificação e aguardar o thread finalizar
+  
     }
 
     public void setInvisible() {
@@ -272,6 +300,7 @@ public class TelaPrincipalView extends Jframe {
                 panelAtulCadastro.setVisible(true);
                 pessoaFisicaController.getPessoaFisicaGUI().setVisible(true);
                 contaController.getContaGUI().setVisible(false);
+               
 
             }
 
@@ -288,6 +317,7 @@ public class TelaPrincipalView extends Jframe {
                 contaController.setConta(getConta());
                 contaController.getContaGUI().setVisible(true); 
                 panelAtulCadastro.setVisible(true);
+               
             }
 
         });
@@ -316,6 +346,16 @@ public class TelaPrincipalView extends Jframe {
 
         });
 
+    }
+    public void updateInfoPessoais(){
+        Conta current = new ContaDAO().searchById(getConta().getId());
+        TransacaoDAO trans = new TransacaoDAO();
+        menuOpcoes.getSaldo().setText("saldo: R$"+trans.getSaldoConta(current));
+        menuOpcoes.getNome().setText("nome :"+current.getLogin());
+        menuOpcoes.getConta().setText(current.getNumeroConta());
+        menuOpcoes.getAgencia().setText(current.getAgencia().getNumeroAgencia());
+        menuOpcoes.repaint();
+        setConta(current);
     }
 
     public PixField getPixField() {

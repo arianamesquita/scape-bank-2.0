@@ -14,6 +14,7 @@ import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
 import model.PessoaFisica;
 import view.AreaPagamentoGUI;
+import view.TelaPrincipalView;
 import view.viewAdds.PagamentosField;
 
 public class PagamentosController {
@@ -21,6 +22,7 @@ public class PagamentosController {
     private AreaPagamentoGUI areaPagamentoGUI;
     private PagamentosField pagamentosField;
     private Conta conta;
+    private TelaPrincipalView ePrincipalView;
 
 
     public PagamentosController(){
@@ -32,8 +34,9 @@ public class PagamentosController {
     }
 
     public void initController(){
-        pagamentosField.getOk().addActionListener(e-> enviarPix());
-        
+        pagamentosField.getOk().addActionListener(e-> {enviarPix();
+        getePrincipalView().updateInfoPessoais();}
+        );
     }
 
 
@@ -126,6 +129,14 @@ public class PagamentosController {
             }
         }while(!password.equals(conta.getSenhaConta()));
         return password;
+    }
+
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
     }
 
     
