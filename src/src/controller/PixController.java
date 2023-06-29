@@ -14,6 +14,7 @@ import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
 import model.PessoaFisica;
 import view.AreaPixGui;
+import view.TelaPrincipalView;
 import view.viewAdds.PixField;
 
 public class PixController {
@@ -21,6 +22,7 @@ public class PixController {
     private AreaPixGui areaPixGui;
     private PixField pixField;
     private Conta conta;
+    private TelaPrincipalView ePrincipalView;
 
     public PixController() {
         this.pixField = new PixField();
@@ -31,7 +33,14 @@ public class PixController {
     }
 
     public void initController() {
-        pixField.getOk().addActionListener(e -> enviarPix());
+        pixField.getOk().addActionListener(e-> {enviarPix();
+        getePrincipalView().updateInfoPessoais();}
+        );
+        areaPixGui.getGerenciarChavesPix().addActionListener(e-> gerenciarChavesPix());
+        areaPixGui.getCelular().addActionListener(e-> escolherChavePixCelular());
+        areaPixGui.getChaveAleatoria().addActionListener(e-> escolherChavePixAleatoria());
+        areaPixGui.getCpf().addActionListener(e-> escolherChavePixCPF());
+        areaPixGui.getDeletarChavePix().addActionListener(e-> deletarChavePix());
 
     }
 
@@ -76,6 +85,40 @@ public class PixController {
         areaPixGui.repaint();
     }
 
+    public void gerenciarChavesPix(){ 
+        areaPixGui.getPixField().setVisible(false);
+        areaPixGui.getCelular().setVisible(true);
+        areaPixGui.getCpf().setVisible(true);
+        areaPixGui.getChaveAleatoria().setVisible(true);
+        areaPixGui.getDeletarChavePix().setVisible(true);
+        areaPixGui.getChavePixAtual().setVisible(true);
+        areaPixGui.getChavePixLabel().setText(getConta().getPagamentos().getChavePix());
+        areaPixGui.getChavePixLabel().setVisible(true);
+    }
+
+    public void escolherChavePixCelular(){
+        ContaDAO contaDAO = new ContaDAO();
+        String chavePix = contaDAO.escolherChavePixCelular(getConta());
+        contaDAO.criaChavePix(getConta(), chavePix);
+    }
+
+    public void escolherChavePixAleatoria(){
+        ContaDAO contaDAO = new ContaDAO();
+        String chavePix = contaDAO.geraChavePixAleatoria();
+        contaDAO.criaChavePix(getConta(), chavePix);
+    }
+
+    public void escolherChavePixCPF(){
+        ContaDAO contaDAO = new ContaDAO();
+        String chavePix = contaDAO.escolherChavePixCPF(getConta());
+        contaDAO.criaChavePix(getConta(), chavePix);
+    }
+
+    public void deletarChavePix(){
+        ContaDAO contaDAO = new ContaDAO();
+        contaDAO.deleteChavePix(getConta());
+    }
+
     public AreaPixGui getAreaPixGui() {
         return areaPixGui;
     }
@@ -94,6 +137,13 @@ public class PixController {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
+    }
+
 
     private int geraId() {
         int count = 0;

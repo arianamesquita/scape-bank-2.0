@@ -278,17 +278,45 @@ public class ContaDAO {
 
     }
 
-    public void criaChavePix(Conta conta){
+    public List<String> buscarChavesPix(Conta conta){
+
+        List<String> chavesPix = new ArrayList<String>();
+
+        String sql = "select chavePix from conta where id = ?";
+
+        String chavePix = null;
+
+        try {
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+            pstm.setInt(1, conta.getId());
+
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                chavePix = rset.getString("chavePix");
+                chavesPix.add(chavePix);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        conexao.Desconecta(); 
+
+        return chavesPix;
+    }
+
+    public void criaChavePix(Conta conta, String string){
 
         String sql = "update conta set chavePix = ? where id = ?";
-        PessoaFisicaDAO pessoaFisica = new PessoaFisicaDAO();
 
         try{
             conexao = Factory.creatConnectionToMySQL();
             conexao.Conecta();
             pstm = conexao.getConnection().prepareStatement(sql);
 
-            pstm.setString(1, geraChavePix(pessoaFisica.ler(conta.getCliente().getId())));
+            pstm.setString(1, string);
             pstm.setInt(2, conta.getId());
 
             pstm.execute();
@@ -396,15 +424,39 @@ public class ContaDAO {
         return chavePix;
     }
 
+    public String geraChavePixAleatoria(){
+        Random ran = new Random();
+        long opcao = ran.nextLong(100000000,999999999);
+        String chavePix = Long.toString(opcao);
+        return chavePix;
+    }
+
     public String[] escolherChavePix (Conta conta){
 
         PessoaFisicaDAO clienteDAO = new PessoaFisicaDAO();
         PessoaFisica cliente = clienteDAO.ler(conta.getCliente().getId());
 
-    
         String[] chavesPix = new String[2];
         chavesPix[0] = cliente.getDocIdentificacao();
         chavesPix[1] = cliente.getTelefone();
+
+        return chavesPix;
+    }
+
+    public String escolherChavePixCelular (Conta conta){
+        PessoaFisicaDAO clienteDAO = new PessoaFisicaDAO();
+        PessoaFisica cliente = clienteDAO.ler(conta.getCliente().getId());
+
+        String chavesPix = cliente.getTelefone();
+
+        return chavesPix;
+    }
+
+    public String escolherChavePixCPF (Conta conta){
+        PessoaFisicaDAO clienteDAO = new PessoaFisicaDAO();
+        PessoaFisica cliente = clienteDAO.ler(conta.getCliente().getId());
+
+        String chavesPix = cliente.getDocIdentificacao();
 
         return chavesPix;
     }

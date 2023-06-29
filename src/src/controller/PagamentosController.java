@@ -102,6 +102,12 @@ public class PagamentosController {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
+    }
 
 
     private int geraId() {
@@ -129,14 +135,6 @@ public class PagamentosController {
             }
         }while(!password.equals(conta.getSenhaConta()));
         return password;
-    }
-
-    public TelaPrincipalView getePrincipalView() {
-        return ePrincipalView;
-    }
-
-    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
-        this.ePrincipalView = ePrincipalView;
     }
 
     

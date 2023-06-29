@@ -28,6 +28,7 @@ import controller.ContaController;
 import controller.LoginController;
 import controller.PagamentosController;
 import controller.PessoaFisicaController;
+import controller.PixController;
 import controller.VerificadorNotificacoes;
 import model.Conta;
 import view.CustomComponents.Jbutton;
@@ -48,6 +49,7 @@ public class TelaPrincipalView extends Jframe {
     private Cards cards;
     private CartaoCreditoController cartaoCreditoController;
     private PagamentosController pagamentosController;
+    private PixController pixController;
     private JPanel panelAtulCadastro;
     private PessoaFisicaController pessoaFisicaController;
     private GerenciarConta gerenciarConta;
@@ -77,11 +79,14 @@ public class TelaPrincipalView extends Jframe {
         this.cartaoCreditoController = new CartaoCreditoController();
         this.pagamentosController = new PagamentosController();
         pagamentosController.setConta(getConta());
+        this.pixController = new PixController();
+        pixController.setConta(getConta());
         this.gerenciarConta = new GerenciarConta();
         this.contaController = new ContaController();
         this.menuOpcoes= new view.MenuOpcoes();
-        pagamentosController.setePrincipalView(this);;
-         updateInfoPessoais();
+        pagamentosController.setePrincipalView(this);
+        pixController.setePrincipalView(this);
+        updateInfoPessoais();
 
         panelAtulCadastro = new JPanel();
         panelAtulCadastro.setOpaque(false);
@@ -135,7 +140,7 @@ public class TelaPrincipalView extends Jframe {
         menuOpcoes.getPix().addActionListener(e -> {
             setInvisible();
 
-            areaPixGui.setVisible(true);
+            pixController.getAreaPixGui().setVisible(true);
 
             setSize(getSize().width, getSize().height + 1);
             setSize(getSize().width, getSize().height - 1);
@@ -222,7 +227,7 @@ public class TelaPrincipalView extends Jframe {
         add(panelAtulCadastro);
         add(menuOpcoes);
 
-        add(areaPixGui);
+        add(pixController.getAreaPixGui());
         add(pagamentosController.getAreaPagamentoGUI());
         add(areaEmprestimoGUI);
         add(cartaoCreditoController.getCartaoCreditoGUI());
@@ -280,6 +285,7 @@ public class TelaPrincipalView extends Jframe {
         cards.setVisible(false);
         cartaoCreditoController.getCartaoCreditoGUI().setVisible(false);
         pagamentosController.getAreaPagamentoGUI().setVisible(false);
+        pixController.getAreaPixGui().setVisible(false);
         panelAtulCadastro.setVisible(false);
         gerenciarConta.setVisible(false);
         pessoaFisicaController.getPessoaFisicaGUI().setVisible(false);
@@ -477,5 +483,14 @@ public class TelaPrincipalView extends Jframe {
     public void setButtons2(JButton[] buttons2) {
         this.buttons2 = buttons2;
     }
+
+    public PixController getPixController() {
+        return pixController;
+    }
+
+    public void setPixController(PixController pixController) {
+        this.pixController = pixController;
+    }
+    
 
 }
