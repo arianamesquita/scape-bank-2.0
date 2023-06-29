@@ -72,6 +72,7 @@ public class TelaPrincipalView extends Jframe {
         this.areaEmprestimoGUI = new AreaEmprestimoGUI(empField);
         this.cartaoCreditoController = new CartaoCreditoController();
         this.pagamentosController = new PagamentosController();
+        pagamentosController.setConta(getConta());
         this.gerenciarConta = new GerenciarConta();
         this.contaController = new ContaController();
 

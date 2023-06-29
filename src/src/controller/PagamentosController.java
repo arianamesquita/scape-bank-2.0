@@ -1,18 +1,19 @@
 package controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 
-
+import DataBase.ContaDAO.ContaDAO;
 import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
 import view.AreaPagamentoGUI;
+import view.ComprovanteGUI;
 import view.viewAdds.PagamentosField;
 
 public class PagamentosController {
@@ -20,41 +21,53 @@ public class PagamentosController {
     private AreaPagamentoGUI areaPagamentoGUI;
     private PagamentosField pagamentosField;
     private Conta conta;
+    ComprovanteGUI comprovanteGUI;
 
     public PagamentosController(){
         this.pagamentosField = new PagamentosField();
         this.areaPagamentoGUI =  new AreaPagamentoGUI(pagamentosField);
 
+        initController();
         getAreaPagamentoGUI().setVisible(true);
-
     }
 
     public void initController(){
-        pagamentosField.getOk().addActionListener( e-> enviarPix());
+        pagamentosField.getOk().addActionListener(e-> enviarPix());
     }
 
 
     public void enviarPix(){
+        
+        ContaDAO numConta = new ContaDAO();
+        TransacaoDAO dao = new TransacaoDAO();
 
         conta.setIdTransacao(geraId());
-        conta.setSenhaConta(confirmSenhaConta().toString());
-        conta.setTipoTransacao("pix");
-        conta.setDataTransacao(new Date(0));
+        conta.setSenhaConta(confirmSenhaConta());
+        conta.setTipoTransacao("Pix");
+        conta.setDataTransacao(Date.valueOf(LocalDate.now()));
         conta.setValorTransacao(pagamentosField.getValorField().getText());
-        conta.setNumeroContaDestino(pagamentosField.getDestinField().getText());
-        conta.setId(36480); //pegar o id da Conta conectada.
+        String chavePix = pagamentosField.getDestinField().getText();
+        conta.setNumeroContaDestino(numConta.searchByChavePix(chavePix));
 
-
-        TransacaoDAO dao = new TransacaoDAO();
 
         try{
             dao.criar(conta);
         } catch (Exception ex){
             Logger.getLogger(PagamentosController.class.getName()).log(Level.SEVERE, null, ex); 
         }
+        mostrarComprovante(conta.getIdTransacao());
+        //areaPagamentoGUI.add(comprovanteGUI);
+        //getComprovanteGUI().setVisible(true);
 
     }
 
+    public void mostrarComprovante(int id){
+        TransacaoDAO transacaoDAO = new TransacaoDAO();
+        Conta transacao = transacaoDAO.getTransacaoById(id);
+
+        comprovanteGUI = new ComprovanteGUI(transacao.getNumeroConta(), transacao.getNumeroContaDestino(), 
+                "pix", transacao.getValorTransacao(), transacao.getIdTransacao());
+    }
 
 
     public AreaPagamentoGUI getAreaPagamentoGUI() {
@@ -75,35 +88,39 @@ public class PagamentosController {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
+    public ComprovanteGUI getComprovanteGUI() {
+        return comprovanteGUI;
+    }
+    public void setComprovanteGUI(ComprovanteGUI comprovanteGUI) {
+        this.comprovanteGUI = comprovanteGUI;
+    }
 
 
     private int geraId() {
         int count = 0;
-        for (Conta conta2 : new TransacaoDAO().getTransacoes()) {
-            if (count < conta2.getId()) {
-                count = conta2.getId();
+        List<Conta> transacoes = new TransacaoDAO().getTransacoes();
+        for (Conta conta : transacoes) {
+            if (count < conta.getIdTransacao()) {
+                count = conta.getIdTransacao();
             }
         }
         return count + 1;
     }
 
-    private char[] confirmSenhaConta(){
-
-        JPasswordField password = new JPasswordField();
-        password.setEchoChar('*');
-
-        JLabel texto = new JLabel("Digite a senha da conta:");
-
-        JPanel entSenha = new JPanel();
-        entSenha.add(texto);
-        entSenha.add(password);
-
-        JOptionPane.showMessageDialog(null, entSenha, "Acesso seguro", JOptionPane.PLAIN_MESSAGE);
-
-        char[] senha = password.getPassword();
-
-        return senha;
-
+    public String confirmSenhaConta(){
+        ContaDAO contaDAO = new ContaDAO();
+        String password;
+        Conta conta = contaDAO.searchById(getConta().getId());
+        do {
+            password = JOptionPane.showInputDialog(areaPagamentoGUI, "Digite a senha da conta:",
+                     "Acesso seguro", JOptionPane.QUESTION_MESSAGE);
+            if (password.equals(conta.getSenhaConta())){
+                System.out.println("Senha conferida!");
+            } else {
+                System.out.println("Senha errada! Tente novamente!");
+            }
+        }while(!password.equals(conta.getSenhaConta()));
+        return password;
     }
 
     

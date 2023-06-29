@@ -65,6 +65,11 @@ public class PagamentosField extends JPanel {
         this.cancelar = new JButton("Cancelar");
         cancelar.setBackground(ColorPaleta.buttonsColor());
         this.ok = new JButton("Ok");
+        ok.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed (java.awt.event.ActionEvent evt){
+                okActionPerformed(evt);
+            }
+        });
         ok.setBackground(ColorPaleta.buttonsColor());
 
 
@@ -116,6 +121,9 @@ public class PagamentosField extends JPanel {
     public void setOk(JButton ok) {
         this.ok = ok;
     }
+    public void okActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_okActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okActionPerformed
     
 
 }

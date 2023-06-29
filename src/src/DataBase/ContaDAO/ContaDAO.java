@@ -227,6 +227,32 @@ public class ContaDAO {
         return conta;
     }
 
+    public String searchByChavePix(String chavePix){
+
+        String sql = "Select numeroConta from conta where chavePix = ?";
+
+        String numConta = null;
+
+        try {
+            conexao = Factory.creatConnectionToMySQL();
+            conexao.Conecta();
+            pstm = conexao.getConnection().prepareStatement(sql);
+            pstm.setString(1, chavePix);
+
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                numConta = rset.getString("numeroConta");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        conexao.Desconecta(); 
+
+        return numConta;
+    }
+
     public void deleteChavePix(Conta conta){
 
         String sql = "update conta set chavePix = null where id = ?";

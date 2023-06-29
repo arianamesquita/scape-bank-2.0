@@ -23,10 +23,10 @@ public class AreaPagamentoGUI extends JPanel{
         pagamentosField.setBounds(60, 20, 600, 120);
         
 
-        comprovante = new ComprovanteGUI("36.480-00", "066.998.447-99", 
-                                "pix", "150,00", 001);
-        comprovante.setBounds(60, 150, 600, 600);
-        comprovante.setOpaque(false);
+        //comprovante = new ComprovanteGUI("36.480-00", "066.998.447-99", 
+        //                        "pix", "150,00", 001);
+        //comprovante.setBounds(60, 150, 600, 600);
+        //comprovante.setOpaque(false);
 
         
         paintMenu = new PaintMenu();
@@ -36,7 +36,7 @@ public class AreaPagamentoGUI extends JPanel{
         paintMenu.setOpaque(false);
         
 
-        paintMenu.add(comprovante);
+        //paintMenu.add(comprovante);
         paintMenu.add(pagamentosField);
 
         add(paintMenu);

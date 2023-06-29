@@ -4,8 +4,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AccessScreen.Custom.ColorFontPaletas;
+import MainScreen.Components.MenuComponent.MenuOpcoes.PaintMenu;
 
 public class ComprovanteGUI extends JPanel{
+
+    PaintMenu paintMenu;
 
     JLabel[] labelSet = new JLabel[10];
 
@@ -16,8 +19,10 @@ public class ComprovanteGUI extends JPanel{
 
     public ComprovanteGUI(String numeroConta, String numeroContaDestino, String tipoTransacao,
                          String valorTransacao, int idTransacao){
+        
 
         setLayout(null);
+        setBounds(60, 150, 600, 600);
 
         String[] textos = {"Comprovante de Transferência", "ID da transação:", "Valor:", "Tipo de transferencia:",
                             "Destino", "Nome: ", "CPF: ", "Tipo de Conta:", "Origem", "Nome :", "Instituição:",
@@ -44,8 +49,8 @@ public class ComprovanteGUI extends JPanel{
             add(labels2);
         }
 
-
         setVisible(true);
+        setOpaque(false);
 
     }
     
