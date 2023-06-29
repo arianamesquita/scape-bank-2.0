@@ -16,16 +16,16 @@ public class AreaPixGui extends JPanel{
     public AreaPixGui(PixField pixField) {
 
         this.pixField = pixField;
+        this.comprovante = new ComprovanteGUI();
 
         setBounds(400, 160, 700, 570);
         setLayout(null);
         pixField.setBounds(60, 20, 600, 120);
         
 
-        comprovante = new ComprovanteGUI("36.480-00", "066.998.447-99", 
-                                "pix", "150,00", 001);
-        comprovante.setBounds(60, 150, 600, 600);
+        comprovante.setBounds(180, 50, 600, 600);
         comprovante.setOpaque(false);
+        comprovante.setVisible(true);
 
         
         paintMenu = new PaintMenu();
@@ -42,6 +42,28 @@ public class AreaPixGui extends JPanel{
 
         setOpaque(false);
         setVisible(true);
+    }
+
+    
+
+
+    public PixField getPixField() {
+        return pixField;
+    }
+    public void setPixField(PixField pixField) {
+        this.pixField = pixField;
+    }
+    public PaintMenu getPaintMenu() {
+        return paintMenu;
+    }
+    public void setPaintMenu(PaintMenu paintMenu) {
+        this.paintMenu = paintMenu;
+    }
+    public ComprovanteGUI getComprovante() {
+        return comprovante;
+    }
+    public void setComprovante(ComprovanteGUI comprovante) {
+        this.comprovante = comprovante;
     }
 
 

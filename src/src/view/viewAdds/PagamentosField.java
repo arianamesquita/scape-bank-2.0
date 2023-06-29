@@ -13,7 +13,6 @@ public class PagamentosField extends JPanel {
 
     JLabel valorTransferencia, destinatario;
     JTextField valorField, destinField;
-
     JButton cancelar, ok;
 
     public PagamentosField() {
@@ -57,7 +56,7 @@ public class PagamentosField extends JPanel {
             @Override
             public void focusLost(FocusEvent e) {
                 if (destinField.getText().isEmpty()) {
-                    destinField.setText("Digite o número do pix");
+                    destinField.setText("Digite o número do pix:");
                 }
             }
         });

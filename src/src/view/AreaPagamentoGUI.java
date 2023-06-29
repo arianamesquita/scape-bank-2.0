@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Graphics;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import MainScreen.Components.Custom.ColorPaleta;

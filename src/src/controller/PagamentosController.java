@@ -3,7 +3,6 @@ package controller;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +14,6 @@ import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
 import model.PessoaFisica;
 import view.AreaPagamentoGUI;
-import view.ComprovanteGUI;
 import view.viewAdds.PagamentosField;
 
 public class PagamentosController {
@@ -29,14 +27,13 @@ public class PagamentosController {
         this.pagamentosField = new PagamentosField();
         this.areaPagamentoGUI =  new AreaPagamentoGUI(pagamentosField);
 
-        //areaPagamentoGUI.getComprovante().setVisible(false);
-
         initController();
         getAreaPagamentoGUI().setVisible(true);
     }
 
     public void initController(){
         pagamentosField.getOk().addActionListener(e-> enviarPix());
+        
     }
 
 
@@ -47,7 +44,7 @@ public class PagamentosController {
 
         conta.setIdTransacao(geraId());
         conta.setSenhaConta(confirmSenhaConta());
-        conta.setTipoTransacao("Pix");
+        conta.setTipoTransacao("Pagamentos");
         conta.setDataTransacao(Date.valueOf(LocalDate.now()));
         conta.setValorTransacao(pagamentosField.getValorField().getText());
         String chavePix = pagamentosField.getDestinField().getText();
@@ -70,7 +67,7 @@ public class PagamentosController {
         PessoaFisica pessoaFisica = new PessoaFisicaDAO().ler(transacao.getCliente().getId());
         
         String text = "Comprovante de Transferência" + "\n" + "ID da transação:" + transacao.getIdTransacao() +
-                     "\nValor:" + transacao.getValorTransacao() + "\nTipo de transferencia:"  + "Pix" +
+                     "\nValor:" + transacao.getValorTransacao() + "\nTipo de transferencia:"  + "Pagamento" +
                             "\nDestino" + transacao.getNumeroContaDestino() + "\nNome: " + 
                             pessoaFisica.getNome() + "\nCPF: " + pessoaFisica.getDocIdentificacao() 
                             + "\nTipo de Conta:" + "Conta-corrente" + "\nOrigem" + transacao.getNumeroConta() +
