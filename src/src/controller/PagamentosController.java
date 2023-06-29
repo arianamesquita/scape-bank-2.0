@@ -9,9 +9,11 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import DataBase.ClienteDAO.PessoaFisicaDAO;
 import DataBase.ContaDAO.ContaDAO;
 import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
+import model.PessoaFisica;
 import view.AreaPagamentoGUI;
 import view.ComprovanteGUI;
 import view.viewAdds.PagamentosField;
@@ -21,11 +23,13 @@ public class PagamentosController {
     private AreaPagamentoGUI areaPagamentoGUI;
     private PagamentosField pagamentosField;
     private Conta conta;
-    ComprovanteGUI comprovanteGUI;
+
 
     public PagamentosController(){
         this.pagamentosField = new PagamentosField();
         this.areaPagamentoGUI =  new AreaPagamentoGUI(pagamentosField);
+
+        //areaPagamentoGUI.getComprovante().setVisible(false);
 
         initController();
         getAreaPagamentoGUI().setVisible(true);
@@ -52,21 +56,31 @@ public class PagamentosController {
 
         try{
             dao.criar(conta);
+            mostrarComprovante(conta.getIdTransacao());
         } catch (Exception ex){
             Logger.getLogger(PagamentosController.class.getName()).log(Level.SEVERE, null, ex); 
         }
-        mostrarComprovante(conta.getIdTransacao());
-        //areaPagamentoGUI.add(comprovanteGUI);
-        //getComprovanteGUI().setVisible(true);
+
 
     }
 
     public void mostrarComprovante(int id){
         TransacaoDAO transacaoDAO = new TransacaoDAO();
         Conta transacao = transacaoDAO.getTransacaoById(id);
+        PessoaFisica pessoaFisica = new PessoaFisicaDAO().ler(transacao.getCliente().getId());
+        
+        String text = "Comprovante de Transferência" + "\n" + "ID da transação:" + transacao.getIdTransacao() +
+                     "\nValor:" + transacao.getValorTransacao() + "\nTipo de transferencia:"  + "Pix" +
+                            "\nDestino" + transacao.getNumeroContaDestino() + "\nNome: " + 
+                            pessoaFisica.getNome() + "\nCPF: " + pessoaFisica.getDocIdentificacao() 
+                            + "\nTipo de Conta:" + "Conta-corrente" + "\nOrigem" + transacao.getNumeroConta() +
+                            "\n Nome :" + pessoaFisica.getDocIdentificacao() + "\nInstituição:" +
+                            "\nScapeBank S.A. - Instituição de Pagamento:" + "\nCNPJ 24.888.069/0001-24";
 
-        comprovanteGUI = new ComprovanteGUI(transacao.getNumeroConta(), transacao.getNumeroContaDestino(), 
-                "pix", transacao.getValorTransacao(), transacao.getIdTransacao());
+        JOptionPane.showMessageDialog(areaPagamentoGUI.getComprovante(), text);
+
+        areaPagamentoGUI.getComprovante().setVisible(true);
+        areaPagamentoGUI.repaint();
     }
 
 
@@ -87,12 +101,6 @@ public class PagamentosController {
     }
     public void setConta(Conta conta) {
         this.conta = conta;
-    }
-    public ComprovanteGUI getComprovanteGUI() {
-        return comprovanteGUI;
-    }
-    public void setComprovanteGUI(ComprovanteGUI comprovanteGUI) {
-        this.comprovanteGUI = comprovanteGUI;
     }
 
 

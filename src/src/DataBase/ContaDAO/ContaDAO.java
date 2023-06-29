@@ -396,4 +396,17 @@ public class ContaDAO {
         return chavePix;
     }
 
+    public String[] escolherChavePix (Conta conta){
+
+        PessoaFisicaDAO clienteDAO = new PessoaFisicaDAO();
+        PessoaFisica cliente = clienteDAO.ler(conta.getCliente().getId());
+
+    
+        String[] chavesPix = new String[2];
+        chavesPix[0] = cliente.getDocIdentificacao();
+        chavesPix[1] = cliente.getTelefone();
+
+        return chavesPix;
+    }
+
 }

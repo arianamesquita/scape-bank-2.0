@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import DataBase.Conexao;
 import DataBase.Factory;
+import DataBase.ClienteDAO.PessoaFisicaDAO;
 import model.Conta;
 
 public class TransacaoDAO {
@@ -128,6 +129,7 @@ public class TransacaoDAO {
                 conta.setValorTransacao(rset.getString("valorTransacao"));
                 conta.setNumeroContaDestino(rset.getString("numeroContaDestino"));
                 conta.setId(rset.getInt("idOrigem"));
+                conta.setCliente(new PessoaFisicaDAO().ler(rset.getInt("idOrigem")));
 
             }
 
@@ -156,11 +158,13 @@ public class TransacaoDAO {
 
             while(rset.next()){
 
-                conta.setValorTransacao(rset.getString("valorTransacao"));
-                conta.setNumeroContaDestino(rset.getString("numeroContaDestino"));
-                conta.setId(rset.getInt("idOrigem"));
+                Conta newConta = new Conta();
 
-                transacoes.add(conta);
+                newConta.setValorTransacao(rset.getString("valorTransacao"));
+                newConta.setNumeroContaDestino(rset.getString("numeroContaDestino"));
+                newConta.setId(rset.getInt("idOrigem"));
+
+                transacoes.add(newConta);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -174,11 +178,10 @@ public class TransacaoDAO {
 
         List<Conta> transacoes = getTransacoesConta(conta);
         float saldo = 0;
-        System.out.println(transacoes);
         for (Conta conta2 : transacoes) {
-            if(conta2.getNumeroConta().equals(conta.getNumeroContaDestino())){
-                saldo += Float.parseFloat(conta2.getValorTransacao());
-            } else saldo -= Float.parseFloat(conta2.getValorTransacao());            
+            if(conta2.getId() == (conta.getId())){
+                saldo -= Float.parseFloat(conta2.getValorTransacao());
+            } else saldo += Float.parseFloat(conta2.getValorTransacao());         
         }
 
         return saldo;
