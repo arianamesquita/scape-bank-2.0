@@ -3,7 +3,6 @@ package controller;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +14,7 @@ import DataBase.ContaDAO.TransacaoDAO;
 import model.Conta;
 import model.PessoaFisica;
 import view.AreaPagamentoGUI;
-import view.ComprovanteGUI;
+import view.TelaPrincipalView;
 import view.viewAdds.PagamentosField;
 
 public class PagamentosController {
@@ -23,6 +22,7 @@ public class PagamentosController {
     private AreaPagamentoGUI areaPagamentoGUI;
     private PagamentosField pagamentosField;
     private Conta conta;
+    private TelaPrincipalView ePrincipalView;
 
 
     public PagamentosController(){
@@ -36,7 +36,9 @@ public class PagamentosController {
     }
 
     public void initController(){
-        pagamentosField.getOk().addActionListener(e-> enviarPix());
+        pagamentosField.getOk().addActionListener(e-> {enviarPix();
+        getePrincipalView().updateInfoPessoais();}
+        );
     }
 
 
@@ -129,6 +131,14 @@ public class PagamentosController {
             }
         }while(!password.equals(conta.getSenhaConta()));
         return password;
+    }
+
+    public TelaPrincipalView getePrincipalView() {
+        return ePrincipalView;
+    }
+
+    public void setePrincipalView(TelaPrincipalView ePrincipalView) {
+        this.ePrincipalView = ePrincipalView;
     }
 
     
